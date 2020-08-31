@@ -12,7 +12,7 @@
 
 <body style="background: white;">
 <p>&nbsp;</p>
-<form id="forma" name="forma" method="POST" action="http://roa.agaribay.net/inicio.php">
+<form id="forma" name="forma" method="POST" action="inicio.php">
 <table border="0" align="center" cellpadding="0" cellspacing="0">
     <tr>
         <td>&nbsp;</td>
