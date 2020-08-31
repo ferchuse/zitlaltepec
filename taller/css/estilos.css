@@ -1,0 +1,238 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+h1{
+	font: bold 14px verdana,arial,Helvetica, sans-serif;
+	color: #DE6900;
+	margin: 0;
+	padding: 0;
+	letter-spacing: 1px;
+} 
+
+.LetrasChicas {
+	color: #666666;
+	font-size: 9px;
+}
+
+.Titulo_Suscripciones {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 36px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #FF6633;
+	text-decoration: none;
+}
+
+.SubTitulo_Servicios {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: bold;
+	color: #B5B5B5;
+	text-decoration: none;
+}
+
+.tabla_encabezado {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #B5B5B5;
+}.tablas {
+	background-color: #EEEEEE;
+	border: 1px solid #B5B5B5;
+}
+.grid_header {
+	background-color: #C6CFFF;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	font-weight: bold;
+	text-decoration: none;
+	height: 18px;
+}
+.texto_titulo_ventanas {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: normal;
+	font-weight: bold;
+	color: #FF6600;
+	text-decoration: none;
+}
+.texto_subtitulo_ventanas {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: normal;
+	font-weight: bold;
+	color: #000099;
+	text-decoration: none;
+}
+.Texto_Flechas_Paginacion {
+	font-family: Webdings;
+	font-size: 14px;
+}
+
+.ancho_lista_zonas_rutas {
+	height: auto;
+	width: 200px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+tr.rowBandaOver {
+	background-color: #C4FFC4;
+}
+tr.rowBandaCeroOut {
+	background-color: #EEEEEE;
+}
+tr.rowBandaUnoOut {
+	background-color: #F7F7F7;
+}
+.comentario_edicion_ayuda {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 9px;
+	font-style: normal;
+	line-height: normal;
+	font-weight: normal;
+	color: #999999;
+	text-decoration: none;
+}
+.letras_error {
+	color: #000000;
+}
+
+.login {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 8em;
+	padding: 15px;
+	border: 1px solid #cccccc;
+	width: 429px;
+	background: #F1F3F5;
+}
+
+.prompt {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:30px;
+	padding: 10px;
+	width: 100px;
+	background-color: #C6CFFF;
+}
+
+.inputlabel {
+	font-weight: bold;
+	text-align: left;
+	}
+	
+.inputbox {
+	margin: 0 0 1em 0;
+	border: 1px solid #cccccc;
+	}
+	
+.inputtiro {
+	width: 25px;
+	margin: 0 0 0 0;
+	border: 0px solid #cccccc;
+	background: #F1F3F5;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	height: 11px;
+	font-weight: bold;
+	}
+
+.inputactivas {
+	width: 40px;
+	margin: 0 0 0 0;
+	border: 0px solid #ffffff;
+	background: #ffffff;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	height: 14px;
+	font-weight: bold;
+	}
+
+.inputejemplares {
+	width: 40px;
+	margin: 0 0 0 0;
+	border: 0px solid #eeeeee;
+	background: #eeeeee;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	height: 14px;
+	font-weight: bold;
+	}
+	
+.inputreporte {
+	width: 40px;
+	margin: 0 0 0 0;
+	border: 0px solid #ffffff;
+	background: #ffffff;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	height: 14px;
+	font-weight: bold;
+	}	
+		
+.button {
+	border : solid 1px #cccccc;
+	background: #E9ECEF;
+	color : #666666;
+	font-weight : bold;
+	font-size : 11px;
+	padding: 4px;
+}
+.ancho_comb_serv {
+	width: 180px;
+}
+.msg_error {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #FF0000;
+	text-align: center;
+}
+.tirotr {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 10px;
+	height: 10px;
+}
+
+.tabla_sup {
+	background-color: #EEEEEE;
+	border-top: 1px solid #B5B5B5;
+	border-right: 1px solid #B5B5B5;
+	border-bottom: 0px none #EEEEEE;
+	border-left: 1px solid #B5B5B5;
+}
+.tabla_inf {
+	background-color: #EEEEEE;
+	border-top: 0px none #EEEEEE;
+	border-right: 1px solid #B5B5B5;
+	border-bottom: 1px solid #B5B5B5;
+	border-left: 1px solid #B5B5B5;
+}.obligatorio {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-style: italic;
+	font-weight: normal;
+	color: #FF0000;
+}
+.letras_canceladas {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bolder;
+	color: #FF0000;
+}
