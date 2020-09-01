@@ -123,7 +123,7 @@
 				$vecData = json_decode($strData, true);
 				$resultado = array();
 				foreach($vecData As $dato){
-					if($res = mysql_query($dato['query'], $strcnn)){
+					if($res = mysql_query($dato['query'])){
 						$resultado[] = array('folio' => $dato['folio']);
 					}
 					else{
