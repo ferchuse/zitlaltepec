@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
 require_once("nusoap/nusoap.php");
-$base='rhgaazco_zitlaltepec';
+$base='road';
 $namespace = "http://road.checame.net/sincronizarservices";
 // create a new soap server
 $server = new soap_server();
