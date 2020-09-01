@@ -114,6 +114,7 @@
 		$respuesta['resultado']=false;
 		$respuesta['mensaje']='';
 		$strcnn=ConectarDB();
+		mysql_select_db("rhgaazco_zitlalte");
 		if($strcnn!="OK")
 		$respuesta['mensaje']=$strcnn;
 		if($respuesta['mensaje']==''){
@@ -122,7 +123,7 @@
 				$vecData = json_decode($strData, true);
 				$resultado = array();
 				foreach($vecData As $dato){
-					if($res = mysql_query($dato['query'])){
+					if($res = mysql_query($dato['query'], $strcnn)){
 						$resultado[] = array('folio' => $dato['folio']);
 					}
 					else{
@@ -157,7 +158,7 @@
 				}
 			}
 		}
-		mysql_select_db("rhgaazco_zitlalte");
+		mysql_select_db("rhgaazco_zitlalte", $MySQL);
 		return $msg;
 	}
 	// Get our posted data if the service is being consumed
