@@ -98,7 +98,9 @@
     </tr>
     <tr>
         <td>&nbsp;</td>
-        <td align="center" width="250"><img src="images/logo_mexiquense.jpg" height="150" width="250" style="border:1px solid rgb(241, 243, 245);"></td>
+        <td align="center" width="250"><img src="images/logo_mexiquense.jpg" height="150" width="250" style="border:1px solid rgb(241, 243, 245);">
+			Servidor 2020
+			</td>
         <td>&nbsp;</td>
     </tr>
 </table>
