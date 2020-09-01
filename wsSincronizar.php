@@ -114,7 +114,7 @@
 		$respuesta['resultado']=false;
 		$respuesta['mensaje']='';
 		$strcnn=ConectarDB();
-		mysql_select_db("rhgaazco_zitlalte");
+		// mysql_select_db("rhgaazco_zitlalte");
 		if($strcnn!="OK")
 		$respuesta['mensaje']=$strcnn;
 		if($respuesta['mensaje']==''){
@@ -158,7 +158,7 @@
 				}
 			}
 		}
-		mysql_select_db("rhgaazco_zitlalte", $MySQL);
+		mysql_select_db("rhgaazco_zitlaltepec");
 		return $msg;
 	}
 	// Get our posted data if the service is being consumed
