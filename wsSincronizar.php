@@ -1,7 +1,7 @@
 <?php
 set_time_limit(0);
 require_once("nusoap/nusoap.php");
-$base='road';
+$base='rhgaazco_zitlalte';
 $namespace = "http://road.checame.net/sincronizarservices";
 // create a new soap server
 $server = new soap_server();
@@ -132,20 +132,20 @@ function UpdateTickets($taquilla,$fechainicial,$fechafinal,$tickets){
 function ConectarDB(){
 	$msg="OK";
 	//Conexion con la base
-	if (!$MySQL=@mysql_connect('localhost', 'road', 'TKU2m3JkNpYJefBP')) {
+	if (!$MySQL=@mysql_connect('localhost', 'rhgaazco_zitlalte', 'Zitla@2020')) {
 		$t=time();
 		while (time()<$t+5) {}
-		if (!$MySQL=@mysql_connect('localhost', 'road', 'TKU2m3JkNpYJefBP')) {
+		if (!$MySQL=@mysql_connect('localhost', 'rhgaazco_zitlalte', 'Zitla@2020')) {
 			$t=time();
 			while (time()<$t+10) {}
-			if (!$MySQL=@mysql_connect('localhost', 'road', 'TKU2m3JkNpYJefBP')) {
+			if (!$MySQL=@mysql_connect('localhost', 'rhgaazco_zitlalte', 'Zitla@2020')) {
 			echo '<br><br><br><h3 align=center">Hay problemas de comunicaci&oacute;n con la Base de datos.</h3>';
 			echo '<h4>Por favor intente mas tarde.-</h4>';
 			exit;
 			}
 		}
 	}
-	mysql_select_db("road");
+	mysql_select_db("rhgaazco_zitlalte");
 	return $msg;
 }
 // Get our posted data if the service is being consumed
