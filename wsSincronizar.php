@@ -2,8 +2,8 @@
 	set_time_limit(0);
 	require_once("nusoap/nusoap.php");
 	$base='road';
-	// $namespace = "http://road.checame.net/sincronizarservices";
-	$namespace = "http://gamn.checame.net/sincronizarservices";
+	$namespace = "http://road.checame.net/sincronizarservices";
+	// $namespace = "http://gamn.checame.net/sincronizarservices";
 	// create a new soap server
 	$server = new soap_server();
 	// configure our WSDL
