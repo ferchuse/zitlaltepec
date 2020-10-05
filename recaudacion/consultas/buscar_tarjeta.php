@@ -10,7 +10,7 @@
 	$consulta = "		
 		SELECT
 			tarjetas_unidad.cve AS tarjeta,
-			tarjetas_unidad.estatus AS estatus_tarjeta,
+			tarjetas_unidad.estatus AS estatus_tarjetas,
 			fecha_viaje,
 			unidades.no_eco,
 			CONCAT(
@@ -47,13 +47,13 @@
 						
 		}
 		
-		if($filas["estatus_tarjetas"] == 'P' ){
+		if($fila["estatus_tarjetas"] == 'P' ){
 			
 			die("<div class='alert alert-danger col-6'>Tarjeta Ya recaudada</div>");
 			
 		}
 		
-		if($filas["estatus_tarjetas"] == 'C'  ){
+		if($fila["estatus_tarjetas"] == 'C'  ){
 			
 			die("<div class='alert alert-danger col-6'>Tarjeta Cancelada</div>");
 			
@@ -82,7 +82,7 @@
 			<label for="">Operador: </label>
 		</td >
 		<td >
-			<input readonly type="text" name="operador" id="operador" value="<?= $fila["no_eco"]?>">
+			<input readonly type="text" name="operador" id="operador" value="<?= $fila["nombre_operador"]?>">
 		</td >
 	</tr>
 	<tr >

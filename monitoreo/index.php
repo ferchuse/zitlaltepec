@@ -19,14 +19,21 @@
 		
 		
 		<style>
-			input[readonly]{
+			.vueltas input[readonly]{
 			width : 60px;
+			background-color: #e9ecef !important;
+			}
+			
+			input[readonly]{
+			
 			background-color: #e9ecef !important;
 			}
 			.origen, .destino{
 			width : 60px;
 			
 			}
+			
+			
 		</style>
 		
 	</head>
@@ -41,130 +48,231 @@
 			
 			<div class="row">
 				<div class="col-sm-10">
-					<form id="form_recaudacion" >
-						
-						<table >
-							<tr >
-								<td class="text-left">
-									<label for="">Tarjeta: :</label>
-								</td >
-								<td >
-									<input type="number" name="tarjeta" id="tarjeta" value="">
-								</td >
-							</tr>
-							<tr >
-								<td >
-									<label for="">Fecha de Viaje: :</label>
-								</td >
-								<td >
-									<input readonly type="date" name="fecha_viaje" id="fecha_viaje" value="">
-								</td >
-							</tr>
-							<tr >
-								<td >
-									<label for="">Unidad: :</label>
-								</td >
-								<td >
-									<input readonly type="number" name="unidad" id="unidad" value="">
-								</td >
-							</tr>
-							<tr >
-								<td >
-									<label for="">Operador: :</label>
-								</td >
-								<td >
-									<input readonly type="text" name="operador" id="operador" value="">
-								</td >
-							</tr>
+					
+					<table >
+						<tr >
+							<td class="text-left">
+								<label for="">Tarjeta: :</label>
+							</td >
+							<td >
+								<input type="number" name="tarjeta" id="tarjeta" value="">
+							</td >
+						</tr>
+						<tfoot id="respuesta_tarjeta">
 							
-						</table>
-						
-						
-						
-						
-						
-						
-						
-					</form>
+							
+						</tfoot>
+					</table>
 					
 					<hr>
-					
-					<table class="table-bordered">
-						<tr >
-							<td colspan="4" class="text-center h4">
-								VUELTA 1
-							</td >
-							
-						</tr>
-						
-						
-						
-						<tr >
-							<td >
-								TARIFA
-							</td >
-							<td >
-								<select>
-									<option>APAXCO</option>
-								</select>
-							</td >
-							<td >
-								<select>
-									<option>APAXCO</option>
-								</select>
-							</td >
-							<td >
-								TOTAL
-							</td >
-						</tr>
-						
-						
-						
+					<div class="row vueltas">
 						<?php 
-							
-							$tarifas = [5,10,12,15,20,25,30,35,38,40,42,43,44,45,48,50,57];
-							
-							foreach($tarifas AS $tarifa){?>
-							<tr >
-								<td class="tarifa">
-									<?= $tarifa ?>
-								</td >
-								<td class="w-25" >
-									<input class="origen" type="number"  >
-								</td >
-								<td >
-									<input class="destino" type="number" size="20">
-								</td >
-								<td >
-									<input class="total_tarifa" readonly type="number" tabindex="-1">
-								</td >
-							</tr>
+							for($vuelta = 1; $vuelta <= 3; $vuelta++){?>
+							<div class="col-sm-4">
+								<table class="table-bordered">
+									<tr >
+										<td colspan="4" class="text-center h4">
+											VUELTA 	<?php echo $vuelta;?>
+										</td >
+										
+									</tr>
+									
+									
+									
+									<tr >
+										<td >
+											TARIFA
+										</td >
+										<td >
+											<select style="width: 90px">
+												<option>APAXCO</option>
+												<option>NUEVOS PASEOS</option>
+												<option>SAUCES</option>
+												<option>GUARDIA</option>
+												<option>SAN BARTOLO</option>
+											</select>
+										</td >
+										<td >
+											<select  style="width: 90px">
+												<option>APAXCO</option>
+												<option>NUEVOS PASEOS</option>
+												<option>SAUCES</option>
+												<option>GUARDIA</option>
+												<option>SAN BARTOLO</option>
+											</select>
+										</td >
+										<td >
+											TOTAL
+										</td >
+									</tr>
+									
+									
+									
+									<?php 
+										
+										$tarifas = [5,10,12,15,20,25,30,35,38,40,42,43,44,45,48,50,57];
+										
+										foreach($tarifas AS $tarifa){?>
+										<tr >
+											<td class="tarifa">
+												<?= $tarifa ?>
+											</td >
+											<td class="w-25" >
+												<input class="origen" type="number"  >
+											</td >
+											<td >
+												<input class="destino" type="number" size="20">
+											</td >
+											<td >
+												<input class="total_tarifa" readonly type="number" tabindex="-1">
+											</td >
+										</tr>
+										<?PHP 
+										}
+										
+									?>
+									
+									<tfoot>
+										<tr >
+											<td >
+												TOTALES:
+											</td >
+											<td >
+												<input class="total_origen" readonly type="number">
+											</td >
+											<td >
+												<input class="total_destino" readonly type="number">
+											</td >
+											<td >
+												<input class="total_vuelta" readonly type="number">
+											</td >
+										</tr>
+									</tfoot>
+								</table>
+							</div>
 							<?PHP 
 							}
 							
 						?>
-						
-						<tfoot>
-							<tr >
-								<td >
-									TOTALES:
-								</td >
-								<td >
-									<input class="total" readonly type="number">
-								</td >
-								<td >
-									<input class="total" readonly type="number">
-								</td >
-								<td >
-									<input class="total" readonly type="number">
-								</td >
-							</tr>
-						</tfoot>
-					</table>
+					</div>
 				</div>
-				
 			</div>
 			
+			<hr>
+			<form id="form_monitoreo">
+				<div class="row">
+					<div class="col-sm-6">
+						<table class="table-bordered">
+							<tr >
+								<td >
+									Ingreso Bruto
+								</td >
+								<td >
+									<input readonly type="number" id="ingreso_bruto">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Casetas
+								</td >
+								<td >
+									<input required type="number" id="casetas">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Diesel
+								</td >
+								<td >
+									<input type="number" id="diesel">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Despachadores
+								</td >
+								<td >
+									<input type="number" id="despachadores">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Comisión
+								</td >
+								<td >
+									<input readonly type="number" id="comision">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Incentivo
+								</td >
+								<td >
+									<input type="number" id="incentivo">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Mutualidad
+								</td >
+								<td >
+									<input readonly type="number" id="mutualidad">
+								</td >
+							</tr>
+							
+							<tr >
+								<td >
+									Seguridad
+								</td >
+								<td >
+									<input  readonly type="number" id="seguridad">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Fianza
+								</td >
+								<td >
+									<input type="number" id="fianza">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Utilidad
+								</td >
+								<td >
+									<input type="number" id="utilidad">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Observaciones
+								</td >
+								<td >
+									<input type="number" id="observaciones">
+								</td >
+							</tr>
+							
+							
+							<tfoot>
+								
+								<tr >
+									<td >
+										
+									</td >
+									<td >
+										<button type="submit" class="btn btn-success">
+											Guardar
+										</button >
+									</td >
+								</tr>
+								
+							</tfoot>
+						</table>
+						
+					</div>
+				</div>
+			</form>
 			
 			
 		</div>
@@ -172,9 +280,9 @@
 		
 		
 		<?php include_once("../scripts.php");?>
-		<script src="monitoreo.js?v=<?= date("Ymdi")?>"></script>
+		<script src="monitoreo.js?v=<?= date("Ymdis")?>"></script>
 		
 		
 	</body>
 	
-</html>
+	</html>
