@@ -58,5 +58,17 @@
 		
 	}
 	
+	
+		// if($_SERVER["SERVER_NAME"] != "localhost") {
+			mysql_query( "SET NAMES 'utf8'") or die("Error Cambiando charset").mysql_error();
+			
+			// mysqli_query($link, "SET sql_mode = ''") or die("Error Cambiando sqlmode").mysqli_error($link);
+			
+			// mysqli_query($link, "SET SESSION sql_mode = ''") or die("Error Cambiando charset").mysqli_error($link);
+			
+			mysql_query("SET CHARACTER SET utf8") or die("Error en charset UTF8".mysql_error());
+		// }
+		
+	
 	mysql_select_db($base);
 ?>
