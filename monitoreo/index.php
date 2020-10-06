@@ -261,7 +261,7 @@
 										
 									</td >
 									<td >
-										<button type="submit" class="btn btn-success">
+										<button type="submit" hidden class="btn btn-success">
 											Guardar
 										</button >
 									</td >
