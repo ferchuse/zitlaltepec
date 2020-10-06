@@ -8,6 +8,10 @@ function onLoad(){
 	$("input").keydown(cursorPress)
 	$("input").focus(function(){
 		$(this).select();
+	});	
+	
+	$("#form_monitoreo").focus(function(){
+		$(this).select();
 	});
 	
 	
