@@ -12,7 +12,7 @@
 		}
 		
 		if($_SERVER["SERVER_NAME"] == "grupozitlaltepec.com.mx" ){
-		
+			
 			
 			
 			$db="rhgaazco_zitlaltepec";
@@ -22,7 +22,7 @@
 			
 		}
 		if($_SERVER["SERVER_NAME"] == "pruebas.grupozitlaltepec.com.mx" ){
-		
+			
 			
 			
 			$db="rhgaazco_pruebas_zit";
@@ -37,9 +37,9 @@
 		$set_names = "SET NAMES 'utf8'";
 		date_default_timezone_set('America/Mexico_City');
 		
-    if (!($link=mysqli_connect($host,$usuario,$pass)))
+		if (!($link=mysqli_connect($host,$usuario,$pass)))
 		{
-			die( "Error conectando a la base de datos.". mysqli_error($link));
+			die( "Error conectando a la base de datos.". mysqli_error($link)). $_SERVER["SERVER_NAME"];
 		}
 		
 		if (!mysqli_select_db($link, $db))
@@ -49,7 +49,7 @@
 		
 		
 		if($_SERVER["SERVER_NAME"] != "localhost") {
-		
+			
 			mysqli_query($link, "SET sql_mode = ''") or die("Error Cambiando sqlmode").mysqli_error($link);
 			// mysqli_query($link, "SET GLOBAL sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));") or die("Error Cambiando sqlmode").mysqli_error($link);
 			
