@@ -39,7 +39,7 @@
 		
 		if (!($link=mysqli_connect($host,$usuario,$pass)))
 		{
-			die( "Error conectando a la base de datos.". mysqli_error($link)). $_SERVER["SERVER_NAME"];
+			die( "Error conectando a la base de datos.". mysqli_error($link).  $_SERVER["SERVER_NAME"]);
 		}
 		
 		if (!mysqli_select_db($link, $db))
