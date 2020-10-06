@@ -3,6 +3,7 @@ $(document).ready(onLoad);
 function onLoad(){
 	
 	
+	$("#diesel, #casetas, #despachadores, #incentivo, #fianza").keyup(calcularUtilidad)
 	$(".origen, .destino").keyup(sumarBoletos)
 	$(".origen, .destino").change(sumarBoletos)
 	$("input").keydown(cursorPress)

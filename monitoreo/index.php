@@ -90,6 +90,7 @@
 												<option>SAUCES</option>
 												<option>GUARDIA</option>
 												<option>SAN BARTOLO</option>
+												<option>I.V.</option>
 											</select>
 										</td >
 										<td >
@@ -99,6 +100,7 @@
 												<option>SAUCES</option>
 												<option>GUARDIA</option>
 												<option>SAN BARTOLO</option>
+												<option>I.V.</option>
 											</select>
 										</td >
 										<td >
@@ -241,7 +243,7 @@
 									Utilidad
 								</td >
 								<td >
-									<input type="number" id="utilidad">
+									<input readonly type="number" id="utilidad">
 								</td >
 							</tr>
 							<tr >
