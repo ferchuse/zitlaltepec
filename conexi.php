@@ -10,10 +10,22 @@
 			$usuario="sistemas";
 			$pass="Glifom3dia";
 		}
-		else{
+		
+		if($_SERVER["SERVER_NAME"] == "grupozitlaltepec.com.mx" ){
+		
 			
 			
 			$db="rhgaazco_zitlaltepec";
+			$usuario="rhgaazco_zitlalte";
+			$pass="Gl1fom3di@";
+			
+			
+		}
+		if($_SERVER["SERVER_NAME"] == "pruebas.grupozitlaltepec.com.mx" ){
+		
+			
+			
+			$db="rhgaazco_pruebas_zit";
 			$usuario="rhgaazco_zitlalte";
 			$pass="Gl1fom3di@";
 			

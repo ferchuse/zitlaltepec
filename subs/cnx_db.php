@@ -24,7 +24,7 @@
 	if($_SERVER["SERVER_NAME"] == "pruebas.grupozitlaltepec.com.mx" ){
 		
 		
-		$base = "rhgaazco_zitlaltepec";
+		$base = "rhgaazco_pruebas_zit";
 		if (!$MySQL=@mysql_connect('localhost', 'rhgaazco_zitlalte', 'Zitla@2020')) {
 			$t=time();
 			while (time()<$t+5) {}

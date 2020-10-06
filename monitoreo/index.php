@@ -249,7 +249,7 @@
 									Observaciones
 								</td >
 								<td >
-									<input type="number" id="observaciones">
+									<input type="text" id="observaciones">
 								</td >
 							</tr>
 							
