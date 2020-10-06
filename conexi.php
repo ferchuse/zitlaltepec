@@ -17,17 +17,18 @@
 			
 			$db="rhgaazco_zitlaltepec";
 			$usuario="rhgaazco_zitlalte";
-			$pass="Gl1fom3di@";
+			$pass="Zitla@2020";
 			
 			
 		}
+		
 		if($_SERVER["SERVER_NAME"] == "pruebas.grupozitlaltepec.com.mx" ){
 			
 			
 			
 			$db="rhgaazco_pruebas_zit";
 			$usuario="rhgaazco_zitlalte";
-			$pass="Gl1fom3di@";
+			$pass="Zitla@2020";
 			
 			
 		}
@@ -39,7 +40,7 @@
 		
 		if (!($link=mysqli_connect($host,$usuario,$pass)))
 		{
-			die( "Error conectando a la base de datos.". mysqli_error($link).  $_SERVER["SERVER_NAME"]);
+			die( "Error conectando a la base de datos.". mysqli_error($link). " " $_SERVER["SERVER_NAME"]);
 		}
 		
 		if (!mysqli_select_db($link, $db))

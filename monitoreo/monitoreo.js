@@ -71,6 +71,7 @@ function calcularUtilidad(){
 	let incentivo = Number($("#incentivo").val());
 	let mutualidad = Number($("#mutualidad").val());
 	let seguridad = Number($("#seguridad").val());
+	let fianza = Number($("#fianza").val());
 	
 	console.log("comision" , comision);
 	console.log("casetas" , casetas);
@@ -79,9 +80,10 @@ function calcularUtilidad(){
 	console.log("incentivo" , incentivo);
 	console.log("mutualidad" , mutualidad);
 	console.log("seguridad" , seguridad);
+	console.log("fianza" , fianza);
 	
 	
-	let utilidad = ingreso_bruto - casetas - diesel - despachadores - comision - incentivo - mutualidad - seguridad;
+	let utilidad = ingreso_bruto - fianza - casetas - diesel - despachadores - comision - incentivo - mutualidad - seguridad;
 	
 	console.log("utilidad" , utilidad);
 	
