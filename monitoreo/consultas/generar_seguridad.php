@@ -19,21 +19,15 @@
 	') ',
 	operadores.nombre
 	) AS nombre_operador,
-	monitoreo.mutualidad,
-	monitoreo.seguridad,
-	utilidad
+	derroteros.mutualidad
 	FROM
 	tarjetas_unidad
 	LEFT JOIN derroteros ON tarjetas_unidad.derrotero = derroteros.cve
 	LEFT JOIN operadores ON tarjetas_unidad.operador = operadores.cve
 	LEFT JOIN empresas ON tarjetas_unidad.empresa = empresas.cve
 	LEFT JOIN unidades ON tarjetas_unidad.unidad = unidades.cve
-	LEFT JOIN monitoreo ON tarjetas_unidad.cve = monitoreo.tarjeta
 	WHERE
 	tarjetas_unidad.cve = '{$_GET["tarjeta"]}'
-	
-	
-	
 	";
 	
 	
@@ -53,9 +47,46 @@
 			
 		}
 		
+		if($fila["estatus_tarjetas"] == 'P' ){
+			
+			die("<div class='alert alert-danger '>Tarjeta Ya recaudada</div>");
+			
+		}
 		
+		if($fila["estatus_tarjetas"] == 'C'  ){
+			
+			die("<div class='alert alert-danger '>Tarjeta Cancelada</div>");
+			
+		}
 		
-		$respuesta["tarjeta"] = $fila;
+	?>
+	<tr >
+		<td >
+			<label for="">Fecha de Viaje: </label>
+		</td >
+		<td >
+			<input  readonly type="date" name="fecha_viaje" id="fecha_viaje" value="<?= $fila["fecha_viaje"]?>">
+		</td >
+	</tr>
+	<tr >
+		<td >
+			<label for="">Unidad: </label>
+		</td >
+		<td >
+			<input readonly type="number" name="unidad" id="unidad" value="<?= $fila["no_eco"]?>">
+		</td >
+	</tr>
+	<tr >
+		<td >
+			<label for="">Operador: </label>
+		</td >
+		<td >
+			<input readonly type="text" name="operador" id="operador" value="<?= $fila["nombre_operador"]?>">
+		</td >
+	</tr>
+	
+	
+	<?php
 		
 	}
 	else {
@@ -63,8 +94,8 @@
 		$respuesta["estatus"] = "error";
 		$respuesta["mensaje"] = "Error en ".$consulta.mysqli_Error($link);
 		
+		echo json_encode($respuesta);
 	}
 	
-	echo json_encode($respuesta);
 	
 ?>						

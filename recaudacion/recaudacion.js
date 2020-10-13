@@ -50,8 +50,8 @@ $(document).ready(function(){
 	
 	
 	
-	$('#num_eco').on('keyup',buscarUnidad );
-	$('#num_eco').on('blur',buscarUnidad );
+	// $('#num_eco').on('keyup',buscarUnidad );
+	// $('#num_eco').on('blur',buscarUnidad );
 	
 	function buscarUnidad(event){
 		event.preventDefault();
@@ -231,28 +231,35 @@ function buscarTarjeta(tarjeta){
 	$("#tarjeta").addClass("cargando"); 
 	return $.ajax({
 		url: 'consultas/buscar_tarjeta.php',
+		dataType: 'JSON',
 		data: {
 			"tarjeta": tarjeta
 		}
 		}).done(function(respuesta){
-		$("#respuesta_tarjeta").html(respuesta);
 		
-		// $("#boton_guardar_abono").prop("disabled", false); 
-		// $("#tarjeta").toggleClass("cargando"); 
-		// $("#generar_mutualidad").click(guardarMutualidad); 
-		// $('#imprimir_mutualidad').on('click', imprimirTicket);
-		// $('#imprimir_tarjeta').data('id_registro', tarjeta);
+		if(respuesta.tarjeta.estatus_tarjetas == "C"){
+			
+			alert("Tarjeta Cancelada");
+			return false;
+		}	
 		
-		// $("#importe_tijera").on('keyup',sumarImportes);
-		// $("#bol_termicos_importe").on('keyup',sumarImportes);
+		if(respuesta.tarjeta.estatus_tarjetas == "P"){
+			
+			alert("Tarjeta Recaudada");
+		return false;
+		}
+		
+		$('#fecha_viaje').val(respuesta.tarjeta.fecha_viaje);
+		$('#nombre_operador').val(respuesta.tarjeta.nombre_operador);
+		$('#no_eco').val(respuesta.tarjeta.no_eco);
+		$('#utilidad').val(respuesta.tarjeta.utilidad);
+		$('#mutualidad').val(respuesta.tarjeta.mutualidad);
+		$('#seguridad').val(respuesta.tarjeta.seguridad);
 		
 		
-		// sumarImportes();
-		// $("#imprimir_abonos").prop("hidden", true);
-		// $("#efectivo").focus();
-	}).always(function(){
-	
-	$("#tarjeta").removeClass("cargando"); 
+		}).always(function(){
+		
+		$("#tarjeta").removeClass("cargando"); 
 		
 	});
 	
@@ -357,13 +364,13 @@ function actualizaMutualidad(){
 					name: "mutualidad_cobrada",
 					value: 1
 				}],
-		id_campo : "tarjeta",
-		id_valor: $("#tarjeta").val()
-	}
-	
-	}).done(function(respuesta){
-	
-	
+				id_campo : "tarjeta",
+				id_valor: $("#tarjeta").val()
+		}
+		
+		}).done(function(respuesta){
+		
+		
 	})
 }
 
@@ -499,11 +506,11 @@ function imprimirTicket(event){
 		}).done(function (respuesta){
 		
 		$.ajax({
-		url: "http://localhost/imprimir_zitlalli.php",
-		method: "POST",
-		data:{
-			"texto" : respuesta
-		}
+			url: "http://localhost/imprimir_zitlalli.php",
+			method: "POST",
+			data:{
+				"texto" : respuesta
+			}
 		});
 		
 		printService.submit({

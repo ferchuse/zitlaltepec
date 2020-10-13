@@ -34,12 +34,16 @@
 	<body>
 		
 		
-		<?php include_once("../menu.php");?>
+		<?php //include_once("../menu.php");?>
 		
 		
 		<div class="container-fluid">
 			
 			<div class="row">
+				
+				<div class="col-sm-12">
+					<h4>Recaudación </h4>
+				</div>
 				<div class="col-sm-10">
 					<form id="form_recaudacion" >
 						
@@ -50,6 +54,127 @@
 								</td >
 								<td >
 									<input type="number" name="tarjeta" id="tarjeta" value="">
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Fecha de Viaje: </label>
+								</td >
+								<td >
+									<input type="date" name="fecha_viaje" id="fecha_viaje" readonly value="">
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Unidad: </label>
+								</td >
+								<td >
+									<input type="text" name="no_eco" id="no_eco" readonly value="">
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Operador: </label>
+								</td >
+								<td >
+									<input type="text" name="nombre_operador" id="nombre_operador" readonly value="">
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Utilidad: </label>
+								</td >
+								<td >
+									<input type="number" name="utilidad" id="utilidad" readonly value="">
+								</td >
+							</tr>
+							
+							<tr >
+								<td class="text-left">
+									<label for="">Vale de Dinero: </label>
+								</td >
+								<td >
+									<input type="number" name="vale_dinero" id="vale_dinero"  readonly value="">
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Importe Boletos con Guia: </label>
+								</td >
+								<td >
+									<input type="number" name="utilidad" id="utilidad" value="" readonly>
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Importe Boletos sin Guia: </label>
+								</td >
+								<td >
+									<input type="number" name="utilidad" id="utilidad" value="" readonly>
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Canitdad de Boletos sin Guia: </label>
+								</td >
+								<td >
+									<input type="number" name="utilidad" id="utilidad" value="" readonly>
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Mutualidad: </label>
+								</td >
+								<td >
+									<input type="number" name="mutualidad" id="mutualidad" value="" readonly>
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Seguridad: </label>
+								</td >
+								<td >
+									<input type="number" name="seguridad" id="seguridad" value="" readonly>
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Fianza: </label>
+								</td >
+								<td >
+									<input type="number" name="seguridad" id="seguridad" value="" readonly>
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Efectivo a entregar: </label>
+								</td >
+								<td >
+									<input type="number" name="efectivo_entregar" id="efectivo_entregar" value="" readonly>
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Efectivo pagado: </label>
+								</td >
+								<td >
+									<input type="number" name="efectivo_pagado" id="efectivo_pagado" value="" readonly>
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Abono Utilidad: </label>
+								</td >
+								<td >
+									<input type="number" name="efectivo_pagado" id="efectivo_pagado" value="" readonly>
+								</td >
+							</tr>
+							<tr >
+								<td class="text-left">
+									<label for="">Observaciones: </label>
+								</td >
+								<td >
+									<input type="text" name="observaciones" id="observaciones" value="" >
 								</td >
 							</tr>
 							

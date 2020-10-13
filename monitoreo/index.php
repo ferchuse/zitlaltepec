@@ -41,11 +41,12 @@
 	<body>
 		
 		
-		<?php include_once("../menu.php");?>
+		<?php //include_once("../menu.php");?>
 		
 		
 		<div class="container-fluid">
-			
+			<?php //include_once("../main.php");?>
+		
 			<div class="row">
 				<div class="col-sm-10">
 					
@@ -55,7 +56,7 @@
 								<label for="">Tarjeta: :</label>
 							</td >
 							<td >
-								<input type="number" name="tarjeta" id="tarjeta" value="">
+								<input type="number" name="tarjeta" id="tarjeta" value="" > 
 							</td >
 						</tr>
 						<tfoot id="respuesta_tarjeta">
@@ -170,7 +171,7 @@
 									Ingreso Bruto
 								</td >
 								<td >
-									<input readonly type="number" id="ingreso_bruto">
+									<input readonly type="number" id="ingreso_bruto" name="ingreso_bruto">
 								</td >
 							</tr>
 							<tr >
@@ -178,7 +179,7 @@
 									Casetas
 								</td >
 								<td >
-									<input required type="number" id="casetas">
+									<input required type="number" id="casetas" name="casetas">
 								</td >
 							</tr>
 							<tr >
@@ -186,7 +187,7 @@
 									Diesel
 								</td >
 								<td >
-									<input type="number" id="diesel">
+									<input type="number" id="diesel" name="diesel">
 								</td >
 							</tr>
 							<tr >
@@ -194,7 +195,7 @@
 									Despachadores
 								</td >
 								<td >
-									<input type="number" id="despachadores">
+									<input type="number" id="despachadores" name="despachadores">
 								</td >
 							</tr>
 							<tr >
@@ -202,7 +203,7 @@
 									Comisión
 								</td >
 								<td >
-									<input readonly type="number" id="comision">
+									<input readonly type="number" id="comision" name="comision">
 								</td >
 							</tr>
 							<tr >
@@ -210,7 +211,7 @@
 									Incentivo
 								</td >
 								<td >
-									<input type="number" id="incentivo">
+									<input type="number" id="incentivo" name="incentivo">
 								</td >
 							</tr>
 							<tr >
@@ -218,7 +219,10 @@
 									Mutualidad
 								</td >
 								<td >
-									<input readonly type="number" id="mutualidad">
+									<input readonly type="number" id="mutualidad" name="mutualidad" value="20">
+									<button id="btn_mutualidad" class="btn btn-secondary btn-sm" type="button" >
+										Cobrar
+									</button >
 								</td >
 							</tr>
 							
@@ -227,7 +231,10 @@
 									Seguridad
 								</td >
 								<td >
-									<input  readonly type="number" id="seguridad">
+									<input  readonly type="number" id="seguridad" name="seguridad" value="20">
+									<button id="btn_seguridad" class="btn btn-secondary btn-sm" type="button">
+										Cobrar
+									</button >
 								</td >
 							</tr>
 							<tr >
@@ -235,7 +242,7 @@
 									Fianza
 								</td >
 								<td >
-									<input type="number" id="fianza">
+									<input type="number" id="fianza" name="fianza">
 								</td >
 							</tr>
 							<tr >
@@ -243,7 +250,7 @@
 									Utilidad
 								</td >
 								<td >
-									<input readonly type="number" id="utilidad">
+									<input readonly type="number" id="utilidad" name="utilidad">
 								</td >
 							</tr>
 							<tr >
@@ -251,7 +258,7 @@
 									Observaciones
 								</td >
 								<td >
-									<input type="text" id="observaciones">
+									<input type="text" id="observaciones"  name="observaciones" size="60">
 								</td >
 							</tr>
 							
@@ -263,8 +270,8 @@
 										
 									</td >
 									<td >
-										<button type="submit" hidden class="btn btn-success">
-											Guardar
+										<button type="submit" class="btn btn-success">
+											<i class="fas fa-save"></i> Guardar
 										</button >
 									</td >
 								</tr>

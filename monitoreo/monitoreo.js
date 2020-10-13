@@ -3,6 +3,9 @@ $(document).ready(onLoad);
 function onLoad(){
 	
 	
+	$("#form_monitoreo").submit(guardarMonitoreo);
+	$("#btn_seguridad").click(cobrarSeguridad);
+	$("#btn_mutualidad").click(cobrarMutualidad);
 	$("#diesel, #casetas, #despachadores, #incentivo, #fianza").keyup(calcularUtilidad)
 	$(".origen, .destino").keyup(sumarBoletos)
 	$(".origen, .destino").change(sumarBoletos)
@@ -34,6 +37,80 @@ function onLoad(){
 }
 
 
+
+function guardarMonitoreo(event){
+	event.preventDefault();
+	
+	var boton = $(this).find(":submit");
+	var icono = boton.find(".fas");
+	
+	
+	boton.prop("disabled", true)
+	icono.toggleClass("fa-save fa-spinner fa-spin");
+	
+	
+	return $.ajax({
+		url: 'consultas/guardar_monitoreo.php',
+		dataType: 'JSON',
+		method: 'POST',
+		data: $("#form_monitoreo").serialize() + "&tarjeta=" + $("#tarjeta").val()
+		}).done(function(respuesta){
+		
+		alertify.success("Guardado Correctamente");
+		
+		}).always(function(){
+		boton.prop("disabled", false)
+		icono.toggleClass("fa-save fa-spinner fa-spin");
+		
+		
+		
+	});
+	
+}
+
+
+function cobrarMutualidad(){
+	var boton = $(this);
+	boton.prop("disabled", true)
+	
+	
+	return $.ajax({
+		url: 'consultas/generar_mutualidad.php',
+		data: {
+			"tarjeta": $("#tarjeta").val()
+			
+		}
+		}).done(function(respuesta){
+		boton.hide();
+		alertify.success("Mutualidad Generada correctamente")
+		}).always(function(){
+		
+		
+		
+	});
+	
+}
+function cobrarSeguridad(){
+	console.log("cobrarSeguridad()");
+	var boton = $(this);
+	boton.prop("disabled", true)
+	
+	
+	return $.ajax({
+		url: 'consultas/generar_mutualidad.php',
+		data: {
+			"tarjeta": $("#tarjeta").val()
+		}
+		}).done(function(respuesta){
+		boton.hide();
+		alertify.success("Seguridad Generada correctamente")
+		}).always(function(){
+		
+		
+		
+	});
+	
+}
 
 function buscarTarjeta(tarjeta){
 	
