@@ -102,7 +102,7 @@
 									<label for="">Importe Boletos con Guia: </label>
 								</td >
 								<td >
-									<input type="number" name="utilidad" id="utilidad" value="" readonly>
+									<input type="number" name="importe_con_guia" id="importe_con_guia" value="" readonly>
 								</td >
 							</tr>
 							<tr >
@@ -110,15 +110,18 @@
 									<label for="">Importe Boletos sin Guia: </label>
 								</td >
 								<td >
-									<input type="number" name="utilidad" id="utilidad" value="" readonly>
+									<input type="number" name="importe_sin_guia" id="importe_sin_guia" value="" readonly>
+								</td >
+								<td >
+									<button type="button" id="btn_ponchar" value="" > Ponchar</button>
 								</td >
 							</tr>
 							<tr >
 								<td class="text-left">
-									<label for="">Canitdad de Boletos sin Guia: </label>
+									<label for="">Cantidad de Boletos sin Guia: </label>
 								</td >
 								<td >
-									<input type="number" name="utilidad" id="utilidad" value="" readonly>
+									<input type="number" name="cant_boletos" id="cant_boletos" value="" readonly>
 								</td >
 							</tr>
 							<tr >
@@ -142,7 +145,7 @@
 									<label for="">Fianza: </label>
 								</td >
 								<td >
-									<input type="number" name="seguridad" id="seguridad" value="" readonly>
+									<input type="number" name="fianza" id="fianza" value="" readonly>
 								</td >
 							</tr>
 							<tr >
@@ -158,7 +161,7 @@
 									<label for="">Efectivo pagado: </label>
 								</td >
 								<td >
-									<input type="number" name="efectivo_pagado" id="efectivo_pagado" value="" readonly>
+									<input type="number" name="efectivo_pagado" id="efectivo_pagado" value="" >
 								</td >
 							</tr>
 							<tr >
@@ -166,7 +169,7 @@
 									<label for="">Abono Utilidad: </label>
 								</td >
 								<td >
-									<input type="number" name="efectivo_pagado" id="efectivo_pagado" value="" readonly>
+									<input type="number" name="abono" id="abono" value="" readonly>
 								</td >
 							</tr>
 							<tr >
@@ -178,11 +181,20 @@
 								</td >
 							</tr>
 							
-						</table>
-						
-						<table id="respuesta_tarjeta">
-							
-							
+							<tfoot>
+								
+								<tr >
+									<td >
+										
+									</td >
+									<td >
+										<button type="submit" class="btn btn-success">
+											<i class="fas fa-save"></i> Guardar
+										</button >
+									</td >
+								</tr>
+								
+							</tfoot>
 						</table>
 						
 						
@@ -197,6 +209,7 @@
 		
 		
 		
+		<?php include_once("modal_ponchar.php");?>
 		<?php include_once("../scripts.php");?>
 		
 		<script src="../plugins/pos_print/websocket-printer.js" > </script>

@@ -18,6 +18,11 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('#btn_ponchar').click(function(event){
+		
+		$("#modal_ponchar").modal("show");
+	});
+	$('#efectivo_pagado').on('keyup', calcularAbono);
 	$('#fecha_tarjetas').on('change', buscarFecha);
 	$('#imprimir_tarjeta').on('click', imprimirTicket);
 	$('#imprimir_abonos').on('click', imprimirTicket);
@@ -246,7 +251,7 @@ function buscarTarjeta(tarjeta){
 		if(respuesta.tarjeta.estatus_tarjetas == "P"){
 			
 			alert("Tarjeta Recaudada");
-		return false;
+			return false;
 		}
 		
 		$('#fecha_viaje').val(respuesta.tarjeta.fecha_viaje);
@@ -256,6 +261,7 @@ function buscarTarjeta(tarjeta){
 		$('#mutualidad').val(respuesta.tarjeta.mutualidad);
 		$('#seguridad').val(respuesta.tarjeta.seguridad);
 		
+		calcularEfectivo();
 		
 		}).always(function(){
 		
@@ -265,6 +271,53 @@ function buscarTarjeta(tarjeta){
 	
 }
 
+
+function calcularEfectivo(){
+	// console.log("calcularUtilidad()");
+	// let ingreso_bruto = Number($("#ingreso_bruto").val());
+	
+	// comision = ingreso_bruto * .13;
+	
+	// $("#comision").val(comision.toFixed(2));
+	
+	let utilidad = Number($("#utilidad").val());
+	let vale_dinero = Number($("#vale_dinero").val());
+	let importe_con_guia = Number($("#importe_con_guia").val());
+	let importe_sin_guia = Number($("#importe_sin_guia").val());
+	let fianza = Number($("#fianza").val());
+	let mutualidad = Number($("#mutualidad").val());
+	let seguridad = Number($("#seguridad").val());
+	
+	console.log("vale_dinero" , vale_dinero);
+	console.log("importe_con_guia" , importe_con_guia);
+	console.log("importe_sin_guia" , vale_dinero);
+	console.log("fianza" , fianza);
+	console.log("mutualidad" , mutualidad);
+	console.log("seguridad" , seguridad);
+	
+	
+	let efectivo_entregar = utilidad - vale_dinero - importe_con_guia - importe_sin_guia + fianza + mutualidad + seguridad;
+	
+	// console.log("utilidad" , utilidad);
+	
+	$("#efectivo_entregar").val(efectivo_entregar.toFixed(2));
+	
+}
+function calcularAbono(){
+
+	
+	let efectivo_entregar = Number($("#efectivo_entregar").val());
+	let efectivo_pagado = Number($("#efectivo_pagado").val());
+	
+	
+	
+	
+	let abono_unidad = efectivo_entregar - efectivo_pagado ;
+	
+	
+	$("#abono_unidad").val(abono_unidad.toFixed(2));
+	
+}
 
 function guardarMutualidad(){
 	if($("#id_recaudaciones").val() == ''){

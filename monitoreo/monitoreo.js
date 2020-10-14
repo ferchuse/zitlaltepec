@@ -44,6 +44,14 @@ function guardarMonitoreo(event){
 	var boton = $(this).find(":submit");
 	var icono = boton.find(".fas");
 	
+	if($("#tarjeta").val() == ""){
+		alert("Ingresa una tarjeta");
+		
+		return false;
+		
+		
+	}
+	
 	
 	boton.prop("disabled", true)
 	icono.toggleClass("fa-save fa-spinner fa-spin");
@@ -57,7 +65,7 @@ function guardarMonitoreo(event){
 		}).done(function(respuesta){
 		
 		alertify.success("Guardado Correctamente");
-		
+		window.location.reload()
 		}).always(function(){
 		boton.prop("disabled", false)
 		icono.toggleClass("fa-save fa-spinner fa-spin");
