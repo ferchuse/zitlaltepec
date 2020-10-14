@@ -9,21 +9,23 @@
 	
 	$consulta_tarjeta = "		
 	SELECT * FROM tarjetas_unidad 
-	WHERE tarjeta = '{$_GET["tarjeta"]}'
+	WHERE cve = '{$_GET["tarjeta"]}'
 	";
 	
 	$result_tarjeta = mysqli_query($link,$consulta_tarjeta);
 	if($result_tarjeta){
 		
-		while($row = mysqli_fetch_assoc($result_tarjeta){
-			
+		while($row = mysqli_fetch_assoc($result_tarjeta)){
 			
 			$fila = $row;
 		}
 		
+			$respuesta["estatus_tarjeta"] = "success";
+		// $respuesta["mensaje_tarjeta"] = "Error en ".$consulta_tarjeta.mysqli_Error($link);
 		
 		
-		$insert_mutualidad
+		
+		$insert_cargo =
 		"INSERT recaudacion_operador 
 		SET tarjeta='{$fila['tarjeta']}',
 		fecha_viaje='{$fila['fecha_viaje']}',
@@ -37,38 +39,37 @@
 		empresa ='{$fila['empresa']}',
 		estatus='A',
 		monto='{$_POST["monto"]}',
-		
 		recaudacion='{$_POST['recaudacion']}',
-		cargo='{$_POST['reg']}'"
+		cargo='{$_POST['carco']}'";
 		
-		$result = mysqli_query($link,$consulta);
+		$result = mysqli_query($link,$insert_cargo);
 		if($result){
 			
 			
 			$respuesta["estatus"] = "success";
-			$respuesta["mensaje"] = "M utualidad generadaa";
+			$respuesta["mensaje"] = "Cargo guardado";
 			
 			
 		}
 		else {
-		
-		$respuesta["estatus"] = "error";
-		$respuesta["mensaje"] = "Error en ".$consulta.mysqli_Error($link);
-		
-		echo json_encode($respuesta);
+			
+			$respuesta["estatus"] = "error";
+			$respuesta["mensaje"] = "Error en ".$insert_cargo.mysqli_Error($link);
+			
+			
 		}
 		
 		
 	}
 	else {
 		
-		$respuesta["estatus"] = "error";
-		$respuesta["mensaje"] = "Error en ".$consulta.mysqli_Error($link);
+		$respuesta["estatus_tarjeta"] = "error";
+		$respuesta["mensaje_tarjeta"] = "Error en ".$consulta_tarjeta.mysqli_Error($link);
 		
-		echo json_encode($respuesta);
-		}
+		// echo json_encode($respuesta);
+	}
 	
 	
 	
-	
+	echo json_encode($respuesta);
 ?>						

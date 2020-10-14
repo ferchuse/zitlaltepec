@@ -83,10 +83,11 @@ function cobrarMutualidad(){
 	
 	
 	return $.ajax({
-		url: 'consultas/generar_mutualidad.php',
+		url: 'consultas/guardar_cargo.php',
 		data: {
-			"tarjeta": $("#tarjeta").val()
-			
+			"tarjeta": $("#tarjeta").val(),
+			"monto": $("#mutualidad").val(),
+			"cargo": 1
 		}
 		}).done(function(respuesta){
 		boton.hide();
@@ -105,9 +106,11 @@ function cobrarSeguridad(){
 	
 	
 	return $.ajax({
-		url: 'consultas/generar_mutualidad.php',
+		url: 'consultas/guardar_cargo.php',
 		data: {
-			"tarjeta": $("#tarjeta").val()
+			"tarjeta": $("#tarjeta").val(),
+			"monto": $("#seguridad").val(),
+			"cargo": 4
 		}
 		}).done(function(respuesta){
 		boton.hide();
