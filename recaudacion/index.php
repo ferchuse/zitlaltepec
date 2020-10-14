@@ -45,7 +45,7 @@
 					<h4>Recaudación </h4>
 				</div>
 				<div class="col-sm-10">
-					<form id="form_recaudacion" >
+					<form id="form_abono" >
 						
 						<table >
 							<tr >

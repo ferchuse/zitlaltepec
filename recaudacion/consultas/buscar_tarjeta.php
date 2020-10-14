@@ -21,7 +21,8 @@
 	) AS nombre_operador,
 	monitoreo.mutualidad,
 	monitoreo.seguridad,
-	utilidad
+	utilidad,
+	fianza
 	FROM
 	tarjetas_unidad
 	LEFT JOIN derroteros ON tarjetas_unidad.derrotero = derroteros.cve

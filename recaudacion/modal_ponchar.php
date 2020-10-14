@@ -1,7 +1,7 @@
 
 <!-- The Modal -->
 <div class="modal fade" id="modal_ponchar">
-	<div class="modal-dialog modal-sm">
+	<div class="modal-dialog">
 		<div class="modal-content">
 			
 			<!-- Modal Header -->
@@ -19,15 +19,28 @@
 				</div>
 				
 				
-				<table  id="tablaboletossencillos">
-					<tbody><tr bgcolor="#E9F2F8"><th>&nbsp;</th>
-						<th>Taquilla</th>
-						<th>Folio</th>
-						<th>Fecha</th>
-						<th>Hora</th>
-						<th>Boleto</th>
-						<th>Costo</th>
-					</tr>
+				<table  id="tablaboletossencillos" class="table table-bordered">
+					<tbody>
+						
+						<tr bgcolor="#E9F2F8">
+							
+							<th>Taquilla</th>
+							<th>Folio</th>
+							<th>Fecha</th>
+							<th>Hora</th>
+							<th>Boleto</th>
+							<th>Costo</th>
+						</tr>
+						<tr bgcolor="#E9F2F8">
+							
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							
+						</tr>
 					</tbody>
 				</table>
 				
@@ -35,7 +48,7 @@
 			</div>
 			<!-- Modal footer -->
 			<div class="modal-footer">
-				<button type="button" class="btn btn-outline-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
+				<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cerrar</button>
 				
 			</div>
 			

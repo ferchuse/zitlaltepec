@@ -22,6 +22,7 @@ $(document).ready(function(){
 		
 		$("#modal_ponchar").modal("show");
 	});
+	$('#boleto').on('keyup', buscarBoleto);
 	$('#efectivo_pagado').on('keyup', calcularAbono);
 	$('#fecha_tarjetas').on('change', buscarFecha);
 	$('#imprimir_tarjeta').on('click', imprimirTicket);
@@ -99,6 +100,37 @@ $(document).ready(function(){
 				}).always(function(){
 				
 				$("#num_eco").removeClass("cargando");
+			});
+			
+		};
+	}
+	
+	
+	function buscarBoleto(event){
+		event.preventDefault();
+		
+		var boleto = $(this).val();
+		
+		if(event.which == 13 || event.which == 0){
+			$("#boleto").addClass("cargando");
+			$.ajax({
+				url: 'consultas/buscar_boleto.php',
+				method: 'GET',
+				dataType: 'JSON',
+				data: {boleto: boleto}
+				}).done(function(respuesta){
+				// console.log("buscarUnidad", respuesta) 
+				if(respuesta.num_rows == 0){
+					alertify.error("No encontrado")
+				}
+				else{
+					
+					
+				}
+				// alertify.error("No encontrado")
+				}).always(function(){
+				alertify.error("No se encontró el boleto")
+				$("#boleto").removeClass("cargando");
 			});
 			
 		};
@@ -260,6 +292,7 @@ function buscarTarjeta(tarjeta){
 		$('#utilidad').val(respuesta.tarjeta.utilidad);
 		$('#mutualidad').val(respuesta.tarjeta.mutualidad);
 		$('#seguridad').val(respuesta.tarjeta.seguridad);
+		$('#fianza').val(respuesta.tarjeta.fianza);
 		
 		calcularEfectivo();
 		
@@ -304,7 +337,7 @@ function calcularEfectivo(){
 	
 }
 function calcularAbono(){
-
+console.log("calcularAbono()")
 	
 	let efectivo_entregar = Number($("#efectivo_entregar").val());
 	let efectivo_pagado = Number($("#efectivo_pagado").val());
@@ -312,10 +345,10 @@ function calcularAbono(){
 	
 	
 	
-	let abono_unidad = efectivo_entregar - efectivo_pagado ;
+	let abono = efectivo_entregar - efectivo_pagado ;
 	
 	
-	$("#abono_unidad").val(abono_unidad.toFixed(2));
+	$("#abono").val(abono.toFixed(2));
 	
 }
 
