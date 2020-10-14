@@ -213,7 +213,7 @@
 		<?php include_once("../scripts.php");?>
 		
 		<script src="../plugins/pos_print/websocket-printer.js" > </script>
-		<script src="recaudacion.js?v=<?= date("Ymdi")?>"></script>
+		<script src="recaudacion.js?v=<?= date("Ymdis")?>"></script>
 		
 		
 	</body>

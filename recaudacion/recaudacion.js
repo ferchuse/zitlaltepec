@@ -45,7 +45,7 @@ $(document).ready(function(){
 			event.preventDefault();
 			console.log("Enter, no enviar");
 			return false;
-		}
+			}
 	});
 	
 	$('.nuevo').on('click',function(){
@@ -138,17 +138,7 @@ $(document).ready(function(){
 	
 	
 	
-	// $('#form_abono').on('keypress',function(event){
-	
-	// if(event.which == 13){
-	// event.preventDefault();
-	// console.log("Enter form");
-	// return false;
-	// }
-	// });
-	
-	//==========GUARDAR NUEVO ABONO============
-	$('#form_abono').on('submit', function guardarAbono(event){
+	$('#form_abono').on('submit', function guardarRecaudacion(event){
 		event.preventDefault();
 		console.log("saldo_tarjetas", $("#saldo_tarjetas").val())
 		console.log("abono_unidad", $("#abono_unidad").val())
@@ -180,19 +170,22 @@ $(document).ready(function(){
 			if(respuesta.estatus == 'success'){
 				alertify.success('Abono Generado correctamente');
 				
-				$("#id_abonos_unidades").val(respuesta.insert_id);
-				$("#imprimir_abonos").prop("hidden", false);
-				$("#imprimir_abonos").data("id_registro", respuesta.insert_id);
-				$("#imprimir_abonos").data("url", "imprimir_abono_unidades.php");
+				// $("#id_abonos_unidades").val(respuesta.insert_id);
+				// $("#imprimir_abonos").prop("hidden", false);
+				// $("#imprimir_abonos").data("id_registro", respuesta.insert_id);
+				// $("#imprimir_abonos").data("url", "imprimir_abono_unidades.php");
 				
-				$("#imprimir_abonos").click();
+				// $("#imprimir_abonos").click();
 				
-				$("#respuesta_tarjeta").html("");
-				$("#form_abono")[0].reset();
+				// $("#respuesta_tarjeta").html("");
+				// $("#form_abono")[0].reset();
+				
+				
 			}
 			else{
-				alertify.error('Ocurrio un error');
+				alertify.success('Guardado');
 			}
+			window.location.reload(true);
 			}).always(function(){
 			boton.prop('disabled',false);
 			icono.toggleClass('fa-save fa-spinner fa-pulse fa-fw');
@@ -200,7 +193,6 @@ $(document).ready(function(){
 	})
 	
 	
-	//==========GUARDAR NUEVA TARJETA============
 	$('#form_edicion').on('submit', function guardarTarjeta(event){
 		event.preventDefault();
 		
