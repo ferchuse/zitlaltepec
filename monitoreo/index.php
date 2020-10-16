@@ -243,6 +243,9 @@
 								</td >
 								<td >
 									<input type="number" id="fianza" name="fianza">
+									<button id="btn_fianza" class="btn btn-secondary btn-sm" type="button">
+										Cobrar
+									</button >
 								</td >
 							</tr>
 							<tr >

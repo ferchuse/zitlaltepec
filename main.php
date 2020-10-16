@@ -762,7 +762,7 @@
 		<tr><td height="20" bgcolor="#9CDAFE"><span class="style1">Menu '.$array_plaza[$_POST['plazausuario']].'</span></td></tr>
 		<tr><td><a href="#" onClick="document.forma.cvemenu.value=1;atcr(\'inicio.php\',\'\',\'\',\'\')">-P&aacute;gina de Inicio</a></td></tr>
 		<tr><td><a href="#" onClick="document.forma.cvemenu.value=2;atcr(\'cambiopass.php\',\'\',\'\',\'\')">-Cambiar Password</a></td></tr>
-		<tr><td><a href="http://catemaco.grupozitlaltepec.com.mx/" target="_blank" onClick="">-Catemaco</a></td></tr>';
+		';
 		
 		if($_POST['plazausuario']>0){
 			if(count($array_plaza)>1){

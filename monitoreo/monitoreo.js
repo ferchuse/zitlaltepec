@@ -6,6 +6,7 @@ function onLoad(){
 	$("#form_monitoreo").submit(guardarMonitoreo);
 	$("#btn_seguridad").click(cobrarSeguridad);
 	$("#btn_mutualidad").click(cobrarMutualidad);
+	$("#btn_fianza").click(cobrarFianza);
 	$("#diesel, #casetas, #despachadores, #incentivo, #fianza").keyup(calcularUtilidad)
 	$(".origen, .destino").keyup(sumarBoletos)
 	$(".origen, .destino").change(sumarBoletos)
@@ -84,6 +85,7 @@ function cobrarMutualidad(){
 	
 	return $.ajax({
 		url: 'consultas/guardar_cargo.php',
+		method: 'post',
 		data: {
 			"tarjeta": $("#tarjeta").val(),
 			"monto": $("#mutualidad").val(),
@@ -107,6 +109,7 @@ function cobrarSeguridad(){
 	
 	return $.ajax({
 		url: 'consultas/guardar_cargo.php',
+		method: 'post',
 		data: {
 			"tarjeta": $("#tarjeta").val(),
 			"monto": $("#seguridad").val(),
@@ -120,6 +123,35 @@ function cobrarSeguridad(){
 		
 		
 	});
+	
+}
+function cobrarFianza(){
+	console.log("cobrarFianza()");
+	var boton = $(this);
+	
+	
+	if($("#fianza").val() > 0){
+		
+		boton.prop("disabled", true)
+		$.ajax({
+			url: 'consultas/guardar_cargo.php',
+			method: 'post',
+			data: {
+				"tarjeta": $("#tarjeta").val(),
+				"monto": $("#fianza").val(),
+				"cargo": 6
+			}
+			}).done(function(respuesta){
+			boton.hide();
+			alertify.success("Fianza Generada correctamente")
+			}).always(function(){
+			
+		});
+	}
+	else{
+		alertify.error("La fianza debe ser mayor a 0")
+	}
+	
 	
 }
 

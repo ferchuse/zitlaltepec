@@ -40,7 +40,7 @@
 		estatus='A',
 		monto='{$_POST["monto"]}',
 		recaudacion='{$_POST['recaudacion']}',
-		cargo='{$_POST['carco']}'";
+		cargo='{$_POST['cargo']}'";
 		
 		$result = mysqli_query($link,$insert_cargo);
 		if($result){
