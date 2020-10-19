@@ -794,7 +794,7 @@
 						
 						IF($ro['link'] == "monitoreo.php"){
 							
-							echo "<tr><td><a href='{$ro['link']}' >-{$ro['nombre']}</a></td></tr>";
+							echo "<tr><td><a href='monitoreo/index.php' >-{$ro['nombre']}</a></td></tr>";
 							
 							
 						}

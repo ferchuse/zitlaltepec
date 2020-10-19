@@ -183,7 +183,7 @@ function calcularUtilidad(){
 	
 	comision = ingreso_bruto * .13;
 	
-	$("#comision").val(comision.toFixed(2));
+	$("#comision").val(comision.toFixed(0));
 	
 	let casetas = Number($("#casetas").val());
 	let diesel = Number($("#diesel").val());
@@ -207,7 +207,7 @@ function calcularUtilidad(){
 	
 	console.log("utilidad" , utilidad);
 	
-	$("#utilidad").val(utilidad.toFixed(2));
+	$("#utilidad").val(utilidad.toFixed(0));
 	
 }
 

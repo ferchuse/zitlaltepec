@@ -6,11 +6,13 @@
 	include("../conexi.php");
 	
 	$link = Conectarse();
-	
+	echo "menuppal2";
 	menuppal2();
 	
+	// print_r($link)
+	
 	function menuppal2() {
-		global $base,$array_modulos,$array_plaza,$PHP_SELF,$_POST;
+		global $base,$array_modulos,$array_plaza,$PHP_SELF,$_POST, $link;
 		$url=split("/",$_SERVER["PHP_SELF"]);
 		$url=array_reverse($url);
 		echo '
@@ -18,7 +20,7 @@
 		<tr><td height="20" bgcolor="#9CDAFE"><span class="style1">Menu </span></td></tr>
 		<tr><td><a href="#" onClick="document.forma.cvemenu.value=1;atcr(\'inicio.php\',\'\',\'\',\'\')">-P&aacute;gina de Inicio</a></td></tr>
 		<tr><td><a href="#" onClick="document.forma.cvemenu.value=2;atcr(\'cambiopass.php\',\'\',\'\',\'\')">-Cambiar Password</a></td></tr>
-		<tr><td><a href="http://catemaco.grupozitlaltepec.com.mx/" target="_blank" onClick="">-Catemaco</a></td></tr>';
+		';
 		
 		
 			$mostrar="";
@@ -78,9 +80,9 @@
 		
 		
 		echo '</table>';
-		if($mostrar!='') {
-			echo '<script language="javascript">$(\'.'.$mostrar.'\').show();'.substr($mostrar,1).'++;</script>';
-		}
+		// if($mostrar!='') {
+			// echo '<script language="javascript">$(\'.'.$mostrar.'\').show();'.substr($mostrar,1).'++;</script>';
+		// }
 	}
 	
 ?>

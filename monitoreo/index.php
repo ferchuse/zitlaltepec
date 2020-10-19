@@ -41,7 +41,7 @@
 	<body>
 		
 		
-		<?php //include_once("../menu.php");?>
+		<?php// include_once("../menu.php");?>
 		
 		
 		<div class="container-fluid">
@@ -242,7 +242,7 @@
 									Fianza
 								</td >
 								<td >
-									<input type="number" id="fianza" name="fianza">
+									<input type="number" id="fianza" name="fianza" value="50">
 									<button id="btn_fianza" class="btn btn-secondary btn-sm" type="button">
 										Cobrar
 									</button >
