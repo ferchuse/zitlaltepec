@@ -7,3 +7,4 @@
 <link href="../css/common.css" rel="stylesheet" >
 <link href="../lib/autocomplete.css" rel="stylesheet" >
 
+<link href="../css/sb-admin.min.css" rel="stylesheet">
