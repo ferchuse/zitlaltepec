@@ -792,7 +792,7 @@
 					<tr><td><table class="cmenu'.$k.'" style="display:none">';
 					while($ro=mysql_fetch_array($rs)) {
 						
-						IF($ro['link'] == "monitoreo.php"){
+						IF($ro['link'] == "monitoreo.php" ){
 							
 							echo "<tr><td><a href='monitoreo/index.php' >-{$ro['nombre']}</a></td></tr>";
 							

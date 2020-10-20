@@ -1,6 +1,7 @@
 <?php
 	// include("../login/login_check.php");
 	// $link_activo = "guias";
+	include("../funciones/generar_select.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,6 +94,14 @@
 											<input type="number" name="utilidad" id="utilidad" readonly value="">
 										</td >
 									</tr>
+									<tr >
+										<td class="text-left">
+											<label for="">Recaudación: </label>
+										</td >
+										<td >
+											<?= generar_select($link, "recaudaciones", "cve" , "nombre")?>
+										</td >
+									</tr>
 									
 									<tr >
 										<td class="text-left">
@@ -182,7 +191,7 @@
 											<label for="">Deuda Operador: </label>
 										</td >
 										<td >
-											<input type="number" name="deuda_operador" id="deuda_operador" value="" readonly>
+											<input type="number" name="deuda_operador" id="deuda_operador" value="" >
 										</td >
 									</tr>
 									<tr >
