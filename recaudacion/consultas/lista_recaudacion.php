@@ -10,7 +10,7 @@
 	
 	
 	
-	$consulta = "SELECT * FROM recibos_extra
+	$consulta = "SELECT * FROM recaudacion_operadores
 	LEFT JOIN empresas USING(id_empresas) 
 	LEFT JOIN beneficiarios USING(id_beneficiarios) 
 	LEFT JOIN motivos_salida USING(id_motivosSalida)

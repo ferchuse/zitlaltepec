@@ -179,6 +179,14 @@
 									</tr>
 									<tr >
 										<td class="text-left">
+											<label for="">Deuda Operador: </label>
+										</td >
+										<td >
+											<input type="number" name="deuda_operador" id="deuda_operador" value="" readonly>
+										</td >
+									</tr>
+									<tr >
+										<td class="text-left">
 											<label for="">Observaciones: </label>
 										</td >
 										<td >

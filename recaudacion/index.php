@@ -61,7 +61,7 @@
 											</button>
 										</td >
 										<td >
-											<a href="nueva_recaudacion" class="btn btn-success" >
+											<a href="nueva_recaudacion.php" class="btn btn-success" >
 												<i class="fas fa-file"></i> Nuevo
 											</a>
 										</td >
