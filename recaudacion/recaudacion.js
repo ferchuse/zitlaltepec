@@ -185,7 +185,7 @@ $(document).ready(function(){
 			else{
 				alertify.success('Guardado');
 			}
-			window.location.reload(true);
+			window.location.href = "../inicio.php";
 			}).always(function(){
 			boton.prop('disabled',false);
 			icono.toggleClass('fa-save fa-spinner fa-pulse fa-fw');

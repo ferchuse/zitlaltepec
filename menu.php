@@ -91,7 +91,7 @@
 
 <ul class="sidebar navbar-nav d-print-none">
 	<li class="nav-item active"> 
-		<a class="nav-link" href="../../index.php">
+		<a class="nav-link" href="../inicio.php">
 			<i class="fas fa-fw fa-home"></i>
 			<span>
 				Inicio 
@@ -113,7 +113,14 @@
 			</a>
 			<div class="dropdown-menu " >
 				<?php 
-					$q_catalogos = "SELECT a.* FROM menu as a INNER JOIN usuario_accesos as b ON (b.menu=a.cve AND b.usuario='".$_SESSION['CveUsuario']."' AND b.acceso>0) WHERE a.modulo='$key' and a.cve!='67' and a.cve!='68' ORDER BY a.orden";	
+					
+					if($_SESSION['CveUsuario']==1){
+						$q_catalogos = "SELECT * FROM menu WHERE modulo='$key' ORDER BY orden";
+					}
+					else{
+						$q_catalogos = "SELECT a.* FROM menu as a INNER JOIN usuario_accesos as b ON (b.menu=a.cve AND b.usuario='".$_SESSION['CveUsuario']."' AND b.acceso>0) WHERE a.modulo='$key' and a.cve!='67' and a.cve!='68' ORDER BY a.orden";	
+						
+					}
 					
 					$result_catalogos = mysqli_query($link, $q_catalogos);
 					if(!$result_catalogos){
@@ -121,7 +128,7 @@
 					}
 					
 					while($fila = mysqli_fetch_assoc($result_catalogos)){
-						echo "<a class='dropdown-item' href='../../paginas/catalogos/{$fila["link"]}' ";
+						echo "<a class='dropdown-item' href='../{$fila["link"]}' ";
 						echo ">-{$fila['nombre']}</a>";
 						
 					}
@@ -132,10 +139,10 @@
 		
 		
 		
+		
+		
+		<?php
+		}
+	?>
 	
-	
-	<?php
-	}
-?>
-
 </ul>

@@ -68,7 +68,6 @@
 					<?php //echo "<b>Permiso</b>: ". dame_permiso(basename($_SERVER['PHP_SELF']), $link);?>
 				</a>	
 				<a class="dropdown-item" href="#">
-					<?php echo "<b>Taquilla: </b>: ". $_COOKIE["id_taquilla"];?>
 					<input type="hidden" id="session_id_administrador" value="<?php echo $_COOKIE["id_administrador"];?>" >
 				</a>
 				<a hidden class="dropdown-item" href="#">Configuración</a>

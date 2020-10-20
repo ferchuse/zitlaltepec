@@ -1,6 +1,7 @@
 <?php
-	// include("../login/login_check.php");
-	// $link_activo = "guias";
+	include("../funciones/generar_select.php");
+	// include('../conexi.php');
+	// $link = Conectarse();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,157 +50,47 @@
 						<div class="col-sm-12">
 							<h4>Recaudación </h4>
 						</div>
-						<div class="col-sm-10">
-							<form id="form_abono" >
+						<div class="col-sm-12">
+							<form id="form_filtro" >
 								
 								<table >
 									<tr >
 										<td class="text-left">
-											<label for="">Tarjeta: </label>
+											<button type="submit" class="btn btn-info" >
+												<i class="fas fa-search"></i> Buscar
+											</button>
 										</td >
 										<td >
-											<input type="number" name="tarjeta" id="tarjeta" value="">
+											<a href="nueva_recaudacion" class="btn btn-success" >
+												<i class="fas fa-file"></i> Nuevo
+											</a>
 										</td >
 									</tr>
 									<tr >
 										<td class="text-left">
-											<label for="">Fecha de Viaje: </label>
+											<label for="">Fecha Inicial: </label>
 										</td >
 										<td >
-											<input type="date" name="fecha_viaje" id="fecha_viaje" readonly value="">
+											<input type="date" name="fecha_inicial" id="fecha_inicial"  value="<?= date("Y-m-d")?>">
 										</td >
 									</tr>
 									<tr >
 										<td class="text-left">
-											<label for="">Unidad: </label>
+											<label for="">Fecha Final: </label>
 										</td >
 										<td >
-											<input type="text" name="no_eco" id="no_eco" readonly value="">
+											<input type="date" name="fecha_final" id="fecha_final" value="<?= date("Y-m-d")?>">
 										</td >
 									</tr>
 									<tr >
 										<td class="text-left">
-											<label for="">Operador: </label>
+											<label for="">Usuario: </label>
 										</td >
 										<td >
-											<input type="text" name="nombre_operador" id="nombre_operador" readonly value="">
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Utilidad: </label>
-										</td >
-										<td >
-											<input type="number" name="utilidad" id="utilidad" readonly value="">
+											<?= generar_select($link, "usuarios", "cve" , "nombre")?>
 										</td >
 									</tr>
 									
-									<tr >
-										<td class="text-left">
-											<label for="">Vale de Dinero: </label>
-										</td >
-										<td >
-											<input type="number" name="vale_dinero" id="vale_dinero"  readonly value="">
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Importe Boletos con Guia: </label>
-										</td >
-										<td >
-											<input type="number" name="importe_con_guia" id="importe_con_guia" value="" readonly>
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Importe Boletos sin Guia: </label>
-										</td >
-										<td >
-											<input type="number" name="importe_sin_guia" id="importe_sin_guia" value="" readonly>
-										</td >
-										<td >
-											<button type="button" id="btn_ponchar" value="" > Ponchar</button>
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Cantidad de Boletos sin Guia: </label>
-										</td >
-										<td >
-											<input type="number" name="cant_boletos" id="cant_boletos" value="" readonly>
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Mutualidad: </label>
-										</td >
-										<td >
-											<input type="number" name="mutualidad" id="mutualidad" value="" readonly>
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Seguridad: </label>
-										</td >
-										<td >
-											<input type="number" name="seguridad" id="seguridad" value="" readonly>
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Fianza: </label>
-										</td >
-										<td >
-											<input type="number" name="fianza" id="fianza" value="" readonly>
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Efectivo a entregar: </label>
-										</td >
-										<td >
-											<input type="number" name="efectivo_entregar" id="efectivo_entregar" value="" readonly>
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Efectivo pagado: </label>
-										</td >
-										<td >
-											<input type="number" name="efectivo_pagado" id="efectivo_pagado" value="" >
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Abono Utilidad: </label>
-										</td >
-										<td >
-											<input type="number" name="abono" id="abono" value="" readonly>
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Observaciones: </label>
-										</td >
-										<td >
-											<input type="text" name="observaciones" id="observaciones" value="" >
-										</td >
-									</tr>
-									
-									<tfoot>
-										
-										<tr >
-											<td >
-												
-											</td >
-											<td >
-												<button type="submit" class="btn btn-success">
-													<i class="fas fa-save"></i> Guardar
-												</button >
-											</td >
-										</tr>
-										
-									</tfoot>
 								</table>
 								
 								
@@ -207,7 +98,18 @@
 						</div>
 						
 					</div>
+					
+					
+					<div class="row">
+						
+						<div class="col-sm-12" id="tabla_registros">
+							
+						</div>
+						
+						
+					</div>
 				</div>
+				
 			</div>
 		</div>
 		
@@ -217,9 +119,63 @@
 		<?php include_once("../scripts.php");?>
 		
 		<script src="../plugins/pos_print/websocket-printer.js" > </script>
-		<script src="recaudacion.js?v=<?= date("Ymdis")?>"></script>
-		
-		
-	</body>
+		<script >
+			
+			$(document).ready(function(){
+			
+			listarRegistros();
+			
+			$('#cve').select2();
+			
+			$('#form_filtro').on('submit', function filtrar(event){
+			event.preventDefault();
+			
+			listarRegistros();
+			
+			
+			
+			});
+			});
+			
+			function listarRegistros(){
+			console.log("listarRegistros()");
+			
+			let form = $("#form_filtro");
+			let boton = form.find(":submit");
+			let icono = boton.find('.fa');
+			
+			boton.prop('disabled',true);
+			icono.toggleClass('fa-search fa-spinner fa-pulse ');
+			
+			return $.ajax({
+			url: 'consultas/lista_recaudacion.php',
+			data: $("#form_filtro").serialize()
+			}).done(function(respuesta){
+			
+			$("#tabla_registros").html(respuesta)
+			
+			// $(".imprimir").click(function(){
+			// imprimirTicket($(this).data("id_registro"))
+			// });
+			
+			// $(".cancelar").click(confirmaCancelacion);
+			
+			// $("#check_all").change(checkAll);
+			
+			// $(".seleccionar").change(contarSeleccionados)
+			
+			}).always(function(){  
+			
+			boton.prop('disabled',false);
+			icono.toggleClass('fa-search fa-spinner fa-pulse fa-fw');
+			
+		});
+	}
 	
+	
+</script>
+
+
+</body>
+
 </html>

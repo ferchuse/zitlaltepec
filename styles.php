@@ -5,6 +5,7 @@
 <link href="../lib/alertify.min.css" rel="stylesheet" media="all"/>
 
 <link href="../css/common.css" rel="stylesheet" >
-<link href="../lib/autocomplete.css" rel="stylesheet" >
 
 <link href="../css/sb-admin.min.css" rel="stylesheet">
+
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
