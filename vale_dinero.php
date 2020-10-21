@@ -234,7 +234,7 @@ if($_POST['cmd']==1)
 		}
 		echo '</select></td></tr>';*/
 	echo '<tr><td>Unidad</td><td><select name="unidad" id="unidad" class="textField"><option value="">---Seleccione---</option>';
-		$res1=mysql_query("SELECT * FROM unidades ORDER BY no_eco");
+		$res1=mysql_query("SELECT * FROM unidades ORDER BY cve");
 		while($row1=mysql_fetch_array($res1)){
 			echo '<option value="'.$row1['cve'].'"';if($row['unidad']==$row1['cve']){echo'selected';} echo'>'.$row1['no_eco'].'</option>';
 		}
