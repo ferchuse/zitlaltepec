@@ -40,6 +40,7 @@
 	
 	<body>
 		
+<<<<<<< HEAD
 		<?php include("../navbar.php")?>
 		<div id="wrapper" class="d-print-none">
 			<?php include_once("../menu.php");?>
@@ -47,6 +48,17 @@
 			<div id="content-wrapper">	
 				<div class="container-fluid">
 					<?php //include_once("../main.php");?>
+=======
+		
+		<?php //include_once("../menu.php");?>
+		
+		
+		<div class="container-fluid">
+			<?php //include_once("../main.php");?>
+		
+			<div class="row">
+				<div class="col-sm-10">
+>>>>>>> parent of c755333... Redondear Utilidad y Comision
 					
 					<div class="row">
 						<div class="col-sm-12">
@@ -290,6 +302,136 @@
 					
 				</div>
 			</div>
+<<<<<<< HEAD
+=======
+			
+			<hr>
+			<form id="form_monitoreo">
+				<div class="row">
+					<div class="col-sm-6">
+						<table class="table-bordered">
+							<tr >
+								<td >
+									Ingreso Bruto
+								</td >
+								<td >
+									<input readonly type="number" id="ingreso_bruto" name="ingreso_bruto">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Casetas
+								</td >
+								<td >
+									<input required type="number" id="casetas" name="casetas">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Diesel
+								</td >
+								<td >
+									<input type="number" id="diesel" name="diesel">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Despachadores
+								</td >
+								<td >
+									<input type="number" id="despachadores" name="despachadores">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Comisión
+								</td >
+								<td >
+									<input readonly type="number" id="comision" name="comision">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Incentivo
+								</td >
+								<td >
+									<input type="number" id="incentivo" name="incentivo">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Mutualidad
+								</td >
+								<td >
+									<input readonly type="number" id="mutualidad" name="mutualidad" value="20">
+									<button id="btn_mutualidad" class="btn btn-secondary btn-sm" type="button" >
+										Cobrar
+									</button >
+								</td >
+							</tr>
+							
+							<tr >
+								<td >
+									Seguridad
+								</td >
+								<td >
+									<input  readonly type="number" id="seguridad" name="seguridad" value="20">
+									<button id="btn_seguridad" class="btn btn-secondary btn-sm" type="button">
+										Cobrar
+									</button >
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Fianza
+								</td >
+								<td >
+									<input type="number" id="fianza" name="fianza">
+									<button id="btn_fianza" class="btn btn-secondary btn-sm" type="button">
+										Cobrar
+									</button >
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Utilidad
+								</td >
+								<td >
+									<input readonly type="number" id="utilidad" name="utilidad">
+								</td >
+							</tr>
+							<tr >
+								<td >
+									Observaciones
+								</td >
+								<td >
+									<input type="text" id="observaciones"  name="observaciones" size="60">
+								</td >
+							</tr>
+							
+							
+							<tfoot>
+								
+								<tr >
+									<td >
+										
+									</td >
+									<td >
+										<button type="submit" class="btn btn-success">
+											<i class="fas fa-save"></i> Guardar
+										</button >
+									</td >
+								</tr>
+								
+							</tfoot>
+						</table>
+						
+					</div>
+				</div>
+			</form>
+			
+			
+>>>>>>> parent of c755333... Redondear Utilidad y Comision
 		</div>
 		
 		
