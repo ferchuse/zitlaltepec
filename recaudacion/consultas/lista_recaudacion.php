@@ -1,8 +1,8 @@
 <?php 
 	session_start();
-	include('../../conexi.php');
-	include('../../funciones/generar_select.php');
-	include('../../funciones/dame_permiso.php');
+	include('../../../conexi.php');
+	include('../../../funciones/generar_select.php');
+	include('../../../funciones/dame_permiso.php');
 	$link = Conectarse();
 	$filas = array();
 	$respuesta = array();
@@ -10,35 +10,32 @@
 	
 	
 	
-	$consulta = "SELECT *,
-	recaudacion_operador.cve AS recaudacion_operador_cve,
-	tarjetas_unidad.cve AS tarjeta,
-	empresas.nombre as empresas_nombre,
-	usuarios.nombre as usuarios_nombre,
-	tarjetas_unidad.estatus AS tarjetas_estatus,
-	cat_cargos_operadores.nombre AS cargos_nombre
-	FROM recaudacion_operador
-	LEFT JOIN tarjetas_unidad ON tarjetas_unidad.cve = recaudacion_operador.tarjeta
-	LEFT JOIN empresas ON empresas.cve = tarjetas_unidad.empresa
-	LEFT JOIN unidades ON unidades.cve = tarjetas_unidad.unidad
-	LEFT JOIN operadores ON operadores.cve = tarjetas_unidad.operador
-	LEFT JOIN cat_cargos_operadores ON cat_cargos_operadores.cve = recaudacion_operador.cargo
-	LEFT JOIN usuarios ON usuarios.cve = recaudacion_operador.usuario
+	$consulta = "SELECT * FROM recaudacion_operadores
+	LEFT JOIN empresas USING(id_empresas) 
+	LEFT JOIN beneficiarios USING(id_beneficiarios) 
+	LEFT JOIN motivos_salida USING(id_motivosSalida)
+	LEFT JOIN usuarios USING(id_usuarios)
 	WHERE 1
 	";
 	
 	$consulta.=  " 
-	AND  DATE(fecha_creacion)
+	AND  DATE(fecha_reciboSalidas)
 	BETWEEN '{$_GET['fecha_inicial']}' 
 	AND '{$_GET['fecha_final']}'"; 
 	
-	
-	
-	if($_GET["usuarios_cve"] != ""){
-		$consulta.=  " AND usuarios.cve = '{$_GET["usuarios_cve"]}'"; 
+	if($_GET['referencia'] != ""){
+		$consulta.=  " AND referencia =  '{$_GET['referencia']}' "; 
 	}
 	
-	$consulta.=  " ORDER BY recaudacion_operador.cve"; 
+	if($_GET['id_beneficiarios'] != ""){
+		$consulta.=  " AND id_beneficiarios =  '{$_GET['id_beneficiarios']}' "; 
+	}
+	
+	if($_GET["id_empresas"] != ""){
+		$consulta.=  " AND recibos_extra.id_empresas = '{$_GET["id_empresas"]}'"; 
+	}
+	
+	$consulta.=  " ORDER BY id_reciboSalidas"; 
 	
 	
 	
@@ -67,13 +64,13 @@
 			<tr>
 				<th></th>
 				<th>Folio</th>
+				<th>Referencia</th>
 				<th>Fecha </th>
-				<th>Unidad</th>
-				<th>Operador</th>
-				<th>Tarjeta</th>
-				<th>Empresa</th>
+				<th>Beneficiario</th>
 				<th>Motivo</th>
+				<th>Empresa</th>
 				<th>Monto</th>
+				<th>Observaciones</th>
 				<th>Usuario</th>
 			</thead>
 			<tbody id="tabla_DB">
@@ -82,37 +79,37 @@
 					?>
 					<tr>
 						<td class="text-center"> 
-							<?php if($fila["tarjetas_estatus"] != 'C'){
+							<?php if($fila["estatus_reciboSalidas"] != 'Cancelado'){
 								
-								$totales[0]+= $fila["monto"];
-								if(dame_permiso("recaudacion.php", $link) == '3'){ 
+								$totales[0]+= $fila["monto_reciboSalidas"];
+								if(dame_permiso("recibos_extra.php", $link) == 'Supervisor'){ 
 								?>
-								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['recaudacion_operador_cve']?>'>
+								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_reciboSalidas']?>'>
 									<i class="fas fa-times"></i>
 								</button>
 								
 								<?php
 								}
 							?>
-							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['recaudacion_operador_cve']?>'>
+							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['id_reciboSalidas']?>'>
 								<i class="fas fa-print"></i>
 							</button>
 							<?php
 							}
 							else{
-								echo "<span class='badge badge-danger'>".$fila["tarjetas_estatus"]."<br>".$fila["datos_cancelacion"]."</span>";
+								echo "<span class='badge badge-danger'>".$fila["estatus_reciboSalidas"]."<br>".$fila["datos_cancelacion"]."</span>";
 							}
 							?>
 						</td>
-						<td><?php echo $fila["cve"]?></td>
-						<td><?php echo $fila["fecha_creacion"]?></td>
-						<td><?php echo $fila["no_eco"]?></td>
-						<td><?php echo $fila["nombre"]?></td>
-						<td><?php echo $fila["tarjeta"]?></td>
-						<td><?php echo $fila["empresas_nombre"]?></td>
-						<td><?php echo $fila["cargos_nombre"]?></td>
-						<td>$<?php echo $fila["monto"]?></td>
-						<td><?php echo $fila["usuarios_nombre"]?></td>
+						<td><?php echo $fila["id_reciboSalidas"]?></td>
+						<td><?php echo $fila["referencia"]?></td>
+						<td><?php echo $fila["fecha_reciboSalidas"]?></td>
+						<td><?php echo $fila["nombre_beneficiarios"]?></td>
+						<td><?php echo $fila["nombre_motivosSalida"]?></td>
+						<td><?php echo $fila["nombre_empresas"]?></td>
+						<td>$<?php echo $fila["monto_reciboSalidas"]?></td>
+						<td><?php echo $fila["observaciones_reciboSalidas"]?></td>
+						<td><?php echo $fila["nombre_usuarios"]?></td>
 							
 					</tr>
 					<?php
@@ -126,7 +123,6 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>

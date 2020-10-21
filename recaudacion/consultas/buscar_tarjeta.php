@@ -43,11 +43,8 @@
 		
 		if( mysqli_num_rows($result) == 0){
 			
+			die("<div class='alert alert-danger'>Tarjeta No encontrada</div>");
 			
-			$respuesta["existe"] = "NO";
-		}
-		else{
-			$respuesta["existe"] = "SI";
 			
 		}
 		
@@ -56,6 +53,7 @@
 			$fila = $row ;
 			
 		}
+		
 		
 		
 		$respuesta["tarjeta"] = $fila;

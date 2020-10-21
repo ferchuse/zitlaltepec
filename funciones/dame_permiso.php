@@ -4,11 +4,9 @@
 	function dame_permiso($url_paginas,$link){
 		// $respuesta = "Sin Acceso";
 		// return false;
-		$consulta = "SELECT * FROM usuarios 
-		LEFT JOIN usuario_accesos ON usuario_accesos.usuario = usuarios.cve
-		LEFT JOIN menu ON usuario_accesos.menu = menu.cve 
-		WHERE link = '$url_paginas' 
-		AND usuarios.cve = {$_SESSION["CveUsuario"]}";
+		$consulta = "SELECT * FROM permisos LEFT JOIN paginas USING(id_paginas) 
+		WHERE url_paginas = '$url_paginas' 
+		AND id_usuarios = {$_COOKIE["id_usuarios"]}";
 		
 		
 		$result = mysqli_query($link, $consulta) or die("Error dame_permiso($consulta) ". mysqli_error($link));
@@ -19,7 +17,7 @@
 				$respuesta= $fila["permiso"];
 			}
 			
-			if($respuesta == "0" || $respuesta == "" ){
+			if($respuesta == "Sin Acceso" || $respuesta == "" ){
 				return "hidden"; 
 			}
 			else{

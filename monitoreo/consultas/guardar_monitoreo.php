@@ -1,5 +1,4 @@
 <?php 
-	session_start();
 	include('../../conexi.php');
 	$link = Conectarse();
 	
@@ -8,7 +7,6 @@
 	"INSERT monitoreo 
 	SET 
 	tarjeta='{$_POST['tarjeta']}',		
-	usuario='{$_SESSION['CveUsuario']}',		
 	fecha_monitoreo= NOW(),
 	ingreso_bruto='{$_POST["ingreso_bruto"]}',
 	casetas='{$_POST["casetas"]}',

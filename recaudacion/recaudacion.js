@@ -185,7 +185,7 @@ $(document).ready(function(){
 			else{
 				alertify.success('Guardado');
 			}
-			 window.location.href = "../inicio.php";
+			window.location.href = "../inicio.php";
 			}).always(function(){
 			boton.prop('disabled',false);
 			icono.toggleClass('fa-save fa-spinner fa-pulse fa-fw');
@@ -265,12 +265,6 @@ function buscarTarjeta(tarjeta){
 			"tarjeta": tarjeta
 		}
 		}).done(function(respuesta){
-		
-		if(respuesta.existe == "NO"){
-			
-			alert("Tarjeta no encontrada");
-			return false;
-		}
 		
 		if(respuesta.tarjeta.estatus_tarjetas == "C"){
 			
