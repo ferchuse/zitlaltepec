@@ -2,6 +2,24 @@
 	
 	//Conexion con la base
 	
+	if($_SERVER["SERVER_NAME"] == "sync-sistemas.com" ){
+		
+		
+		$base = "syncsis_zitlaltepec";
+		if (!$MySQL=@mysql_connect('localhost', 'syncsis', 'Nana@0107')) {
+			$t=time();
+			while (time()<$t+5) {}
+			if (!$MySQL=@mysql_connect('localhost', 'syncsis', 'Nana@0107')) {
+				$t=time();
+				while (time()<$t+10) {}
+				if (!$MySQL=@mysql_connect('localhost', 'syncsis', 'Nana@0107')) {
+					echo '<br><br><br><h3 align=center">Hay problemas de comunicaci&oacute;n con la Base de datos.</h3>';
+					echo '<h4>Por favor intente mas tarde.-</h4>';
+					exit;
+				}
+			}
+		}
+	}	
 	if($_SERVER["SERVER_NAME"] == "localhost" ){
 		
 		
