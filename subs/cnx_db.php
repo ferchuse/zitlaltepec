@@ -60,7 +60,7 @@
 	
 	
 		// if($_SERVER["SERVER_NAME"] != "localhost") {
-			mysql_query( "SET NAMES 'utf8'") or die("Error Cambiando charset").mysql_error();
+			// mysql_query( "SET NAMES 'utf8'") or die("Error Cambiando charset").mysql_error();
 			
 			// mysqli_query($link, "SET sql_mode = ''") or die("Error Cambiando sqlmode").mysqli_error($link);
 			
