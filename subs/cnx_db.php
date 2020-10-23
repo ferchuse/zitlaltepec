@@ -40,7 +40,7 @@
 		}
 	}
 	
-	if($_SERVER["SERVER_NAME"] == "grupozitlaltepec.com.mx" ){
+	if($_SERVER["SERVER_NAME"] == "grupozitlaltepec.com.mx" || $_SERVER["SERVER_NAME"] == "rhgaaz.com" ){
 		$base = "rhgaazco_zitlaltepec";
 		if (!$MySQL=@mysql_connect('localhost', 'rhgaazco_zitlalte', 'Zitla@2020')) {
 			$t=time();
