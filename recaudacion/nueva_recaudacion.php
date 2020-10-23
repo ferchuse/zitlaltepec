@@ -1,6 +1,7 @@
 <?php
 	// include("../login/login_check.php");
 	// $link_activo = "guias";
+	include("../funciones/generar_select.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,6 +94,14 @@
 											<input type="number" name="utilidad" id="utilidad" readonly value="">
 										</td >
 									</tr>
+									<tr >
+										<td class="text-left">
+											<label for="">Recaudación: </label>
+										</td >
+										<td >
+											<?= generar_select($link, "recaudaciones", "cve" , "nombre")?>
+										</td >
+									</tr>
 									
 									<tr >
 										<td class="text-left">
@@ -135,6 +144,9 @@
 										</td >
 										<td >
 											<input type="number" name="mutualidad" id="mutualidad" value="" readonly>
+											<button id="btn_mutualidad" class="btn btn-secondary btn-sm" type="button" >
+												Cobrar
+											</button >
 										</td >
 									</tr>
 									<tr >
@@ -143,14 +155,20 @@
 										</td >
 										<td >
 											<input type="number" name="seguridad" id="seguridad" value="" readonly>
+											<button id="btn_seguridad" class="btn btn-secondary btn-sm" type="button">
+												Cobrar
+											</button >
 										</td >
 									</tr>
 									<tr >
-										<td class="text-left">
-											<label for="">Fianza: </label>
+										<td >
+											Fianza
 										</td >
 										<td >
-											<input type="number" name="fianza" id="fianza" value="" readonly>
+											<input type="number" id="fianza" name="fianza" value="50">
+											<button id="btn_fianza" class="btn btn-secondary btn-sm" type="button">
+												Cobrar
+											</button >
 										</td >
 									</tr>
 									<tr >
@@ -182,7 +200,7 @@
 											<label for="">Deuda Operador: </label>
 										</td >
 										<td >
-											<input type="number" name="deuda_operador" id="deuda_operador" value="" readonly>
+											<input type="number" name="deuda_operador" id="deuda_operador" value="" >
 										</td >
 									</tr>
 									<tr >

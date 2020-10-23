@@ -6,29 +6,21 @@
 	$link = Conectarse();
 	$filas = array();
 	$respuesta = array();
-	$totales = array_fill (  0 ,  1 , 0 ); //Llena el array totales con 10 elementos en 0s
+	$totales = array_fill (  0 ); //Llena el array totales con 10 elementos en 0s
 	
 	
 	
-	$consulta = "SELECT *,
-	recaudacion_operador.cve AS recaudacion_operador_cve,
-	tarjetas_unidad.cve AS tarjeta,
-	empresas.nombre as empresas_nombre,
-	usuarios.nombre as usuarios_nombre,
-	tarjetas_unidad.estatus AS tarjetas_estatus,
-	cat_cargos_operadores.nombre AS cargos_nombre
-	FROM recaudacion_operador
-	LEFT JOIN tarjetas_unidad ON tarjetas_unidad.cve = recaudacion_operador.tarjeta
+	$consulta = "SELECT *, usuarios.nombre as usuarios_nombre
+	FROM monitoreo
+	LEFT JOIN tarjetas_unidad ON tarjetas_unidad.cve = monitoreo.tarjeta
 	LEFT JOIN empresas ON empresas.cve = tarjetas_unidad.empresa
 	LEFT JOIN unidades ON unidades.cve = tarjetas_unidad.unidad
-	LEFT JOIN operadores ON operadores.cve = tarjetas_unidad.operador
-	LEFT JOIN cat_cargos_operadores ON cat_cargos_operadores.cve = recaudacion_operador.cargo
-	LEFT JOIN usuarios ON usuarios.cve = recaudacion_operador.usuario
+	LEFT JOIN usuarios ON usuarios.cve = monitoreo.usuario
 	WHERE 1
 	";
 	
 	$consulta.=  " 
-	AND  DATE(fecha_creacion)
+	AND  DATE(fecha_monitoreo)
 	BETWEEN '{$_GET['fecha_inicial']}' 
 	AND '{$_GET['fecha_final']}'"; 
 	
@@ -38,7 +30,7 @@
 		$consulta.=  " AND usuarios.cve = '{$_GET["usuarios_cve"]}'"; 
 	}
 	
-	$consulta.=  " ORDER BY recaudacion_operador.cve"; 
+	$consulta.=  " ORDER BY id_monitoreo"; 
 	
 	
 	
@@ -69,22 +61,22 @@
 				<th>Folio</th>
 				<th>Fecha </th>
 				<th>Unidad</th>
-				<th>Operador</th>
+				<th>Aforador</th>
 				<th>Tarjeta</th>
-				<th>Empresa</th>
-				<th>Motivo</th>
 				<th>Monto</th>
-				<th>Usuario</th>
+				<th>Vueltas</th>
+				
 			</thead>
 			<tbody id="tabla_DB">
 				<?php 
 					foreach($filas as $index=>$fila){
+					$total+= $fila["utilidad"];
 					?>
 					<tr>
 						<td class="text-center"> 
-							<?php if($fila["tarjetas_estatus"] != 'C'){
+							<?php if($fila["monitoreo_estatus"] != 'C'){
 								
-								$totales[0]+= $fila["monto"];
+								
 								if(dame_permiso("recaudacion.php", $link) == '3'){ 
 								?>
 								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['recaudacion_operador_cve']?>'>
@@ -94,7 +86,7 @@
 								<?php
 								}
 							?>
-							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['recaudacion_operador_cve']?>'>
+							<button hidden class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['recaudacion_operador_cve']?>'>
 								<i class="fas fa-print"></i>
 							</button>
 							<?php
@@ -104,23 +96,21 @@
 							}
 							?>
 						</td>
-						<td><?php echo $fila["cve"]?></td>
-						<td><?php echo $fila["fecha_creacion"]?></td>
+						<td><?php echo $fila["id_monitoreo"]?></td>
+						<td><?php echo $fila["fecha_monitoreo"]?></td>
 						<td><?php echo $fila["no_eco"]?></td>
-						<td><?php echo $fila["nombre"]?></td>
-						<td><?php echo $fila["tarjeta"]?></td>
-						<td><?php echo $fila["empresas_nombre"]?></td>
-						<td><?php echo $fila["cargos_nombre"]?></td>
-						<td>$<?php echo $fila["monto"]?></td>
 						<td><?php echo $fila["usuarios_nombre"]?></td>
+						<td><?php echo $fila["tarjeta"]?></td>
+						<td>$<?php echo number_format($fila["utilidad"])?></td>
+						<td><?php echo $fila["vueltas"]?></td>
 							
 					</tr>
 					<?php
 						
-						if($fila["estatus_reciboSalidas"] != "Cancelado"){
+						// if($fila["estatus_reciboSalidas"] != "Cancelado"){
 							
 							
-						}
+						// }
 					}
 				?>
 			</tbody>
@@ -132,16 +122,9 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td></td>
-					<td></td>
-					<?php
-						foreach($totales as $i =>$total){
-						?>
+					
 						<td class="h6">$<?php echo number_format($total)?></td>
-						<?php	
-						}
-					?>
-					<td></td>
+						
 					<td></td>
 				</tr>
 			</tfoot>
@@ -150,7 +133,7 @@
 	
 	<?php
 		
-		
+	// print_r($_SESSION);
 	}
 	else {
 		echo  "Error en ".$consulta.mysqli_Error($link);

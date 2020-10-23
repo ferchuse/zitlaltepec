@@ -78,83 +78,6 @@ function guardarMonitoreo(event){
 }
 
 
-function cobrarMutualidad(){
-	var boton = $(this);
-	boton.prop("disabled", true)
-	
-	
-	return $.ajax({
-		url: 'consultas/guardar_cargo.php',
-		method: 'post',
-		data: {
-			"tarjeta": $("#tarjeta").val(),
-			"monto": $("#mutualidad").val(),
-			"cargo": 1
-		}
-		}).done(function(respuesta){
-		boton.hide();
-		alertify.success("Mutualidad Generada correctamente")
-		}).always(function(){
-		
-		
-		
-	});
-	
-}
-function cobrarSeguridad(){
-	console.log("cobrarSeguridad()");
-	var boton = $(this);
-	boton.prop("disabled", true)
-	
-	
-	return $.ajax({
-		url: 'consultas/guardar_cargo.php',
-		method: 'post',
-		data: {
-			"tarjeta": $("#tarjeta").val(),
-			"monto": $("#seguridad").val(),
-			"cargo": 4
-		}
-		}).done(function(respuesta){
-		boton.hide();
-		alertify.success("Seguridad Generada correctamente")
-		}).always(function(){
-		
-		
-		
-	});
-	
-}
-function cobrarFianza(){
-	console.log("cobrarFianza()");
-	var boton = $(this);
-	
-	
-	if($("#fianza").val() > 0){
-		
-		boton.prop("disabled", true)
-		$.ajax({
-			url: 'consultas/guardar_cargo.php',
-			method: 'post',
-			data: {
-				"tarjeta": $("#tarjeta").val(),
-				"monto": $("#fianza").val(),
-				"cargo": 6
-			}
-			}).done(function(respuesta){
-			boton.hide();
-			alertify.success("Fianza Generada correctamente")
-			}).always(function(){
-			
-		});
-	}
-	else{
-		alertify.error("La fianza debe ser mayor a 0")
-	}
-	
-	
-}
-
 function buscarTarjeta(tarjeta){
 	
 	$("#tarjeta").addClass("cargando"); 
@@ -183,7 +106,7 @@ function calcularUtilidad(){
 	
 	comision = ingreso_bruto * .13;
 	
-	$("#comision").val(comision.toFixed(2));
+	$("#comision").val(comision.toFixed(0));
 	
 	let casetas = Number($("#casetas").val());
 	let diesel = Number($("#diesel").val());
@@ -191,7 +114,7 @@ function calcularUtilidad(){
 	let incentivo = Number($("#incentivo").val());
 	let mutualidad = Number($("#mutualidad").val());
 	let seguridad = Number($("#seguridad").val());
-	let fianza = Number($("#fianza").val());
+	// let fianza = Number($("#fianza").val());
 	
 	console.log("comision" , comision);
 	console.log("casetas" , casetas);
@@ -200,14 +123,14 @@ function calcularUtilidad(){
 	console.log("incentivo" , incentivo);
 	console.log("mutualidad" , mutualidad);
 	console.log("seguridad" , seguridad);
-	console.log("fianza" , fianza);
+	// console.log("fianza" , fianza);
 	
 	
-	let utilidad = ingreso_bruto - fianza - casetas - diesel - despachadores - comision - incentivo - mutualidad - seguridad;
+	let utilidad = ingreso_bruto -  casetas - diesel - despachadores - comision - incentivo - mutualidad - seguridad;
 	
 	console.log("utilidad" , utilidad);
 	
-	$("#utilidad").val(utilidad.toFixed(2));
+	$("#utilidad").val(utilidad.toFixed(0));
 	
 }
 

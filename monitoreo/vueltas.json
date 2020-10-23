@@ -1,0 +1,25 @@
+vueltas: [
+	{
+        "vuelta": 1,
+        "origen": "APAXCO",
+        "destino": "SAN BARTOLO"
+
+        boletos: [
+			{
+                "tarifa": 5,
+                "ida": 10,
+                "vuelta": 5
+
+            }, 
+			{
+                "tarifa": 5,
+                "ida": 10,
+                "vuelta": 5
+
+            }
+
+        ]
+
+    }
+
+]

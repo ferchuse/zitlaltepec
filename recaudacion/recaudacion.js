@@ -185,7 +185,7 @@ $(document).ready(function(){
 			else{
 				alertify.success('Guardado');
 			}
-			window.location.href = "../inicio.php";
+			 window.location.href = "../inicio.php";
 			}).always(function(){
 			boton.prop('disabled',false);
 			icono.toggleClass('fa-save fa-spinner fa-pulse fa-fw');
@@ -255,6 +255,91 @@ $(document).ready(function(){
 
 
 
+function cobrarMutualidad(){
+	var boton = $(this);
+	boton.prop("disabled", true)
+	
+	
+	return $.ajax({
+		url: 'consultas/guardar_cargo.php',
+		method: 'post',
+		data: {
+			"tarjeta": $("#tarjeta").val(),
+			"monto": $("#mutualidad").val(),
+			"cargo": 1
+		}
+		}).done(function(respuesta){
+		boton.hide();
+		alertify.success("Mutualidad Generada correctamente")
+		}).always(function(){
+		
+		
+		
+	});
+	
+}
+function cobrarSeguridad(){
+	console.log("cobrarSeguridad()");
+	var boton = $(this);
+	boton.prop("disabled", true)
+	
+	
+	return $.ajax({
+		url: 'consultas/guardar_cargo.php',
+		method: 'post',
+		data: {
+			"tarjeta": $("#tarjeta").val(),
+			"monto": $("#seguridad").val(),
+			"cargo": 4
+		}
+		}).done(function(respuesta){
+		boton.hide();
+		alertify.success("Seguridad Generada correctamente")
+		}).always(function(){
+		
+		
+		
+	});
+	
+}
+
+
+renderVueltas(){
+	
+	
+	
+}
+
+function cobrarFianza(){
+	console.log("cobrarFianza()");
+	var boton = $(this);
+	
+	
+	if($("#fianza").val() > 0){
+		
+		boton.prop("disabled", true)
+		$.ajax({
+			url: 'consultas/guardar_cargo.php',
+			method: 'post',
+			data: {
+				"tarjeta": $("#tarjeta").val(),
+				"monto": $("#fianza").val(),
+				"cargo": 6
+			}
+			}).done(function(respuesta){
+			boton.hide();
+			alertify.success("Fianza Generada correctamente")
+			}).always(function(){
+			
+		});
+	}
+	else{
+		alertify.error("La fianza debe ser mayor a 0")
+	}
+}
+
+
+
 function buscarTarjeta(tarjeta){
 	
 	$("#tarjeta").addClass("cargando"); 
@@ -265,6 +350,12 @@ function buscarTarjeta(tarjeta){
 			"tarjeta": tarjeta
 		}
 		}).done(function(respuesta){
+		
+		if(respuesta.existe == "NO"){
+			
+			alert("Tarjeta no encontrada");
+			return false;
+		}
 		
 		if(respuesta.tarjeta.estatus_tarjetas == "C"){
 			
@@ -558,6 +649,53 @@ function buscarFecha(){
 	
 }
 
+
+function imprimirCargo(folio, tabla){
+	console.log("imprimirCargo()");
+	var id_registro = $(this).data("id_registro");
+	var url = $(this).data("url");
+	var boton = $(this); 
+	var icono = boton.find("fas");
+	if(!id_registro){
+		
+		alertify.error("Ingrese una tarjeta");
+		return false;
+	}
+	$("#ticket").html("");
+	$("#ticket").height(0);
+	
+	boton.prop("disabled", true); 
+	icono.toggleClass("fa-print fa-spinner fa-spin");
+	
+	$.ajax({
+		url: "impresion/"+ url,
+		data:{
+			"folio" : id_registro
+			tabla : id_registro
+		}
+		}).done(function (respuesta){
+		
+		$.ajax({
+			url: "http://localhost/imprimir_zitlalli.php",
+			method: "POST",
+			data:{
+				"texto" : respuesta
+			}
+		});
+		
+		printService.submit({
+			'type': 'LABEL',
+			'raw_content': respuesta
+		});
+		
+		
+		}).always(function(){
+		
+		boton.prop("disabled", false);
+		icono.toggleClass("fa-print fa-spinner fa-spin");
+		
+	});
+}
 
 function imprimirTicket(event){
 	console.log("imprimirTicket()");

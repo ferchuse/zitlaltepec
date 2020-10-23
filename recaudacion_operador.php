@@ -408,7 +408,7 @@ if($_POST['cmd']==2){
 		//$texto.='|';
 		//$texto.="FECHA:    ".$_POST['fecha_viaje'];
 		//$texto.='|';
-		$texto.=chr(27).'!'.chr(40)."NUM ECO: ".$array_unidad[$_POST['unidad']];
+		$texto.=chr(27).'!'.chr(40)."NUM ECO: ".$array_unidad[$_POST['unidad']]; // cargar todos las unidades y operadores en un array es una completa estupidez, solo haz un leftjoin
 		$texto.='|';
 		$texto.=chr(27).'!'.chr(10)."(".$array_cveconductor[$_POST['operador']].')'.$array_nomconductor[$_POST['operador']];
 		$texto.='|';

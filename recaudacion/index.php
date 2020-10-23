@@ -84,10 +84,18 @@
 									</tr>
 									<tr >
 										<td class="text-left">
+											<label for="">Unidad: </label>
+										</td >
+										<td >
+											<input type="text" name="num_eco" id="num_eco" >
+										</td >
+									</tr>
+									<tr >
+										<td class="text-left">
 											<label for="">Usuario: </label>
 										</td >
 										<td >
-											<?= generar_select($link, "usuarios", "cve" , "nombre")?>
+											<?= generar_select($link, "usuarios", "cve" , "nombre", true, false, false, 0, 0, "usuarios_cve","usuarios_cve")?>
 										</td >
 									</tr>
 									
@@ -142,7 +150,7 @@
 			
 			let form = $("#form_filtro");
 			let boton = form.find(":submit");
-			let icono = boton.find('.fa');
+			let icono = boton.find('.fas');
 			
 			boton.prop('disabled',true);
 			icono.toggleClass('fa-search fa-spinner fa-pulse ');
