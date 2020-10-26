@@ -1,13 +1,14 @@
 <?php 
-	include('../../../conexi.php');
+	include('../conexi.php');
 	$link = Conectarse();
 	$filas = array();
 	
 	$consulta = "SELECT 
 	*,
-	operadores.nombre  
+	operadores.nombre  AS operadores_nombre
 	FROM recaudacion_operador
 	LEFT JOIN operadores  ON recaudacion_operador.operador = operadores.cve
+	LEFT JOIN unidades  ON recaudacion_operador.unidad = unidades.cve
 	LEFT JOIN cat_cargos_operadores ON recaudacion_operador.cargo = cat_cargos_operadores.cve
 	
 	WHERE recaudacion_operador.cve = '{$_GET['folio']}'";
@@ -55,17 +56,17 @@
 		
 		
 		$texto ="@".'|';
-		$texto.=chr(27).'!'.chr(40)."  ".$_POST[$row['cargo']];
+		$texto.=chr(27).'!'.chr(40)."  ".$_GET['tabla'];
 		$texto.='||';
-		$texto.=chr(27).'!'.chr(40)."FOLIO: ".$row['cve'];
+		$texto.=chr(27).'!'.chr(40)."FOLIO: ".$registro['cve'];
 		$texto.='|';
-		$texto.=$row['fecha']." ".$row['hora'];
+		$texto.=$registro['fecha']." ".$registro['hora'];
 		$texto.='|';
-		$texto.=chr(27).'!'.chr(40)."NUM ECO: ".$row['no_eco'];
+		$texto.=chr(27).'!'.chr(40)."NUM ECO: ".$registro['no_eco'];
 		$texto.='|';
-		$texto.=chr(27).'!'.chr(10)."(".$registro['operador']].')'.$array_nomconductor[$row['operador']];
+		$texto.=chr(27).'!'.chr(10)."(".$registro['operador'].')'.$registro['operadores_nombre'];
 		$texto.='|';
-		$texto.=chr(27).'!'.chr(10)."MONTO: ".number_format($row['monto'],2);
+		$texto.=chr(27).'!'.chr(10)."MONTO: ".number_format($registro['monto'],2);
 		$texto.= "VA"; // Cut
 		
 		// /* Output an example receipt */

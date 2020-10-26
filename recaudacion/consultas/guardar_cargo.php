@@ -1,7 +1,7 @@
 <?php 
 	
 	include('../../conexi.php');
-	
+	header("Content-Type: application/json");
 	$link = Conectarse();
 	$filas = array();
 	
@@ -46,6 +46,7 @@
 		if($result){
 			
 			
+			$respuesta["folio"] = mysqli_insert_id($link);
 			$respuesta["estatus"] = "success";
 			$respuesta["mensaje"] = "Cargo guardado";
 			

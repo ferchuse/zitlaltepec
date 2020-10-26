@@ -143,7 +143,7 @@
 											<label for="">Mutualidad: </label>
 										</td >
 										<td >
-											<input type="number" name="mutualidad" id="mutualidad" value="" readonly>
+											<input type="number" name="mutualidad" id="mutualidad" value="20" readonly>
 											<button id="btn_mutualidad" class="btn btn-secondary btn-sm" type="button" >
 												Cobrar
 											</button >
@@ -154,7 +154,7 @@
 											<label for="">Seguridad: </label>
 										</td >
 										<td >
-											<input type="number" name="seguridad" id="seguridad" value="" readonly>
+											<input type="number" name="seguridad" id="seguridad" value="20" readonly>
 											<button id="btn_seguridad" class="btn btn-secondary btn-sm" type="button">
 												Cobrar
 											</button >

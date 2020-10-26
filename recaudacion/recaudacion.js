@@ -22,6 +22,11 @@ $(document).ready(function(){
 		
 		$("#modal_ponchar").modal("show");
 	});
+	
+	$("#btn_seguridad").click(cobrarSeguridad);
+	$("#btn_mutualidad").click(cobrarMutualidad);
+	$("#btn_fianza").click(cobrarFianza);
+	
 	$('#boleto').on('keyup', buscarBoleto);
 	$('#efectivo_pagado').on('keyup', calcularAbono);
 	$('#fecha_tarjetas').on('change', buscarFecha);
@@ -45,7 +50,7 @@ $(document).ready(function(){
 			event.preventDefault();
 			console.log("Enter, no enviar");
 			return false;
-			}
+		}
 	});
 	
 	$('.nuevo').on('click',function(){
@@ -185,7 +190,7 @@ $(document).ready(function(){
 			else{
 				alertify.success('Guardado');
 			}
-			 window.location.href = "../inicio.php";
+			window.location.href = "../inicio.php";
 			}).always(function(){
 			boton.prop('disabled',false);
 			icono.toggleClass('fa-save fa-spinner fa-pulse fa-fw');
@@ -269,10 +274,13 @@ function cobrarMutualidad(){
 			"cargo": 1
 		}
 		}).done(function(respuesta){
-		boton.hide();
+		
+		imprimirCargo(respuesta.folio, "Mutualidad");
+		
 		alertify.success("Mutualidad Generada correctamente")
 		}).always(function(){
 		
+		boton.hide();
 		
 		
 	});
@@ -293,9 +301,12 @@ function cobrarSeguridad(){
 			"cargo": 4
 		}
 		}).done(function(respuesta){
-		boton.hide();
+		
+		imprimirCargo(respuesta.folio, "Seguridad");
+		
 		alertify.success("Seguridad Generada correctamente")
 		}).always(function(){
+		boton.hide();
 		
 		
 		
@@ -304,11 +315,6 @@ function cobrarSeguridad(){
 }
 
 
-renderVueltas(){
-	
-	
-	
-}
 
 function cobrarFianza(){
 	console.log("cobrarFianza()");
@@ -328,6 +334,7 @@ function cobrarFianza(){
 			}
 			}).done(function(respuesta){
 			boton.hide();
+			imprimirCargo(respuesta.folio, "Fianza");
 			alertify.success("Fianza Generada correctamente")
 			}).always(function(){
 			
@@ -420,7 +427,7 @@ function calcularEfectivo(){
 	
 }
 function calcularAbono(){
-console.log("calcularAbono()")
+	console.log("calcularAbono()")
 	
 	let efectivo_entregar = Number($("#efectivo_entregar").val());
 	let efectivo_pagado = Number($("#efectivo_pagado").val());
@@ -435,113 +442,8 @@ console.log("calcularAbono()")
 	
 }
 
-function guardarMutualidad(){
-	if($("#id_recaudaciones").val() == ''){
-		
-		alertify.error("Seleccione Recaudacion"); 
-		return false;
-	}
-	
-	$boton = $(this);
-	$boton.prop("disabled", true); 
-	$("#loader_mutualidad").prop("hidden", false);
-	
-	var fecha_mutualidad = new Date().toString("yyyy-MM-dd hh:mm:ss");
-	console.log("fecha_mutualidad", fecha_mutualidad);
-	
-	$.ajax({
-		url: '../../funciones/fila_insert.php',
-		method: 'POST',
-		dataType: 'JSON',
-		data: {
-			tabla: 'mutualidad',
-			valores: [
-				{
-					name: "fecha_mutualidad",
-					value: fecha_mutualidad
-				},	
-				{
-					name: "id_recaudaciones",
-					value: $("#id_recaudaciones").val()
-				},
-				{
-					name: "id_empresas",
-					value: $("#id_empresas").val()
-				},
-				{
-					name: "monto_mutualidad",
-					value: $("#monto_mutualidad").val()
-				},
-				{
-					name: "id_unidades",
-					value: $("#form_abono #id_unidades").val()
-				},
-				{
-					name: "id_usuarios",
-					value: $("#id_usuarios").val()
-				},
-				{
-					name: "id_conductores",
-					value: $("#id_conductores").val()
-				},
-				{
-					name: "id_administrador",
-					value: $("#session_id_administrador").val()
-				},
-				{
-					name: "tarjeta",
-					value: $("#tarjeta").val()
-				}
-			]
-		}
-		}).done(function(respuesta){
-		if(respuesta.estatus == 'success'){
-			alertify.success("Guardado Correctamente");
-		}
-		
-		// console.log(respuesta);
-		$boton.prop("disabled", false);
-		$boton.fadeOut(300); 
-		$("#monto_mutualidad").prop("disabled", true); 
-		$("#imprimir_mutualidad").prop("hidden", false);
-		$("#imprimir_mutualidad").data("id_registro", respuesta.nuevo_id);
-		
-		
-		$("#imprimir_mutualidad").data("url", "imprimir_mutualidad.php");
-		
-		
-		$("#loader_mutualidad").prop("hidden", true);
-		$("#imprimir_mutualidad").click();
-		
-		//actualiza tarjeta mutualidad cobrada = 1
-		actualizaMutualidad();
-		
-		
-	});
-}
 
-function actualizaMutualidad(){
-	console.log("actualizaMutualidad")
-	$.ajax({
-		url: '../../funciones/fila_update.php',
-		method: 'POST',
-		dataType: 'JSON',
-		data: {
-			tabla: 'tarjetas',
-			valores: [
-				{
-					name: "mutualidad_cobrada",
-					value: 1
-				}],
-				id_campo : "tarjeta",
-				id_valor: $("#tarjeta").val()
-		}
-		
-		}).done(function(respuesta){
-		
-		
-	})
-}
+
 
 
 function contarFolios(){
@@ -651,37 +553,24 @@ function buscarFecha(){
 
 
 function imprimirCargo(folio, tabla){
-	console.log("imprimirCargo()");
-	var id_registro = $(this).data("id_registro");
-	var url = $(this).data("url");
-	var boton = $(this); 
-	var icono = boton.find("fas");
-	if(!id_registro){
-		
-		alertify.error("Ingrese una tarjeta");
-		return false;
-	}
-	$("#ticket").html("");
-	$("#ticket").height(0);
+	console.log("imprimirCargo()", folio , tabla)
 	
-	boton.prop("disabled", true); 
-	icono.toggleClass("fa-print fa-spinner fa-spin");
-	
+	// 
 	$.ajax({
-		url: "impresion/"+ url,
+		url: "imprimir_cargo.php",
 		data:{
-			"folio" : id_registro
-			tabla : id_registro
+			"folio" : folio,
+			"tabla" : tabla
 		}
 		}).done(function (respuesta){
 		
-		$.ajax({
-			url: "http://localhost/imprimir_zitlalli.php",
-			method: "POST",
-			data:{
-				"texto" : respuesta
-			}
-		});
+		// $.ajax({
+		// url: "http://localhost/imprimir_zitlalli.php",
+		// method: "POST",
+		// data:{
+		// "texto" : respuesta
+		// }
+		// });
 		
 		printService.submit({
 			'type': 'LABEL',
@@ -691,8 +580,6 @@ function imprimirCargo(folio, tabla){
 		
 		}).always(function(){
 		
-		boton.prop("disabled", false);
-		icono.toggleClass("fa-print fa-spinner fa-spin");
 		
 	});
 }

@@ -4,9 +4,7 @@ function onLoad(){
 	
 	
 	$("#form_monitoreo").submit(guardarMonitoreo);
-	$("#btn_seguridad").click(cobrarSeguridad);
-	$("#btn_mutualidad").click(cobrarMutualidad);
-	$("#btn_fianza").click(cobrarFianza);
+	
 	$("#diesel, #casetas, #despachadores, #incentivo, #fianza").keyup(calcularUtilidad)
 	$(".origen, .destino").keyup(sumarBoletos)
 	$(".origen, .destino").change(sumarBoletos)
