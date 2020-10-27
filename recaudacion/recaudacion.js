@@ -27,7 +27,7 @@ $(document).ready(function(){
 	$("#btn_mutualidad").click(cobrarCargo);
 	$("#btn_fianza").click(cobrarCargo);
 	
-	$('#boleto').on('keyup', buscarBoleto);
+	// $('#boleto').on('keyup', buscarBoleto);
 	$('#efectivo_pagado').on('keyup', calcularAbono);
 	$('#fecha_tarjetas').on('change', buscarFecha);
 	$('#imprimir_tarjeta').on('click', imprimirTicket);
@@ -111,35 +111,7 @@ $(document).ready(function(){
 	}
 	
 	
-	function buscarBoleto(event){
-		event.preventDefault();
-		
-		var boleto = $(this).val();
-		
-		if(event.which == 13 || event.which == 0){
-			$("#boleto").addClass("cargando");
-			$.ajax({
-				url: 'consultas/buscar_boleto.php',
-				method: 'GET',
-				dataType: 'JSON',
-				data: {boleto: boleto}
-				}).done(function(respuesta){
-				// console.log("buscarUnidad", respuesta) 
-				if(respuesta.num_rows == 0){
-					alertify.error("No encontrado")
-				}
-				else{
-					
-					
-				}
-				// alertify.error("No encontrado")
-				}).always(function(){
-				alertify.error("No se encontró el boleto")
-				$("#boleto").removeClass("cargando");
-			});
-			
-		};
-	}
+
 	
 	
 	

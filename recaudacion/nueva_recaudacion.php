@@ -267,6 +267,7 @@
 		
 		<script src="../plugins/pos_print/websocket-printer.js" > </script>
 		<script src="recaudacion.js?v=<?= date("Ymdis")?>"></script>
+		<script src="js/boletos.js?v=<?= date("Ymdis")?>"></script>
 		
 		
 	</body>

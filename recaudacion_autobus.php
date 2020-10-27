@@ -523,7 +523,7 @@ if($_POST['cmd']==2){
 if($_POST['cmd']==1){
 	echo '<div id="dialogboletossencillos" style="display:none;">
 	<table>
-	<tr><th>Boleto</th><td><input type="text" class="textField" id="boletosencillo" onpaste="return false" autocomplete="off" value="" onKeyPress="
+	<tr><th>Boleto</th><td><input type="text" class="textField" id="boletosencillo" autocomplete="off" value="" onKeyPress="
 		if(document.getElementById(\'capturadosencillo\').value == 0){
 			setTimeout(\'limpiarboletosencillo()\',2000);
 			document.getElementById(\'capturadosencillo\').value = 1;

@@ -19,11 +19,12 @@
 				</div>
 				
 				
-				<table  id="tablaboletossencillos" class="table table-bordered">
-					<tbody>
+				<table  id="tablaboletossencillos" class="table-bordered table-condensed">
+					<thead>
 						
 						<tr bgcolor="#E9F2F8">
 							
+							<th></th>
 							<th>Taquilla</th>
 							<th>Folio</th>
 							<th>Fecha</th>
@@ -31,17 +32,9 @@
 							<th>Boleto</th>
 							<th>Costo</th>
 						</tr>
-						<tr bgcolor="#E9F2F8">
-							
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							<td>&nbsp;</td>
-							
-						</tr>
-					</tbody>
+					</thead>
+					
+					
 				</table>
 				
 				
