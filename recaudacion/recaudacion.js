@@ -23,9 +23,9 @@ $(document).ready(function(){
 		$("#modal_ponchar").modal("show");
 	});
 	
-	$("#btn_seguridad").click(cobrarSeguridad);
-	$("#btn_mutualidad").click(cobrarMutualidad);
-	$("#btn_fianza").click(cobrarFianza);
+	$("#btn_seguridad").click(cobrarCargo);
+	$("#btn_mutualidad").click(cobrarCargo);
+	$("#btn_fianza").click(cobrarCargo);
 	
 	$('#boleto').on('keyup', buscarBoleto);
 	$('#efectivo_pagado').on('keyup', calcularAbono);
@@ -260,9 +260,26 @@ $(document).ready(function(){
 
 
 
-function cobrarMutualidad(){
+function cobrarCargo(){
 	var boton = $(this);
+	
+	if($("#tarjeta").val() == ""){
+		alert("No ha elegido tarjeta");
+		$("#tarjeta").focus();
+		return false;
+	}
+	if($("#recaudacion").val() == ""){
+		alert("Elija recaudación");
+		return false;
+	}
+	
 	boton.prop("disabled", true)
+	
+	
+	var id_cargo = $(this).data("id_cargo");
+	var nombre_cargo = $(this).data("nombre_cargo");
+	var monto = $(this).data("monto");
+	
 	
 	
 	return $.ajax({
@@ -270,14 +287,15 @@ function cobrarMutualidad(){
 		method: 'post',
 		data: {
 			"tarjeta": $("#tarjeta").val(),
-			"monto": $("#mutualidad").val(),
-			"cargo": 1
+			"monto": monto,
+			"recaudacion": $("#recaudacion").val(),
+			"cargo": id_cargo
 		}
 		}).done(function(respuesta){
 		
-		imprimirCargo(respuesta.folio, "Mutualidad");
+		imprimirCargo(respuesta.folio, nombre_cargo);
 		
-		alertify.success("Mutualidad Generada correctamente")
+		alertify.success("Guardado correctamente")
 		}).always(function(){
 		
 		boton.hide();
@@ -286,64 +304,73 @@ function cobrarMutualidad(){
 	});
 	
 }
-function cobrarSeguridad(){
-	console.log("cobrarSeguridad()");
-	var boton = $(this);
-	boton.prop("disabled", true)
+// function cobrarSeguridad(){
+	// console.log("cobrarSeguridad()");
+	// var boton = $(this);
+	// boton.prop("disabled", true)
 	
+	// if($("#tarjeta").val() == ""){
+		// alert("No ha elegido tarjeta");
+		// return false;
+	// }
+	// return $.ajax({
+		// url: 'consultas/guardar_cargo.php',
+		// method: 'post',
+		// data: {
+			// "tarjeta": $("#tarjeta").val(),
+			// "monto": $("#seguridad").val(),
+			// "cargo": 4
+		// }
+		// }).done(function(respuesta){
+		
+		// imprimirCargo(respuesta.folio, "Seguridad");
+		
+		// alertify.success("Seguridad Generada correctamente")
+		// }).always(function(){
+		// boton.hide();
+		
+		
+		
+	// });
 	
-	return $.ajax({
-		url: 'consultas/guardar_cargo.php',
-		method: 'post',
-		data: {
-			"tarjeta": $("#tarjeta").val(),
-			"monto": $("#seguridad").val(),
-			"cargo": 4
-		}
-		}).done(function(respuesta){
-		
-		imprimirCargo(respuesta.folio, "Seguridad");
-		
-		alertify.success("Seguridad Generada correctamente")
-		}).always(function(){
-		boton.hide();
-		
-		
-		
-	});
-	
-}
+// }
 
 
 
-function cobrarFianza(){
-	console.log("cobrarFianza()");
-	var boton = $(this);
+// function cobrarFianza(){
+	// console.log("cobrarFianza()");
+	// var boton = $(this);
 	
 	
-	if($("#fianza").val() > 0){
+	// if($("#tarjeta").val() == ""){
+		// alert("No ha elegido tarjeta");
+		// return false;
+	// }
+	
+	// if($("#fianza").val() > 0){
 		
-		boton.prop("disabled", true)
-		$.ajax({
-			url: 'consultas/guardar_cargo.php',
-			method: 'post',
-			data: {
-				"tarjeta": $("#tarjeta").val(),
-				"monto": $("#fianza").val(),
-				"cargo": 6
-			}
-			}).done(function(respuesta){
-			boton.hide();
-			imprimirCargo(respuesta.folio, "Fianza");
-			alertify.success("Fianza Generada correctamente")
-			}).always(function(){
+		// boton.prop("disabled", true)
+		// $.ajax({
+			// url: 'consultas/guardar_cargo.php',
+			// method: 'post',
+			// data: {
+				// "tarjeta": $("#tarjeta").val(),
+				// "recaudacion": $("#recaudacion").val(),
+				// "monto": $("#fianza").val(),
+				// "cargo": 6
+			// }
+			// }).done(function(respuesta){
+			// boton.hide();
+			// imprimirCargo(respuesta.folio, "Fianza");
+			// alertify.success("Fianza Generada correctamente")
+			// }).always(function(){
 			
-		});
-	}
-	else{
-		alertify.error("La fianza debe ser mayor a 0")
-	}
-}
+		// });
+	// }
+	// else{
+		// alertify.error("La fianza debe ser mayor a 0")
+	// }
+// }
 
 
 

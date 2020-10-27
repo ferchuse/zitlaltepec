@@ -1,5 +1,5 @@
 <?php 
-	
+	session_start();
 	include('../../conexi.php');
 	header("Content-Type: application/json");
 	$link = Conectarse();
@@ -9,7 +9,7 @@
 	
 	$consulta_tarjeta = "		
 	SELECT * FROM tarjetas_unidad 
-	WHERE cve = '{$_GET["tarjeta"]}'
+	WHERE cve = '{$_POST["tarjeta"]}'
 	";
 	
 	$result_tarjeta = mysqli_query($link,$consulta_tarjeta);
@@ -27,15 +27,15 @@
 		
 		$insert_cargo =
 		"INSERT recaudacion_operador 
-		SET tarjeta='{$fila['tarjeta']}',
+		SET tarjeta='{$_POST['tarjeta']}',
 		fecha_viaje='{$fila['fecha_viaje']}',
 		fecha= CURDATE(),
+		hora= CURTIME(),
 		fecha_creacion= CURDATE(),
 		operador='{$fila['operador']}',
-		hora= CURTIME(),
 		unidad='{$fila['unidad']}',
 		derrotero='{$fila['derrotero']}',
-		usuario='{$_SESSION['cveusuario']}',
+		usuario='{$_SESSION['CveUsuario']}',
 		empresa ='{$fila['empresa']}',
 		estatus='A',
 		monto='{$_POST["monto"]}',
@@ -70,7 +70,7 @@
 		// echo json_encode($respuesta);
 	}
 	
-	
+	$respuesta["consulta"] = $insert_cargo;
 	
 	echo json_encode($respuesta);
 ?>						

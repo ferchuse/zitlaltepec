@@ -35,7 +35,14 @@
 	<body>
 		
 		
-		<?php //include_once("../menu.php");?>
+		<?php 
+			
+			
+			//include_once("../menu.php");
+			// echo "<pre>";
+			// print var_dump($_SESSION);
+			// echo "<pre>";
+			?>
 		
 		
 		<?php include("../navbar.php")?>
@@ -99,7 +106,7 @@
 											<label for="">Recaudación: </label>
 										</td >
 										<td >
-											<?= generar_select($link, "recaudaciones", "cve" , "nombre")?>
+											<?= generar_select($link, "recaudaciones", "cve" , "nombre", false, false, true, 0, 0, "recaudacion", "recaudacion")?>
 										</td >
 									</tr>
 									
@@ -143,8 +150,12 @@
 											<label for="">Mutualidad: </label>
 										</td >
 										<td >
-											<input type="number" name="mutualidad" id="mutualidad" value="20" readonly>
-											<button id="btn_mutualidad" class="btn btn-secondary btn-sm" type="button" >
+											<input hidden type="number" name="mutualidad" id="mutualidad" value="20" readonly>
+											<button
+											data-id_cargo="1"
+											data-nombre_cargo="Mutualidad" 
+											data-monto="20" 
+											id="btn_mutualidad" class="btn btn-secondary btn-sm" type="button" >
 												Cobrar
 											</button >
 										</td >
@@ -154,8 +165,14 @@
 											<label for="">Seguridad: </label>
 										</td >
 										<td >
-											<input type="number" name="seguridad" id="seguridad" value="20" readonly>
-											<button id="btn_seguridad" class="btn btn-secondary btn-sm" type="button">
+											<input hidden type="number" name="seguridad" id="seguridad" value="20" readonly>
+											<button 
+											
+											data-id_cargo="4"
+											data-nombre_cargo="Seguridad" 
+											data-monto="20" 
+											
+											id="btn_seguridad" class="btn btn-secondary btn-sm" type="button">
 												Cobrar
 											</button >
 										</td >
@@ -165,8 +182,14 @@
 											Fianza
 										</td >
 										<td >
-											<input type="number" id="fianza" name="fianza" value="50">
-											<button id="btn_fianza" class="btn btn-secondary btn-sm" type="button">
+											<input hidden readonly type="number" id="fianza" name="fianza" value="50">
+											<button
+											data-id_cargo="5"
+											data-nombre_cargo="Fianza" 
+											data-monto="50" 
+											
+											
+											id="btn_fianza" class="btn btn-secondary btn-sm" type="button">
 												Cobrar
 											</button >
 										</td >

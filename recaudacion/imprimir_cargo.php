@@ -5,8 +5,11 @@
 	
 	$consulta = "SELECT 
 	*,
-	operadores.nombre  AS operadores_nombre
+	recaudacion_operador.cve  AS folio,
+	operadores.nombre  AS operadores_nombre,
+	usuarios.usuario  AS usuarios_nombre
 	FROM recaudacion_operador
+	LEFT JOIN usuarios  ON recaudacion_operador.usuario = usuarios.cve
 	LEFT JOIN operadores  ON recaudacion_operador.operador = operadores.cve
 	LEFT JOIN unidades  ON recaudacion_operador.unidad = unidades.cve
 	LEFT JOIN cat_cargos_operadores ON recaudacion_operador.cargo = cat_cargos_operadores.cve
@@ -55,18 +58,20 @@
 		// $texto.= "VA"; // Cut
 		
 		
-		$texto ="@".'|';
-		$texto.=chr(27).'!'.chr(40)."  ".$_GET['tabla'];
-		$texto.='||';
-		$texto.=chr(27).'!'.chr(40)."FOLIO: ".$registro['cve'];
-		$texto.='|';
-		$texto.=$registro['fecha']." ".$registro['hora'];
-		$texto.='|';
-		$texto.=chr(27).'!'.chr(40)."NUM ECO: ".$registro['no_eco'];
-		$texto.='|';
-		$texto.=chr(27).'!'.chr(10)."(".$registro['operador'].')'.$registro['operadores_nombre'];
-		$texto.='|';
-		$texto.=chr(27).'!'.chr(10)."MONTO: ".number_format($registro['monto'],2);
+		$texto ="@";
+		$texto.=chr(27).'!'.chr(40)."  ".$_GET['tabla']."\n\n";
+	
+		$texto.=chr(27).'!'.chr(40)."FOLIO: ".$registro['folio']."\n\n";
+	
+		$texto.= $registro['fecha']." ".$registro['hora']."\n\n";
+		
+		$texto.=chr(27).'!'.chr(40)."TAQUILLERO: ".$registro['usuarios_nombre']."\n\n";
+		
+		$texto.=chr(27).'!'.chr(40)."NUM ECO: ".$registro['no_eco']."\n\n";
+	
+		$texto.=chr(27).'!'.chr(20)."(".$registro['operador'].')'.$registro['operadores_nombre']."\n\n";
+		
+		$texto.=chr(27).'!'.chr(40)."MONTO: ".number_format($registro['monto'],2)."\n\n";
 		$texto.= "VA"; // Cut
 		
 		// /* Output an example receipt */
