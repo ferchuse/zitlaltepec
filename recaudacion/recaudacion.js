@@ -111,7 +111,7 @@ $(document).ready(function(){
 	}
 	
 	
-
+	
 	
 	
 	
@@ -277,71 +277,71 @@ function cobrarCargo(){
 	
 }
 // function cobrarSeguridad(){
-	// console.log("cobrarSeguridad()");
-	// var boton = $(this);
-	// boton.prop("disabled", true)
-	
-	// if($("#tarjeta").val() == ""){
-		// alert("No ha elegido tarjeta");
-		// return false;
-	// }
-	// return $.ajax({
-		// url: 'consultas/guardar_cargo.php',
-		// method: 'post',
-		// data: {
-			// "tarjeta": $("#tarjeta").val(),
-			// "monto": $("#seguridad").val(),
-			// "cargo": 4
-		// }
-		// }).done(function(respuesta){
-		
-		// imprimirCargo(respuesta.folio, "Seguridad");
-		
-		// alertify.success("Seguridad Generada correctamente")
-		// }).always(function(){
-		// boton.hide();
-		
-		
-		
-	// });
-	
+// console.log("cobrarSeguridad()");
+// var boton = $(this);
+// boton.prop("disabled", true)
+
+// if($("#tarjeta").val() == ""){
+// alert("No ha elegido tarjeta");
+// return false;
+// }
+// return $.ajax({
+// url: 'consultas/guardar_cargo.php',
+// method: 'post',
+// data: {
+// "tarjeta": $("#tarjeta").val(),
+// "monto": $("#seguridad").val(),
+// "cargo": 4
+// }
+// }).done(function(respuesta){
+
+// imprimirCargo(respuesta.folio, "Seguridad");
+
+// alertify.success("Seguridad Generada correctamente")
+// }).always(function(){
+// boton.hide();
+
+
+
+// });
+
 // }
 
 
 
 // function cobrarFianza(){
-	// console.log("cobrarFianza()");
-	// var boton = $(this);
-	
-	
-	// if($("#tarjeta").val() == ""){
-		// alert("No ha elegido tarjeta");
-		// return false;
-	// }
-	
-	// if($("#fianza").val() > 0){
-		
-		// boton.prop("disabled", true)
-		// $.ajax({
-			// url: 'consultas/guardar_cargo.php',
-			// method: 'post',
-			// data: {
-				// "tarjeta": $("#tarjeta").val(),
-				// "recaudacion": $("#recaudacion").val(),
-				// "monto": $("#fianza").val(),
-				// "cargo": 6
-			// }
-			// }).done(function(respuesta){
-			// boton.hide();
-			// imprimirCargo(respuesta.folio, "Fianza");
-			// alertify.success("Fianza Generada correctamente")
-			// }).always(function(){
-			
-		// });
-	// }
-	// else{
-		// alertify.error("La fianza debe ser mayor a 0")
-	// }
+// console.log("cobrarFianza()");
+// var boton = $(this);
+
+
+// if($("#tarjeta").val() == ""){
+// alert("No ha elegido tarjeta");
+// return false;
+// }
+
+// if($("#fianza").val() > 0){
+
+// boton.prop("disabled", true)
+// $.ajax({
+// url: 'consultas/guardar_cargo.php',
+// method: 'post',
+// data: {
+// "tarjeta": $("#tarjeta").val(),
+// "recaudacion": $("#recaudacion").val(),
+// "monto": $("#fianza").val(),
+// "cargo": 6
+// }
+// }).done(function(respuesta){
+// boton.hide();
+// imprimirCargo(respuesta.folio, "Fianza");
+// alertify.success("Fianza Generada correctamente")
+// }).always(function(){
+
+// });
+// }
+// else{
+// alertify.error("La fianza debe ser mayor a 0")
+// }
 // }
 
 
@@ -563,18 +563,18 @@ function imprimirCargo(folio, tabla){
 		}
 		}).done(function (respuesta){
 		
-		// $.ajax({
-		// url: "http://localhost/imprimir_zitlalli.php",
-		// method: "POST",
-		// data:{
-		// "texto" : respuesta
-		// }
-		// });
-		
-		printService.submit({
-			'type': 'LABEL',
-			'raw_content': respuesta
+		$.ajax({
+			url: "http://localhost/impresiongenerallogo.php",
+			method: "GET",
+			data:{
+				"textoimp" : atob(respuesta)
+			}
 		});
+		
+		// printService.submit({
+		// 'type': 'LABEL',
+		// 'raw_content': respuesta
+		// });
 		
 		
 		}).always(function(){
