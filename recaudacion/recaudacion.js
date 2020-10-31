@@ -30,8 +30,8 @@ $(document).ready(function(){
 	// $('#boleto').on('keyup', buscarBoleto);
 	$('#efectivo_pagado').on('keyup', calcularAbono);
 	$('#fecha_tarjetas').on('change', buscarFecha);
-	$('#imprimir_tarjeta').on('click', imprimirTicket);
-	$('#imprimir_abonos').on('click', imprimirTicket);
+	// $('#imprimir_tarjeta').on('click', imprimirTicket);
+	// $('#imprimir_abonos').on('click', imprimirTicket);
 	$('#btn_generar_tarjeta').on('click', function(){
 		
 		$("#form_edicion")[0].reset();
@@ -567,7 +567,7 @@ function imprimirCargo(folio, tabla){
 			url: "http://localhost/impresiongenerallogo.php",
 			method: "GET",
 			data:{
-				"textoimp" : atob(respuesta)
+				"textoimp" : atob(respuesta) + atob(respuesta)
 			}
 		});
 		
@@ -583,32 +583,23 @@ function imprimirCargo(folio, tabla){
 	});
 }
 
-function imprimirTicket(event){
-	console.log("imprimirTicket()");
-	var id_registro = $(this).data("id_registro");
-	var url = $(this).data("url");
-	var boton = $(this); 
-	var icono = boton.find("fas");
-	if(!id_registro){
-		
-		alertify.error("Ingrese una tarjeta");
-		return false;
-	}
-	$("#ticket").html("");
-	$("#ticket").height(0);
+function imprimirAbono(folio){
+	console.log("imprimirAbono()");
+	
+	
 	
 	boton.prop("disabled", true); 
 	icono.toggleClass("fa-print fa-spinner fa-spin");
 	
 	$.ajax({
-		url: "impresion/"+ url,
+		url: "imprimir_abono.php",
 		data:{
-			id_registro : id_registro
+			folio : folio
 		}
 		}).done(function (respuesta){
 		
 		$.ajax({
-			url: "http://localhost/imprimir_zitlalli.php",
+			url: "http://localhost/impresiongenerallogo.php",
 			method: "POST",
 			data:{
 				"texto" : respuesta
