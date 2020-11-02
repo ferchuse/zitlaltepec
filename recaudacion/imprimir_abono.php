@@ -5,6 +5,7 @@
 	
 	$consulta = "SELECT 
 	*,
+	recaudacion_autobus.monto as monto,
 	recaudacion_autobus.cve  AS folio,
 	operadores.nombre  AS operadores_nombre,
 	usuarios.usuario  AS usuarios_nombre
@@ -59,6 +60,7 @@
 		
 		
 		$texto ="@";
+		$texto.=   "RECAUDACION POR  MONITOREO\n";
 		$texto.=chr(27).'!'.chr(40)."  ".$_GET['tabla']."\n\n";
 	
 		$texto.=chr(27).'!'.chr(40)."FOLIO: ".$registro['folio']."\n\n";
@@ -71,7 +73,25 @@
 	
 		$texto.=chr(27).'!'.chr(20)."(".$registro['operador'].')'.$registro['operadores_nombre']."\n\n";
 		
-		$texto.=chr(27).'!'.chr(40)."MONTO: ".number_format($registro['monto'],2)."\n\n";
+		$texto.=chr(27).'!'.chr(40)."MONTO: $".number_format($registro['monto'],2)."\n\n";
+		$texto.= "VA"; // Cut
+		
+		
+		$texto ="@";
+		$texto.=   "RECAUDACION POR  MONITOREO\n";
+		$texto.=chr(27).'!'.chr(40)."  ".$_GET['tabla']."\n\n";
+	
+		$texto.=chr(27).'!'.chr(40)."FOLIO: ".$registro['folio']."\n\n";
+	
+		$texto.= $registro['fecha']." ".$registro['hora']."\n\n";
+		
+		$texto.=chr(27).'!'.chr(40)."TAQUILLERO: ".$registro['usuarios_nombre']."\n\n";
+		
+		$texto.=chr(27).'!'.chr(40)."NUM ECO: ".$registro['no_eco']."\n\n";
+	
+		$texto.=chr(27).'!'.chr(20)."(".$registro['operador'].')'.$registro['operadores_nombre']."\n\n";
+		
+		$texto.=chr(27).'!'.chr(40)."MONTO: $".number_format($registro['monto'],2)."\n\n";
 		$texto.= "VA"; // Cut
 		
 		// /* Output an example receipt */
