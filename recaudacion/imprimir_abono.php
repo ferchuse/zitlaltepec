@@ -77,7 +77,7 @@
 		$texto.= "VA"; // Cut
 		
 		
-		$texto ="@";
+		$texto .="@";
 		$texto.=   "RECAUDACION POR  MONITOREO\n";
 		$texto.=chr(27).'!'.chr(40)."  ".$_GET['tabla']."\n\n";
 	

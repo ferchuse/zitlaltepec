@@ -218,7 +218,9 @@ function guardarRecaudacion(event){
 		else{
 			alertify.success('Guardado');
 		}
-		window.location.href = "../inicio.php";
+		
+		
+		
 		}).always(function(){
 		boton.prop('disabled',false);
 		icono.toggleClass('fa-save fa-spinner fa-pulse fa-fw');
@@ -248,10 +250,16 @@ function imprimirAbono(folio){
 			}
 		});
 		
+		setTimeout(function(){
+			
+			window.location.href = "../inicio.php";
+		}, 1000)
+		
 		printService.submit({
 			'type': 'LABEL',
 			'raw_content': respuesta
 		});
+		
 		
 		
 		}).always(function(){
