@@ -115,59 +115,7 @@ $(document).ready(function(){
 	
 	
 	
-	$('#form_abono').on('submit', function guardarRecaudacion(event){
-		event.preventDefault();
-		console.log("saldo_tarjetas", $("#saldo_tarjetas").val())
-		console.log("abono_unidad", $("#abono_unidad").val())
-		
-		if(Number($("#abono_unidad").val()) < Number($("#saldo_tarjetas").val())){
-			alertify.error("El abono es menor al total de la tarjeta");
-			return false;
-		}
-		if($("#imprimir_mutualidad").prop("hidden")){
-			alertify.error("Falta Cobrar Mutualidad");
-			return false;
-		}
-		
-		
-		let form = $("#form_abono");
-		let boton = $("#boton_guardar_abono");
-		let icono = boton.find('.fa');
-		let datos = form.serialize();
-		
-		boton.prop('disabled',true);
-		icono.toggleClass('fa-save fa-spinner fa-pulse ');
-		
-		$.ajax({  
-			url: 'consultas/guardar_recaudacion.php',
-			method: 'POST', 
-			dataType: 'JSON',
-			data: datos
-			}).done(function(respuesta){ 
-			if(respuesta.estatus == 'success'){
-				alertify.success('Abono Generado correctamente');
-				
-				// $("#id_abonos_unidades").val(respuesta.insert_id);
-				// $("#imprimir_abonos").prop("hidden", false);
-				// $("#imprimir_abonos").data("id_registro", respuesta.insert_id);
-				// $("#imprimir_abonos").data("url", "imprimir_abono_unidades.php");
-				
-				// $("#imprimir_abonos").click();
-				
-				// $("#respuesta_tarjeta").html("");
-				// $("#form_abono")[0].reset();
-				
-				
-			}
-			else{
-				alertify.success('Guardado');
-			}
-			window.location.href = "../inicio.php";
-			}).always(function(){
-			boton.prop('disabled',false);
-			icono.toggleClass('fa-save fa-spinner fa-pulse fa-fw');
-		});
-	})
+	$('#form_abono').on('submit',guardarRecaudacion );
 	
 	
 	$('#form_edicion').on('submit', function guardarTarjeta(event){
@@ -178,7 +126,7 @@ $(document).ready(function(){
 		
 		let form = $("#form_edicion");
 		let boton = $(this).find(":submit");
-		let icono = boton.find('.fa');
+		let icono = boton.find('.fas');
 		let datos = form.serializeArray();
 		let fecha_creacion = new Date().toString('yyyy-MM-dd HH:mm:ss')
 		
@@ -230,6 +178,92 @@ $(document).ready(function(){
 	
 });
 
+function guardarRecaudacion(event){
+	event.preventDefault();
+	console.log("saldo_tarjetas", $("#saldo_tarjetas").val())
+	console.log("abono_unidad", $("#abono_unidad").val())
+	
+	if(Number($("#abono_unidad").val()) < Number($("#saldo_tarjetas").val())){
+		alertify.error("El abono es menor al total de la tarjeta");
+		return false;
+	}
+	if($("#imprimir_mutualidad").prop("hidden")){
+		alertify.error("Falta Cobrar Mutualidad");
+		return false;
+	}
+	
+	
+	var form = $("#form_abono");
+	var boton = form.find(":submit");
+	var icono = boton.find('.fas');
+	var datos = form.serialize();
+	
+	boton.prop('disabled',true);
+	icono.toggleClass('fa-save fa-spinner fa-pulse ');
+	
+	$.ajax({  
+		url: 'consultas/guardar_recaudacion.php',
+		method: 'POST', 
+		dataType: 'JSON',
+		data: datos
+		}).done(function(respuesta){ 
+		if(respuesta.estatus == 'success'){
+			alertify.success('Abono Generado correctamente');
+			
+			
+			imprimirAbono(respuesta.folio);
+			
+			
+		}
+		else{
+			alertify.success('Guardado');
+		}
+		// window.location.href = "../inicio.php";
+		}).always(function(){
+		boton.prop('disabled',false);
+		icono.toggleClass('fa-save fa-spinner fa-pulse fa-fw');
+	});
+}
+
+function imprimirAbono(folio){
+	console.log("imprimirAbono()");
+	
+	
+	
+	// boton.prop("disabled", true); 
+	// icono.toggleClass("fa-print fa-spinner fa-spin");
+	
+	$.ajax({
+		url: "imprimir_abono.php",
+		data:{
+			folio : folio
+		}
+		}).done(function (respuesta){
+		
+		$.ajax({
+			url: "http://localhost/impresiongenerallogo.php",
+			method: "POST",
+			data:{
+				"texto" : respuesta
+			}
+		});
+		
+		printService.submit({
+			'type': 'LABEL',
+			'raw_content': respuesta
+		});
+		
+		
+		}).always(function(){
+		
+		// boton.prop("disabled", false);
+		// icono.toggleClass("fa-print fa-spinner fa-spin");
+		
+	});
+}
+
+
+
 
 
 function cobrarCargo(){
@@ -276,73 +310,7 @@ function cobrarCargo(){
 	});
 	
 }
-// function cobrarSeguridad(){
-// console.log("cobrarSeguridad()");
-// var boton = $(this);
-// boton.prop("disabled", true)
 
-// if($("#tarjeta").val() == ""){
-// alert("No ha elegido tarjeta");
-// return false;
-// }
-// return $.ajax({
-// url: 'consultas/guardar_cargo.php',
-// method: 'post',
-// data: {
-// "tarjeta": $("#tarjeta").val(),
-// "monto": $("#seguridad").val(),
-// "cargo": 4
-// }
-// }).done(function(respuesta){
-
-// imprimirCargo(respuesta.folio, "Seguridad");
-
-// alertify.success("Seguridad Generada correctamente")
-// }).always(function(){
-// boton.hide();
-
-
-
-// });
-
-// }
-
-
-
-// function cobrarFianza(){
-// console.log("cobrarFianza()");
-// var boton = $(this);
-
-
-// if($("#tarjeta").val() == ""){
-// alert("No ha elegido tarjeta");
-// return false;
-// }
-
-// if($("#fianza").val() > 0){
-
-// boton.prop("disabled", true)
-// $.ajax({
-// url: 'consultas/guardar_cargo.php',
-// method: 'post',
-// data: {
-// "tarjeta": $("#tarjeta").val(),
-// "recaudacion": $("#recaudacion").val(),
-// "monto": $("#fianza").val(),
-// "cargo": 6
-// }
-// }).done(function(respuesta){
-// boton.hide();
-// imprimirCargo(respuesta.folio, "Fianza");
-// alertify.success("Fianza Generada correctamente")
-// }).always(function(){
-
-// });
-// }
-// else{
-// alertify.error("La fianza debe ser mayor a 0")
-// }
-// }
 
 
 
@@ -579,43 +547,6 @@ function imprimirCargo(folio, tabla){
 		
 		}).always(function(){
 		
-		
-	});
-}
-
-function imprimirAbono(folio){
-	console.log("imprimirAbono()");
-	
-	
-	
-	boton.prop("disabled", true); 
-	icono.toggleClass("fa-print fa-spinner fa-spin");
-	
-	$.ajax({
-		url: "imprimir_abono.php",
-		data:{
-			folio : folio
-		}
-		}).done(function (respuesta){
-		
-		$.ajax({
-			url: "http://localhost/impresiongenerallogo.php",
-			method: "POST",
-			data:{
-				"texto" : respuesta
-			}
-		});
-		
-		printService.submit({
-			'type': 'LABEL',
-			'raw_content': respuesta
-		});
-		
-		
-		}).always(function(){
-		
-		boton.prop("disabled", false);
-		icono.toggleClass("fa-print fa-spinner fa-spin");
 		
 	});
 }

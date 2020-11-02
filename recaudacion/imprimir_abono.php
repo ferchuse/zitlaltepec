@@ -5,16 +5,16 @@
 	
 	$consulta = "SELECT 
 	*,
-	recaudacion_operador.cve  AS folio,
+	recaudacion_autobus.cve  AS folio,
 	operadores.nombre  AS operadores_nombre,
 	usuarios.usuario  AS usuarios_nombre
-	FROM recaudacion_operador
-	LEFT JOIN usuarios  ON recaudacion_operador.usuario = usuarios.cve
-	LEFT JOIN operadores  ON recaudacion_operador.operador = operadores.cve
-	LEFT JOIN unidades  ON recaudacion_operador.unidad = unidades.cve
-	LEFT JOIN cat_cargos_operadores ON recaudacion_operador.cargo = cat_cargos_operadores.cve
+	FROM recaudacion_autobus
+	LEFT JOIN tarjetas_unidad  ON recaudacion_autobus.tarjeta = tarjetas_unidad.cve
+	LEFT JOIN usuarios  ON recaudacion_autobus.usuario = usuarios.cve
+	LEFT JOIN operadores  ON recaudacion_autobus.operador = operadores.cve
+	LEFT JOIN unidades  ON recaudacion_autobus.unidad = unidades.cve
 	
-	WHERE recaudacion_operador.cve = '{$_GET['folio']}'";
+	WHERE recaudacion_autobus.cve = '{$_GET['folio']}'";
 	
 	
 	$result = mysqli_query($link,$consulta);
