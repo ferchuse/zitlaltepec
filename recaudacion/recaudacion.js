@@ -218,7 +218,7 @@ function guardarRecaudacion(event){
 		else{
 			alertify.success('Guardado');
 		}
-		// window.location.href = "../inicio.php";
+		window.location.href = "../inicio.php";
 		}).always(function(){
 		boton.prop('disabled',false);
 		icono.toggleClass('fa-save fa-spinner fa-pulse fa-fw');
