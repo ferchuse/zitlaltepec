@@ -8,7 +8,11 @@ require_once('subs/cnx_db.php');
 		mysql_query("INSERT INTO cargos_unidades (fecha, unidad, motivo, cargo, abono) 
 			SELECT '".date('Y-m-01')."', a.cve, '".$row['cve']."', b.cargo_".$row['cve'].", 0 
 			FROM unidades a INNER JOIN derroteros b ON b.cve = a.derrotero WHERE a.estatus=1");
+			
+			
 	}
+	
+	echo "Cargos generados correctamente";
 // }
 
 ?>

@@ -64,7 +64,7 @@ function guardarMonitoreo(event){
 		}).done(function(respuesta){
 		
 		alertify.success("Guardado Correctamente");
-		window.location.href = "../inicio.php";
+		// window.location.href = "../inicio.php";
 		}).always(function(){
 		boton.prop("disabled", false)
 		icono.toggleClass("fa-save fa-spinner fa-spin");
@@ -112,15 +112,17 @@ function calcularUtilidad(){
 	let incentivo = Number($("#incentivo").val());
 	let mutualidad = Number($("#mutualidad").val());
 	let seguridad = Number($("#seguridad").val());
+	let tag = Number($("#tag").val());
 	// let fianza = Number($("#fianza").val());
 	
-	console.log("comision" , comision);
-	console.log("casetas" , casetas);
-	console.log("diesel" , diesel);
-	console.log("despachadores" , despachadores);
-	console.log("incentivo" , incentivo);
-	console.log("mutualidad" , mutualidad);
-	console.log("seguridad" , seguridad);
+	// console.log("comision" , comision);
+	// console.log("casetas" , casetas);
+	// console.log("diesel" , diesel);
+	// console.log("despachadores" , despachadores);
+	// console.log("incentivo" , incentivo);
+	// console.log("mutualidad" , mutualidad);
+	// console.log("seguridad" , seguridad);
+	// console.log("tag" , tag);
 	// console.log("fianza" , fianza);
 	
 	

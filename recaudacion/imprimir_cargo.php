@@ -5,6 +5,7 @@
 	
 	$consulta = "SELECT 
 	*,
+	recaudacion_operador.monto  AS monto,
 	recaudacion_operador.cve  AS folio,
 	operadores.nombre  AS operadores_nombre,
 	usuarios.usuario  AS usuarios_nombre

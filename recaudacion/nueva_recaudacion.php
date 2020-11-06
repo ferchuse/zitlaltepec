@@ -66,7 +66,7 @@
 											<label for="">Tarjeta: </label>
 										</td >
 										<td >
-											<input type="number" name="tarjeta" id="tarjeta" value="">
+											<input type="number" name="tarjeta" id="tarjeta" value="167446">
 										</td >
 									</tr>
 									<tr >
@@ -150,7 +150,7 @@
 											<label for="">Mutualidad: </label>
 										</td >
 										<td >
-											<input hidden type="number" name="mutualidad" id="mutualidad" value="20" readonly>
+											<input  type="number" name="mutualidad" id="mutualidad" value="20" readonly>
 											<button
 											data-id_cargo="1"
 											data-nombre_cargo="Mutualidad" 
@@ -165,7 +165,7 @@
 											<label for="">Seguridad: </label>
 										</td >
 										<td >
-											<input hidden type="number" name="seguridad" id="seguridad" value="20" readonly>
+											<input  type="number" name="seguridad" id="seguridad" value="20" readonly>
 											<button 
 											
 											data-id_cargo="4"
@@ -179,10 +179,27 @@
 									</tr>
 									<tr >
 										<td >
+											TAG
+										</td >
+										<td >
+											<input  readonly type="number" id="tag" name="tag" value="">
+											<button
+											data-id_cargo="6"
+											data-nombre_cargo="TAG" 
+											data-monto="" 
+											
+											
+											id="btn_tag" class="btn btn-secondary btn-sm" type="button">
+												Cobrar
+											</button >
+										</td >
+									</tr>
+									<tr >
+										<td >
 											Fianza
 										</td >
 										<td >
-											<input hidden readonly type="number" id="fianza" name="fianza" value="50">
+											<input  readonly type="number" id="fianza" name="fianza" value="50">
 											<button
 											data-id_cargo="5"
 											data-nombre_cargo="Fianza" 

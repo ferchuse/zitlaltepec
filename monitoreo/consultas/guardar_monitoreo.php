@@ -18,6 +18,7 @@
 	incentivo='{$_POST["incentivo"]}',
 	mutualidad='{$_POST["mutualidad"]}',
 	seguridad='{$_POST["seguridad"]}',
+	tag='{$_POST["tag"]}',
 	fianza='{$_POST["fianza"]}',
 	utilidad='{$_POST["utilidad"]}',
 	observaciones='{$_POST["observaciones"]}'";

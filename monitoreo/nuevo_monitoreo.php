@@ -57,7 +57,7 @@
 										<label for="">Tarjeta:</label>
 									</td >
 									<td >
-										<input type="number" name="tarjeta" id="tarjeta" value="" > 
+										<input type="number" name="tarjeta" id="tarjeta" value="167446" > 
 									</td >
 									
 								</tr>
@@ -72,7 +72,7 @@
 										<label for="">Vueltas:</label>
 									</td >
 									<td >
-										<input type="number" name="vueltas" id="vueltas" value="2" > 
+										<input type="number" name="vueltas" form="form_monitoreo" id="vueltas" value="2" > 
 									</td >
 								</tr>
 							</table>
@@ -245,6 +245,23 @@
 											
 										</td >
 									</tr>
+									<tr >
+										<td >
+											Fianza
+										</td >
+										<td >
+											<input  type="number" id="fianza" name="fianza" value="50">
+										</td >
+									</tr>
+									<tr >
+										<td >
+											TAG
+										</td >
+										<td >
+											<input   type="number" id="tag" name="tag" value="">
+											
+										</td >
+									</tr>
 									
 									<tr >
 										<td >
@@ -254,6 +271,7 @@
 											<input readonly type="number" id="utilidad" name="utilidad">
 										</td >
 									</tr>
+									
 									<tr >
 										<td >
 											Observaciones

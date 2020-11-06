@@ -22,6 +22,7 @@
 	monitoreo.mutualidad,
 	monitoreo.seguridad,
 	utilidad,
+	monitoreo.tag,
 	fianza
 	FROM
 	tarjetas_unidad

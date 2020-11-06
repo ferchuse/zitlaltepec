@@ -1,4 +1,4 @@
-var printService = new WebSocketPrinter();
+// var printService = new WebSocketPrinter();
 
 
 $(document).ready(function(){
@@ -23,9 +23,8 @@ $(document).ready(function(){
 		$("#modal_ponchar").modal("show");
 	});
 	
-	$("#btn_seguridad").click(cobrarCargo);
-	$("#btn_mutualidad").click(cobrarCargo);
-	$("#btn_fianza").click(cobrarCargo);
+	$("#btn_seguridad, #btn_mutualidad, #btn_fianza, #btn_tag").click(cobrarCargo);
+	
 	
 	// $('#boleto').on('keyup', buscarBoleto);
 	$('#efectivo_pagado').on('keyup', calcularAbono);
@@ -292,7 +291,7 @@ function cobrarCargo(){
 	
 	var id_cargo = $(this).data("id_cargo");
 	var nombre_cargo = $(this).data("nombre_cargo");
-	var monto = $(this).data("monto");
+	var monto = $(this).prev().val();
 	
 	
 	
@@ -358,6 +357,7 @@ function buscarTarjeta(tarjeta){
 		$('#mutualidad').val(respuesta.tarjeta.mutualidad);
 		$('#seguridad').val(respuesta.tarjeta.seguridad);
 		$('#fianza').val(respuesta.tarjeta.fianza);
+		$('#tag').val(respuesta.tarjeta.tag);
 		
 		calcularEfectivo();
 		
@@ -385,16 +385,17 @@ function calcularEfectivo(){
 	let fianza = Number($("#fianza").val());
 	let mutualidad = Number($("#mutualidad").val());
 	let seguridad = Number($("#seguridad").val());
+	let tag = Number($("#tag").val());
 	
-	console.log("vale_dinero" , vale_dinero);
-	console.log("importe_con_guia" , importe_con_guia);
-	console.log("importe_sin_guia" , vale_dinero);
-	console.log("fianza" , fianza);
-	console.log("mutualidad" , mutualidad);
-	console.log("seguridad" , seguridad);
+	// console.log("vale_dinero" , vale_dinero);
+	// console.log("importe_con_guia" , importe_con_guia);
+	// console.log("importe_sin_guia" , vale_dinero);
+	// console.log("fianza" , fianza);
+	// console.log("mutualidad" , mutualidad);
+	// console.log("seguridad" , seguridad);
 	
 	
-	let efectivo_entregar = utilidad - vale_dinero - importe_con_guia - importe_sin_guia + fianza + mutualidad + seguridad;
+	let efectivo_entregar = utilidad + fianza + mutualidad + seguridad + tag - vale_dinero - importe_con_guia - importe_sin_guia ;
 	
 	// console.log("utilidad" , utilidad);
 	
