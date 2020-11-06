@@ -66,7 +66,7 @@
 											<label for="">Tarjeta: </label>
 										</td >
 										<td >
-											<input type="number" name="tarjeta" id="tarjeta" value="167446">
+											<input type="number" name="tarjeta" id="tarjeta" value="">
 										</td >
 									</tr>
 									<tr >
@@ -227,7 +227,7 @@
 											<input type="number" name="efectivo_pagado" id="efectivo_pagado" value="" >
 										</td >
 									</tr>
-									<tr >
+									<tr hidden >
 										<td class="text-left">
 											<label for="">Abono Utilidad: </label>
 										</td >

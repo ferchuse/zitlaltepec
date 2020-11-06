@@ -33,7 +33,7 @@
 		usuario='{$_SESSION['CveUsuario']}',
 		empresa='{$fila['empresa']}',
 		estatus='A',
-		monto='{$_POST['abono']}',
+		monto='{$_POST['efectivo_pagado']}',
 		monto_derrotero='{$_POST['monto_derrotero']}',
 		cant_boletos='{$_POST['cant_boletos']}',
 		vueltas='{$_POST['vueltas']}',

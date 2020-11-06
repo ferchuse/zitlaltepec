@@ -26,15 +26,14 @@ $(document).ready(function(){
 	$("#btn_seguridad, #btn_mutualidad, #btn_fianza, #btn_tag").click(cobrarCargo);
 	
 	
-	// $('#boleto').on('keyup', buscarBoleto);
-	$('#efectivo_pagado').on('keyup', calcularAbono);
+	$('#efectivo_pagado').on('keyup', calcularDeuda);
+	
+	
 	$('#fecha_tarjetas').on('change', buscarFecha);
-	// $('#imprimir_tarjeta').on('click', imprimirTicket);
-	// $('#imprimir_abonos').on('click', imprimirTicket);
+	
 	$('#btn_generar_tarjeta').on('click', function(){
 		
 		$("#form_edicion")[0].reset();
-		// $("#modal_edicion").modal("show");
 		$('#modal_edicion').modal({ backdrop: 'static'}).modal('show').on('shown.bs.modal', function () {
 			$('#form_edicion input:eq(0)').trigger("focus");
 		});
@@ -59,9 +58,6 @@ $(document).ready(function(){
 	});
 	
 	
-	
-	// $('#num_eco').on('keyup',buscarUnidad );
-	// $('#num_eco').on('blur',buscarUnidad );
 	
 	function buscarUnidad(event){
 		event.preventDefault();
@@ -243,9 +239,9 @@ function imprimirAbono(folio){
 		
 		$.ajax({
 			url: "http://localhost/impresiongenerallogo.php",
-			method: "POST",
+			method: "GET",
 			data:{
-				"texto" : respuesta
+				"textoimp" : atob(respuesta) + atob(respuesta)
 			}
 		});
 		
@@ -402,8 +398,9 @@ function calcularEfectivo(){
 	$("#efectivo_entregar").val(efectivo_entregar.toFixed(2));
 	
 }
-function calcularAbono(){
-	console.log("calcularAbono()")
+
+function calcularDeuda(){
+	console.log("calcularDeuda()")
 	
 	let efectivo_entregar = Number($("#efectivo_entregar").val());
 	let efectivo_pagado = Number($("#efectivo_pagado").val());
@@ -411,10 +408,11 @@ function calcularAbono(){
 	
 	
 	
-	let abono = efectivo_entregar - efectivo_pagado ;
+	let deuda_operador = efectivo_entregar - efectivo_pagado ;
 	
 	
-	$("#abono").val(abono.toFixed(2));
+	$("#deuda_operador").val(deuda_operador.toFixed(2));
+	// $("#abono").val(abono.toFixed(2));
 	
 }
 
