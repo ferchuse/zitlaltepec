@@ -31,7 +31,7 @@
 		unidad='{$fila['unidad']}',
 		derrotero='{$fila['derrotero']}',
 		usuario='{$_SESSION['CveUsuario']}',
-		empresa='{$fila['empresa']}',
+		empresa='{$fila['empresa']}',	
 		estatus='A',
 		monto='{$_POST['efectivo_pagado']}',
 		monto_derrotero='{$_POST['monto_derrotero']}',
@@ -90,7 +90,7 @@
 	
 	$respuesta["consulta"] = $consulta;
 	
-	
+	//Actualiza Tarjeta
 	
 	$update = 
 	"UPDATE tarjetas_unidad
@@ -107,6 +107,37 @@
 		$respuesta["estatus_update"] = "error";
 		$respuesta["mensaje_update"] = "Error en ".$update.mysqli_Error($link);
 	}
+	
+	//Actualiza Guias
+	
+	
+	//Actualisa Vales de Dinero
+	
+	
+	//Actualisa Boletos Sencillos
+	
+	/*
+	
+	foreach($_POST['guias'] as $guia){
+			$datos = explode("_",$guia);
+			mysql_query("UPDATE guia SET folio_recaudacion='".$cverecaudacion."',fecha_recaudacion='".$_POST['fecha']."' WHERE taquilla='".$datos[0]."' AND folio='".$datos[1]."'");
+			mysql_query("UPDATE boletos SET folio_recaudacion='".$cverecaudacion."',fecha_recaudacion='".$_POST['fecha']."' WHERE taquilla='".$datos[0]."' AND guia='".$datos[1]."'");
+		}
+		if($_POST['cant_taqmovil'] > 0){
+			mysql_query("UPDATE boletos_taquillamovil SET folio_recaudacion='".$cverecaudacion."',fecha_recaudacion='".fechaLocal()."' WHERE unidad='".$_POST['unidad']."' AND folio_recaudacion='0' AND estatus!='C' ORDER BY cve LIMIT ".intval($_POST['cant_taqmovil']));
+		}
+		if($_POST['cant_abonomovil'] > 0){
+			mysql_query("UPDATE abono_unidad_taquillamovil SET folio_recaudacion='".$cverecaudacion."',fecha_recaudacion='".fechaLocal()."' WHERE unidad='".$_POST['unidad']."' AND folio_recaudacion='0' AND estatus!='C' ORDER BY cve LIMIT ".intval($_POST['cant_abonomovil']));
+		}
+		$boletos = json_decode($_POST['boletossencillos'], true);
+		foreach($boletos as $boleto){
+			mysql_query("UPDATE boletos_sencillos SET folio_recaudacion='$cverecaudacion', fecha_recaudacion='".fechaLocal()."', tipo_recaudacion=1 WHERE taquilla = '".$boleto['taquilla']."' AND folio='".$boleto['folio']."'");
+		}
+		foreach($_POST['vales_dinero'] as $vale){
+			mysql_query("UPDATE vale_dinero SET recaudacion='".$cverecaudacion."',fecha_recaudacion='".$_POST['fecha']."' WHERE cve='".$vale."'");
+		}
+	*/
+	
 	
 	
 	echo json_encode($respuesta);

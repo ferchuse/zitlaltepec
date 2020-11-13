@@ -19,7 +19,7 @@
 		
 		
 		<style>
-			.vueltas input[readonly]{
+			.tabla_vuelta input[readonly]{
 			width : 60px;
 			background-color: #e9ecef !important;
 			}
@@ -28,11 +28,21 @@
 			
 			background-color: #e9ecef !important;
 			}
-			.origen, .destino{
+			.cant_origen, .cant_destino{
 			width : 60px;
 			
 			}
+			/* Chrome, Safari, Edge, Opera */
+			input::-webkit-outer-spin-button,
+			input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+			}
 			
+			/* Firefox */
+			input[type=number] {
+			-moz-appearance: textfield;
+			}
 			
 		</style>
 		
@@ -47,134 +57,63 @@
 			<div id="content-wrapper">	
 				<div class="container-fluid">
 					<?php //include_once("../main.php");?>
-					
-					<div class="row">
-						<div class="col-sm-12">
-							
-							<table >
-								<tr >
-									<td class="text-left">
-										<label for="">Tarjeta:</label>
-									</td >
-									<td >
-										<input type="number" name="tarjeta" id="tarjeta" value="" > 
-									</td >
-									
-								</tr>
-								
-								<tfoot id="respuesta_tarjeta">
-									
-									
-								</tfoot>
-								<tr >
-									
-									<td class="text-left">
-										<label for="">Vueltas:</label>
-									</td >
-									<td >
-										<input type="number" name="vueltas" form="form_monitoreo" id="vueltas" value="2" > 
-									</td >
-								</tr>
-							</table>
-							
-							<hr>
-							<div class="row vueltas">
-								<?php 
-									for($vuelta = 1; $vuelta <= 3; $vuelta++){?>
-									<div class="col-sm-4">
-										<table class="table-bordered">
-											<tr >
-												<td colspan="4" class="text-center h4">
-													VUELTA 	<?php echo $vuelta;?>
-												</td >
-												
-											</tr>
-											
-											
-											
-											<tr >
-												<td >
-													TARIFA
-												</td >
-												<td >
-													<select style="width: 90px">
-														<option>APAXCO</option>
-														<option>NUEVOS PASEOS</option>
-														<option>SAUCES</option>
-														<option>GUARDIA</option>
-														<option>SAN BARTOLO</option>
-														<option>I.V.</option>
-													</select>
-												</td >
-												<td >
-													<select  style="width: 90px">
-														<option>APAXCO</option>
-														<option>NUEVOS PASEOS</option>
-														<option>SAUCES</option>
-														<option>GUARDIA</option>
-														<option>SAN BARTOLO</option>
-														<option>I.V.</option>
-													</select>
-												</td >
-												<td >
-													TOTAL
-												</td >
-											</tr>
-											
-											
-											
-											<?php 
-												
-												$tarifas = [5,10,12,15,20,25,30,35,38,40,42,43,44,45,48,50,57];
-												
-												foreach($tarifas AS $tarifa){?>
-												<tr >
-													<td class="tarifa">
-														<?= $tarifa ?>
-													</td >
-													<td class="w-25" >
-														<input class="origen" type="number"  >
-													</td >
-													<td >
-														<input class="destino" type="number" size="20">
-													</td >
-													<td >
-														<input class="total_tarifa" readonly type="number" tabindex="-1">
-													</td >
-												</tr>
-												<?PHP 
-												}
-												
-											?>
-											
-											<tfoot>
-												<tr >
-													<td >
-														TOTALES:
-													</td >
-													<td >
-														<input class="total_origen" readonly type="number">
-													</td >
-													<td >
-														<input class="total_destino" readonly type="number">
-													</td >
-													<td >
-														<input class="total_vuelta" readonly type="number">
-													</td >
-												</tr>
-											</tfoot>
-										</table>
-									</div>
-									<?PHP 
-									}
-									
-								?>
-							</div>
-						</div>
-					</div>
-					
-					<hr>
 					<form id="form_monitoreo">
+						<div class="row">
+							<div class="col-sm-12">
+								
+								
+								<table >
+									
+									<?php if(isset($_GET["id_monitoreo"])){?>
+										<tr >
+											<td class="text-left">
+												<label for="">Folio:</label>
+											</td >
+											<td >
+												<input type="number" name="id_monitoreo" id="id_monitoreo" value="<?php echo $_GET["id_monitoreo"]?>" > 
+											</td >
+											
+										</tr>
+										
+										<?php 
+											
+										}
+									?>
+									
+									<tr >
+										<td class="text-left">
+											<label for="">Tarjeta:</label>
+										</td >
+										<td >
+											<input type="number" name="tarjeta" id="tarjeta" value="" > 
+										</td >
+										
+									</tr>
+									
+									<tfoot id="respuesta_tarjeta">
+										
+										
+									</tfoot>
+									<tr >
+										
+										<td class="text-left">
+											<label for="">Vueltas:</label>
+										</td >
+										<td >
+											<input type="number" name="vueltas" form="form_monitoreo" id="vueltas" value="2" min="1" max="3"> 
+										</td >
+									</tr>
+								</table>
+								
+									<hr>
+									<div class="row vueltas" id="row_vueltas">
+									
+									</div>
+									</div>
+						</div>
+						
+						<hr>
+						
 						<div class="row">
 							<div class="col-sm-6">
 								<table class="table-bordered">
@@ -215,7 +154,7 @@
 											Comisión
 										</td >
 										<td >
-											<input readonly type="number" id="comision" name="comision">
+											<input readonly type="number" id="comision" name="comision" step="any">
 										</td >
 									</tr>
 									<tr >
@@ -223,7 +162,7 @@
 											Incentivo
 										</td >
 										<td >
-											<input type="number" id="incentivo" name="incentivo">
+											<input type="number" id="incentivo" name="incentivo" >
 										</td >
 									</tr>
 									<tr >
@@ -250,7 +189,7 @@
 											Fianza
 										</td >
 										<td >
-											<input  type="number" id="fianza" name="fianza" value="50">
+											<input  type="number" id="fianza" name="fianza" required value="">
 										</td >
 									</tr>
 									<tr >
@@ -268,7 +207,7 @@
 											Utilidad
 										</td >
 										<td >
-											<input readonly type="number" id="utilidad" name="utilidad">
+											<input readonly type="number" id="utilidad" name="utilidad" step="any">
 										</td >
 									</tr>
 									
@@ -300,8 +239,8 @@
 								
 							</div>
 						</div>
+						
 					</form>
-					
 					
 				</div>
 			</div>

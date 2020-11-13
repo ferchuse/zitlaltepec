@@ -16,22 +16,8 @@
 	LEFT JOIN empresas ON empresas.cve = tarjetas_unidad.empresa
 	LEFT JOIN unidades ON unidades.cve = tarjetas_unidad.unidad
 	LEFT JOIN usuarios ON usuarios.cve = monitoreo.usuario
-	WHERE 1
+	WHERE id_monitoreo = '{$_GET["id_monitoreo"]}'
 	";
-	
-	$consulta.=  " 
-	AND  DATE(fecha_monitoreo)
-	BETWEEN '{$_GET['fecha_inicial']}' 
-	AND '{$_GET['fecha_final']}'"; 
-	
-	
-	
-	if($_GET["usuarios_cve"] != ""){
-		$consulta.=  " AND usuarios.cve = '{$_GET["usuarios_cve"]}'"; 
-	}
-	
-	$consulta.=  " ORDER BY id_monitoreo"; 
-	
 	
 	
 	$result = mysqli_query($link,$consulta);
@@ -43,7 +29,7 @@
 		}
 		
 		while($fila = mysqli_fetch_assoc($result)){
-			// console_log($fila);
+			
 			$filas[] = $fila ;
 		}
 	?>
@@ -70,14 +56,14 @@
 			<tbody id="tabla_DB">
 				<?php 
 					foreach($filas as $index=>$fila){
-						$total+= $fila["utilidad"];
+					$total+= $fila["utilidad"];
 					?>
 					<tr>
 						<td class="text-center"> 
 							<?php if($fila["monitoreo_estatus"] != 'C'){
 								
 								
-								if(dame_permiso("monitoreo.php", $link) == '3'){ 
+								if(dame_permiso("recaudacion.php", $link) == '3'){ 
 								?>
 								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['recaudacion_operador_cve']?>'>
 									<i class="fas fa-times"></i>
@@ -95,9 +81,6 @@
 								echo "<span class='badge badge-danger'>".$fila["tarjetas_estatus"]."<br>".$fila["datos_cancelacion"]."</span>";
 							}
 							?>
-							<a href="nuevo_monitoreo.php?id_monitoreo=<?php echo $fila['id_monitoreo']?>" class="btn btn-default cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_monitoreo']?>'>
-								<i class="fas fa-search"></i>
-							</a>
 						</td>
 						<td><?php echo $fila["id_monitoreo"]?></td>
 						<td><?php echo $fila["fecha_monitoreo"]?></td>
@@ -106,16 +89,16 @@
 						<td><?php echo $fila["tarjeta"]?></td>
 						<td>$<?php echo number_format($fila["utilidad"])?></td>
 						<td><?php echo $fila["vueltas"]?></td>
-						
+							
 					</tr>
 					<?php
 						
 						// if($fila["estatus_reciboSalidas"] != "Cancelado"){
-						
-						
+							
+							
 						// }
 					}
-					?>
+				?>
 			</tbody>
 			<tfoot>
 				<tr>
@@ -126,8 +109,8 @@
 					<td></td>
 					<td></td>
 					
-					<td class="h6">$<?php echo number_format($total)?></td>
-					
+						<td class="h6">$<?php echo number_format($total)?></td>
+						
 					<td></td>
 				</tr>
 			</tfoot>
@@ -136,7 +119,7 @@
 	
 	<?php
 		
-		// print_r($_SESSION);
+	// print_r($_SESSION);
 	}
 	else {
 		echo  "Error en ".$consulta.mysqli_Error($link);

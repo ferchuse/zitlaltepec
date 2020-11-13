@@ -190,6 +190,7 @@ if($_POST['ajax']==1){
 	exit();
 }
 
+//comando Buscar Tarjeta
 if($_POST['ajax']==2){
 	$res=mysql_query("SELECT * FROM tarjetas_unidad WHERE cve='".$_POST['tarjeta']."'");
 	if($row=mysql_fetch_array($res)){
@@ -226,6 +227,8 @@ if($_POST['ajax']==2){
 		$row1=mysql_fetch_array($res1);	
 		echo round($row1[0],2).'|';
 		echo round($row['monto']-$row1[0],2).'|<table border="1"><tr><th>Guia</th><th>Cant. Boletos</th><th>Imp. Boletos</th>';
+		
+		// Buscar Boletos con guia
 		$res1=mysql_query("SELECT taquilla, folio FROM guia WHERE taquilla>0 AND unidad='".$row['unidad']."' AND folio_recaudacion=0");
 		$tboletos=0;
 		$iboletos=0;
@@ -238,18 +241,26 @@ if($_POST['ajax']==2){
 			$iboletos+=$row2[1];
 		}
 		echo '</table>|'.$tboletos.'|'.$iboletos.'|<table><tr><th>Folio</th><th>Fecha</th><th>Importe</th></tr>';
+		
+		//Buscar Vale de Dinero 
 		$tvale=0;
+		
+		
 		$res1=mysql_query("SELECT * FROM vale_dinero WHERE estatus!='C' AND recaudacion=0 AND unidad='".$row['unidad']."' ORDER BY cve");
 		while($row1 = mysql_fetch_array($res1)){
 			echo '<tr><td>'.$row1['cve'].'<input type="hidden" name="vales_dinero[]" value="'.$row1['cve'].'"></td><td>'.$row1['fecha'].'</td><td align="right">'.$row1['monto'].'</td></tr>';
 			$tvale += $row1['monto'];
 		}
 		echo '</table>|'.$tvale.'|';
+		
+		//Deuda del operador
 		$res = mysql_query("SELECT SUM(a.deuda_operador - a.abono_deuda) as saldo
 		FROM recaudacion_autobus a INNER JOIN unidades b ON b.cve = a.unidad 
 		WHERE a.estatus != 'C' AND a.deuda_operador > a.abono_deuda AND a.operador='".$row['operador']."'");
 		$row = mysql_fetch_array($res);
 		echo $row[0];
+		
+		
 		$res1=mysql_query("SELECT COUNT(cve), SUM(monto) FROM boletos_taquillamovil WHERE estatus!='C' AND folio_recaudacion=0 AND unidad='".$unidad."'");
 		$row1=mysql_fetch_array($res1);
 		echo '|'.$row1[0].'|'.$row1[1];
@@ -319,6 +330,8 @@ if($_POST['ajax']==4){
 	echo json_encode($resultado);
 	exit();
 }
+
+//Comando Imprimir
 
 if($_POST['cmd']==10){
 	$res = mysql_query("SELECT * FROM recaudacion_autobus WHERE cve='".$_POST['reg']."'");
@@ -392,7 +405,7 @@ if($_POST['cmd']==10){
 }
 
 top($_SESSION);
-
+//Comando Cancelar
 if($_POST['cmd']==3){
 	mysql_query("UPDATE recaudacion_autobus SET estatus='C',fechacan='".fechaLocal()." ".horaLocal()."',usucan='".$_POST['cveusuario']."' WHERE cve='".$_POST['reg']."'");
 	$res = mysql_query("SELECT tarjeta FROM recaudacion_autobus WHERE cve='".$_POST['reg']."'");
@@ -410,6 +423,7 @@ if($_POST['cmd']==3){
 	$_POST['cmd']=0;
 }
 
+//Comando Guardar Recaudacion
 if($_POST['cmd']==2){
 	//mysql_query("INSERT usuario_recaudacion SET usuario='".$_POST['cveusuario']."',recaudacion='".$_POST['recaudacion']."',fecha=CURDATE()");
 	$res1 = mysql_query("SELECT * FROM tarjetas_unidad WHERE cve = '".$_POST['tarjeta']."'");

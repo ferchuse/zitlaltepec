@@ -6,9 +6,11 @@ function onLoad(){
 	$("#form_monitoreo").submit(guardarMonitoreo);
 	
 	$("#diesel, #casetas, #despachadores, #incentivo, #fianza").keyup(calcularUtilidad)
-	$(".origen, .destino").keyup(sumarBoletos)
-	$(".origen, .destino").change(sumarBoletos)
-	$("input").keydown(cursorPress)
+	$("#row_vueltas").on("keyup", ".cant_origen, .cant_destino", sumarBoletos)
+	$("#row_vueltas").on("change", ".cant_origen, .cant_destino", sumarBoletos)
+	$("#row_vueltas").on("keydown", "input", cursorPress)
+	
+	// $("").keydown(cursorPress)
 	$("input").focus(function(){
 		$(this).select();
 	});	
@@ -17,6 +19,7 @@ function onLoad(){
 		$(this).select();
 	});
 	
+	$("#vueltas").change(renderVueltas)
 	
 	$('#tarjeta').on('keyup',function(event){
 		event.preventDefault();
@@ -32,6 +35,127 @@ function onLoad(){
 			buscarTarjeta(tarjeta);
 		}
 	});
+	
+	
+	renderVueltas();
+	
+}
+
+
+
+
+function renderVueltas(){
+	console.log("renderVueltas()")
+	str_vueltas="";
+	
+	
+	
+	for(num_vueltas = 1; num_vueltas <= Number($("#vueltas").val()); num_vueltas++ ){
+		
+		str_vueltas += `
+		<div class="col-sm-4 ">
+		<table class="table-bordered tabla_vuelta">
+		<tr >
+		<td colspan="4" class="text-center h4">
+		VUELTA 	<span class="num_vuelta" >${num_vueltas}</span>
+		</td >
+		
+		</tr>
+		
+		
+		
+		<tr >
+		<td >
+		TARIFA
+		</td >
+		<td >
+		<select required class="origen" style="width: 90px">
+		<option value="">Elige...</option>
+		<option>APAXCO</option>
+		<option>NUEVOS PASEOS</option>
+		<option>SAUCES</option>
+		<option>GUARDIA</option>
+		<option>SAN BARTOLO</option>
+		<option>I.V.</option>
+		</select>
+		</td >
+		<td >
+		<select required class="destino" style="width: 90px">
+		<option value="">Elige...</option>
+		<option>APAXCO</option>
+		<option>NUEVOS PASEOS</option>
+		<option>SAUCES</option>
+		<option>GUARDIA</option>
+		<option>SAN BARTOLO</option>
+		<option>I.V.</option>
+		</select>
+		</td >
+		<td >
+		TOTAL
+		</td >
+		</tr>`;
+		//<?php $tarifas = [5,10,12,15,20,25,30,35,38,40,42,43,44,45,48,50,57];
+		
+		var tarifas = [5,10,12,15,20,25,30,35,38,40,42,43,44,45,48,50,57];
+		
+		
+		
+		
+		
+		
+		tarifas.forEach(function(tarifa){
+			
+			str_vueltas += `
+			<tr >
+			<td class="tarifa">
+			${tarifa}
+			</td >
+			<td class="w-25" >
+			<input class="cant_origen" type="number"  value="">
+			</td >
+			<td >
+			<input class="cant_destino" type="number" size="20">
+			</td >
+			<td >
+			<input class="total_tarifa" readonly type="number" tabindex="-1">
+			</td >
+			</tr>`;
+			
+		});
+		
+		
+		str_vueltas += `
+		<tfoot>
+		<tr >
+		<td >
+		TOTALES:
+		</td >
+		<td >
+		<input class="total_origen" readonly type="number">
+		</td >
+		<td >
+		<input class="total_destino" readonly type="number">
+		</td >
+		<td >
+		<input class="total_vuelta" readonly type="number">
+		</td >
+		</tr>
+		</tfoot>
+		</table>
+		</div>
+		`;
+		
+	}
+	
+	
+	$("#row_vueltas").html(str_vueltas);
+}
+
+
+function cargarMonitoreo(){
+	
+	
+	
 	
 }
 
@@ -55,12 +179,80 @@ function guardarMonitoreo(event){
 	boton.prop("disabled", true)
 	icono.toggleClass("fa-save fa-spinner fa-spin");
 	
+	var monitoreo_vueltas =[];
+	var monitoreo_boletos =[];
+	
+	
+	$(".tabla_vuelta").each(function(i, tabla){
+		console.log("for each tabla")
+		
+		var num_vuelta = $(this).find(".num_vuelta").text()
+		
+		monitoreo_vueltas.push({
+			
+			"num_vuelta": num_vuelta,
+			"origen": $(this).find(".origen").val(),
+			"origen": $(this).find(".origen").val(),
+			"total_origen": $(this).find(".total_origen").val(),
+			"total_destino": $(this).find(".total_destino").val(),
+			"total_vuelta": $(this).find(".total_vuelta").val()
+			
+		})
+		
+		
+		
+		$(this).find(".tarifa").each(function(j, tarifa ){
+			
+			// console.log("for each tarifa")
+			
+			var fila = $(this).closest("tr");
+			var tarifa = Number($(this).text());
+			var cant_origen = Number(fila.find(".cant_origen").val());
+			var cant_destino = Number(fila.find(".cant_destino").val());
+			var total_tarifa = Number(fila.find(".total_tarifa").val());
+			
+			
+			monitoreo_boletos.push({
+				"num_vuelta": num_vuelta,
+				"tarifa": tarifa,
+				"cant_origen": cant_origen,
+				"cant_destino": cant_destino,
+				"total_tarifa": total_tarifa
+				
+			})
+			// console.log("vueltas", vueltas);
+		})
+		
+		
+	})
+	
+	
 	
 	return $.ajax({
 		url: 'consultas/guardar_monitoreo.php',
 		dataType: 'JSON',
 		method: 'POST',
-		data: $("#form_monitoreo").serialize() + "&tarjeta=" + $("#tarjeta").val()
+		data: 
+		{
+			"tarjeta" :  $("#tarjeta").val(),
+			"vueltas" :  $("#vueltas").val(),
+			"ingreso_bruto" :  $("#ingreso_bruto").val(),
+			"casetas" :  $("#casetas").val(),
+			"diesel" :  $("#casetas").val(),
+			"despachadores" :  $("#casetas").val(),
+			"comision" :  $("#comision").val(),
+			"incentivo" :  $("#casetas").val(),
+			"mutualidad" :  $("#casetas").val(),
+			"seguridad" :  $("#casetas").val(),
+			"fianza" :  $("#fianza").val(),
+			"tag" :  $("#tag").val(),
+			"utilidad" :  $("#utilidad").val(),
+			"observaciones" :  $("#observaciones").val(),
+			"monitoreo_vueltas": monitoreo_vueltas ,
+			"monitoreo_boletos": monitoreo_boletos  
+			
+		}
+		
 		}).done(function(respuesta){
 		
 		alertify.success("Guardado Correctamente");
@@ -113,17 +305,7 @@ function calcularUtilidad(){
 	let mutualidad = Number($("#mutualidad").val());
 	let seguridad = Number($("#seguridad").val());
 	let tag = Number($("#tag").val());
-	// let fianza = Number($("#fianza").val());
 	
-	// console.log("comision" , comision);
-	// console.log("casetas" , casetas);
-	// console.log("diesel" , diesel);
-	// console.log("despachadores" , despachadores);
-	// console.log("incentivo" , incentivo);
-	// console.log("mutualidad" , mutualidad);
-	// console.log("seguridad" , seguridad);
-	// console.log("tag" , tag);
-	// console.log("fianza" , fianza);
 	
 	
 	let utilidad = ingreso_bruto -  casetas - diesel - despachadores - comision - incentivo - mutualidad - seguridad;
@@ -149,8 +331,8 @@ function sumarBoletos(event){
 	
 	let fila = $(this).closest("tr");
 	
-	let origen = Number(fila.find(".origen").val());
-	let destino = Number(fila.find(".destino").val());
+	let origen = Number(fila.find(".cant_origen").val());
+	let destino = Number(fila.find(".cant_destino").val());
 	let tarifa = Number(fila.find(".tarifa").text());
 	
 	console.log("tarifa", tarifa)
@@ -185,11 +367,11 @@ function sumarTotales(tabla){
 	var total_tarifa = 0, total_vuelta = 0, total_origen = 0, total_destino = 0 , ingreso_bruto = 0;
 	
 	
-	tabla.find(".origen").each(function(index, elemnt){
+	tabla.find(".cant_origen").each(function(index, elemnt){
 		let fila = $(this).closest("tr");
 		
 		let origen = Number($(this).val());
-		let destino = Number(fila.find(".destino").val());
+		let destino = Number(fila.find(".cant_destino").val());
 		total_tarifa = Number(fila.find(".total_tarifa").val());
 		
 		
