@@ -158,40 +158,46 @@
 						<div class="row">
 							<div class="col-sm-12">
 								
+									<h4>Ver Monitoreo </h4>
 								
-								<table >
-									<tr >
-										<td class="text-left">
-											<label for="">Folio:</label>
-										</td >
-										<td >
-											<input readonly type="number" name="id_monitoreo" id="id_monitoreo" value="<?php echo $lista_monitoreo["id_monitoreo"]?>" > 
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Fecha:</label>
-										</td >
-										<td >
-											<input readonly type="text"  value="<?php echo $lista_monitoreo["fecha_monitoreo"]?>" > 
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Usuario:</label>
-										</td >
-										<td >
-											<input readonly type="text" value="<?php echo $lista_monitoreo["usuarios_nombre"]?>" > 
-										</td >
-									</tr>
-									<tr >
-										<td class="text-left">
-											<label for="">Tarjeta:</label>
-										</td >
-										<td >
-											<input readonly type="number" name="tarjeta" id="tarjeta" value="<?php echo $lista_monitoreo["tarjeta"]?>" > 
-										</td >
-										
+								
+									<a href="index.php" class="btn btn-success" >
+										<i class="fas fa-arrow-left"></i> Regresar
+									</a>
+									
+									<table >
+										<tr >
+											<td class="text-left">
+												<label for="">Folio:</label>
+											</td >
+											<td >
+												<input readonly type="number" name="id_monitoreo" id="id_monitoreo" value="<?php echo $lista_monitoreo["id_monitoreo"]?>" > 
+											</td >
+										</tr>
+										<tr >
+											<td class="text-left">
+												<label for="">Fecha:</label>
+											</td >
+											<td >
+												<input readonly type="text"  value="<?php echo $lista_monitoreo["fecha_monitoreo"]?>" > 
+											</td >
+										</tr>
+										<tr >
+											<td class="text-left">
+												<label for="">Usuario:</label>
+											</td >
+											<td >
+												<input readonly type="text" value="<?php echo $lista_monitoreo["usuarios_nombre"]?>" > 
+											</td >
+										</tr>
+										<tr >
+											<td class="text-left">
+												<label for="">Tarjeta:</label>
+											</td >
+											<td >
+												<input readonly type="number" name="tarjeta" id="tarjeta" value="<?php echo $lista_monitoreo["tarjeta"]?>" > 
+											</td >
+											
 									</tr>
 									<tr >
 										<td >

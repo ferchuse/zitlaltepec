@@ -61,6 +61,12 @@
 					<div class="row">
 						<div class="col-sm-12">
 							
+									<h4>Nuevo Monitoreo </h4>
+								
+								
+									<a href="index.php" class="btn btn-success" >
+										<i class="fas fa-arrow-left"></i> Regresar
+									</a>
 							
 							<table >
 								
