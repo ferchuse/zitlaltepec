@@ -192,7 +192,7 @@ function guardarMonitoreo(event){
 			
 			"num_vuelta": num_vuelta,
 			"origen": $(this).find(".origen").val(),
-			"origen": $(this).find(".origen").val(),
+			"destino": $(this).find(".destino").val(),
 			"total_origen": $(this).find(".total_origen").val(),
 			"total_destino": $(this).find(".total_destino").val(),
 			"total_vuelta": $(this).find(".total_vuelta").val()

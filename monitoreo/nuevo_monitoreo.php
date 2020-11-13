@@ -57,63 +57,63 @@
 			<div id="content-wrapper">	
 				<div class="container-fluid">
 					<?php //include_once("../main.php");?>
-					<form id="form_monitoreo">
-						<div class="row">
-							<div class="col-sm-12">
+					
+					<div class="row">
+						<div class="col-sm-12">
+							
+							
+							<table >
 								
-								
-								<table >
-									
-									<?php if(isset($_GET["id_monitoreo"])){?>
-										<tr >
-											<td class="text-left">
-												<label for="">Folio:</label>
-											</td >
-											<td >
-												<input type="number" name="id_monitoreo" id="id_monitoreo" value="<?php echo $_GET["id_monitoreo"]?>" > 
-											</td >
-											
-										</tr>
-										
-										<?php 
-											
-										}
-									?>
-									
+								<?php if(isset($_GET["id_monitoreo"])){?>
 									<tr >
 										<td class="text-left">
-											<label for="">Tarjeta:</label>
+											<label for="">Folio:</label>
 										</td >
 										<td >
-											<input type="number" name="tarjeta" id="tarjeta" value="" > 
+											<input type="number" name="id_monitoreo" id="id_monitoreo" value="<?php echo $_GET["id_monitoreo"]?>" > 
 										</td >
 										
 									</tr>
 									
-									<tfoot id="respuesta_tarjeta">
+									<?php 
 										
-										
-									</tfoot>
-									<tr >
-										
-										<td class="text-left">
-											<label for="">Vueltas:</label>
-										</td >
-										<td >
-											<input type="number" name="vueltas" form="form_monitoreo" id="vueltas" value="2" min="1" max="3"> 
-										</td >
-									</tr>
-								</table>
+									}
+								?>
 								
-									<hr>
-									<div class="row vueltas" id="row_vueltas">
+								<tr >
+									<td class="text-left">
+										<label for="">Tarjeta:</label>
+									</td >
+									<td >
+										<input type="number" name="tarjeta" id="tarjeta" value="" > 
+									</td >
 									
-									</div>
-									</div>
+								</tr>
+								
+								<tfoot id="respuesta_tarjeta">
+									
+									
+								</tfoot>
+								<tr >
+									
+									<td class="text-left">
+										<label for="">Vueltas:</label>
+									</td >
+									<td >
+										<input type="number" name="vueltas" form="form_monitoreo" id="vueltas" value="2" min="1" max="3"> 
+									</td >
+								</tr>
+							</table>
+							
+							<hr>
+							<div class="row vueltas" id="row_vueltas">
+								
+							</div>
 						</div>
-						
-						<hr>
-						
+					</div>
+					
+					<hr>
+					<form id="form_monitoreo">
 						<div class="row">
 							<div class="col-sm-6">
 								<table class="table-bordered">
@@ -235,23 +235,23 @@
 										</tr>
 										
 									</tfoot>
-								</table>
-								
-							</div>
+							</table>
+							
 						</div>
-						
-					</form>
+					</div>
 					
-				</div>
+				</form>
+				
 			</div>
 		</div>
-		
-		
-		
-		<?php include_once("../scripts.php");?>
-		<script src="monitoreo.js?v=<?= date("Ymdis")?>"></script>
-		
-		
-	</body>
+	</div>
 	
+	
+	
+	<?php include_once("../scripts.php");?>
+	<script src="monitoreo.js?v=<?= date("Ymdis")?>"></script>
+	
+	
+</body>
+
 </html>

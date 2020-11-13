@@ -28,38 +28,31 @@
 	if($result){
 		
 		$folio = mysqli_insert_id($link);
-		$respuesta["estatus"] = "success";
-		$respuesta["mensaje"] = "Guardado";
+		$respuesta["estatus"]["monitoreo"] = "success";
+		$respuesta["mensaje"]["monitoreo"] = "Guardado";
 		
 		
 	}
 	else {
 		
-		$respuesta["estatus"] = "error";
-		$respuesta["mensaje"] = "Error en ".$consulta.mysqli_Error($link);
+		$respuesta["estatus"]["monitoreo"] = "error";
+		$respuesta["mensaje"]["monitoreo"] = "Error en ".$consulta.mysqli_Error($link);
 		
 		
 	}
 	
 	
 	
-	foreach($_POST["vueltas"] as $i => $vuelta){
-		
-		
-		
+	foreach($_POST["monitoreo_vueltas"] as $i => $vuelta){
 		
 		
 		$consulta = 
-		"INSERT INTO vueltas
+		"INSERT INTO monitoreo_vueltas
 		SET 
 		id_monitoreo='{$folio}',	
 		num_vuelta='{$vuelta['num_vuelta']}',	
 		origen='{$vuelta['origen']}',	
 		destino='{$vuelta['destino']}',	
-		tarifa='{$vuelta['tarifa']}',	
-		cant_origen='{$vuelta['cant_origen']}',	
-		cant_destino='{$vuelta['cant_destino']}',	
-		total_tarifa='{$vuelta['total_tarifa']}',	
 		total_origen='{$vuelta['total_origen']}',	
 		total_destino='{$vuelta['total_destino']}',	
 		total_vuelta='{$vuelta['total_vuelta']}'
@@ -68,19 +61,43 @@
 		$result = mysqli_query($link,$consulta);
 		if($result){
 			
-			
-			$respuesta["estatus"] = "success";
-			$respuesta["mensaje"] = "Guardado";
-			
-			
+			$respuesta["estatus"]["vueltas"] = "success";
+			$respuesta["mensaje"]["vueltas"] = "Guardado";
 		}
 		else {
 			
-			$respuesta["estatus"] = "error";
-			$respuesta["mensaje"] = "Error en ".$consulta.mysqli_Error($link);
-			
-			
+			$respuesta["estatus"]["vueltas"] = "error";
+			$respuesta["mensaje"]["vueltas"] = "Error en ".$consulta.mysqli_Error($link);
 		}
+		
+	}
+	
+	foreach($_POST["monitoreo_boletos"] as $i => $boleto){
+		
+		$consulta = 
+		"INSERT INTO monitoreo_boletos
+		SET 
+		id_monitoreo='{$folio}',	
+		num_vuelta='{$boleto['num_vuelta']}',	
+		tarifa='{$boleto['tarifa']}',	
+		cant_origen='{$boleto['cant_origen']}',	
+		cant_destino='{$boleto['cant_destino']}',	
+		total_tarifa='{$boleto['total_tarifa']}'
+		
+		";
+		
+		$result = mysqli_query($link,$consulta);
+		if($result){
+			
+			$respuesta["estatus"]["boletos"] = "success";
+			$respuesta["mensaje"]["boletos"] = "Guardado";
+		}
+		else {
+			
+			$respuesta["estatus"]["boletos"] = "error";
+			$respuesta["mensaje"]["boletos"] = "Error en ".$consulta.mysqli_Error($link);
+		}
+		
 	}
 	
 	echo json_encode($respuesta);

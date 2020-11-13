@@ -95,7 +95,7 @@
 								echo "<span class='badge badge-danger'>".$fila["tarjetas_estatus"]."<br>".$fila["datos_cancelacion"]."</span>";
 							}
 							?>
-							<a href="nuevo_monitoreo.php?id_monitoreo=<?php echo $fila['id_monitoreo']?>" class="btn btn-default cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_monitoreo']?>'>
+							<a href="ver_monitoreo.php?id_monitoreo=<?php echo $fila['id_monitoreo']?>" class="btn btn-default cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_monitoreo']?>'>
 								<i class="fas fa-search"></i>
 							</a>
 						</td>
