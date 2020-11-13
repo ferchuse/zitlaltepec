@@ -64,7 +64,7 @@
 									<h4>Nuevo Monitoreo </h4>
 								
 								
-									<a href="index.php" class="btn btn-success" >
+									<a href="index.php" class="btn btn-success btn-sm" >
 										<i class="fas fa-arrow-left"></i> Regresar
 									</a>
 							
