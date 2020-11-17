@@ -143,9 +143,51 @@
 			
 			
 			});
-			});
+		});
+		
+		var printService = new WebSocketPrinter();
+		
+		function imprimirTicket(folio){
+			console.log("imprimirAbono()");
 			
-			function listarRegistros(){
+			
+			
+			// boton.prop("disabled", true); 
+			// icono.toggleClass("fa-print fa-spinner fa-spin");
+			
+			$.ajax({
+				url: "imprimir_abono.php",
+				data:{
+					folio : folio
+				}
+				}).done(function (respuesta){
+				
+				$.ajax({
+					url: "http://localhost/impresiongenerallogo.php",
+					method: "GET",
+					data:{
+						"textoimp" : atob(respuesta) + atob(respuesta)
+					}
+				});
+				
+				
+				
+				printService.submit({
+					'type': 'LABEL',
+					'raw_content': respuesta
+				});
+				
+				
+				
+				}).always(function(){
+				
+				// boton.prop("disabled", false);
+				// icono.toggleClass("fa-print fa-spinner fa-spin");
+				
+			});
+		}
+		
+		function listarRegistros(){
 			console.log("listarRegistros()");
 			
 			let form = $("#form_filtro");
@@ -156,34 +198,34 @@
 			icono.toggleClass('fa-search fa-spinner fa-pulse ');
 			
 			return $.ajax({
-			url: 'consultas/lista_recaudacion.php',
-			data: $("#form_filtro").serialize()
-			}).done(function(respuesta){
-			
-			$("#tabla_registros").html(respuesta)
-			
-			// $(".imprimir").click(function(){
-			// imprimirTicket($(this).data("id_registro"))
-			// });
-			
-			// $(".cancelar").click(confirmaCancelacion);
-			
-			// $("#check_all").change(checkAll);
-			
-			// $(".seleccionar").change(contarSeleccionados)
-			
-			}).always(function(){  
-			
-			boton.prop('disabled',false);
-			icono.toggleClass('fa-search fa-spinner fa-pulse fa-fw');
-			
-		});
-	}
+				url: 'consultas/lista_recaudacion.php',
+				data: $("#form_filtro").serialize()
+				}).done(function(respuesta){
+				
+				$("#tabla_registros").html(respuesta)
+				
+				$(".imprimir").click(function(){
+				imprimirTicket($(this).data("id_registro"))
+				});
+				
+				// $(".cancelar").click(confirmaCancelacion);
+				
+				// $("#check_all").change(checkAll);
+				
+				// $(".seleccionar").change(contarSeleccionados)
+				
+				}).always(function(){  
+				
+				boton.prop('disabled',false);
+				icono.toggleClass('fa-search fa-spinner fa-pulse fa-fw');
+				
+			});
+		}
+		
+		
+	</script>
 	
 	
-</script>
-
-
 </body>
 
 </html>
