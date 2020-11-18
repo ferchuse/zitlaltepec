@@ -72,6 +72,7 @@
 				<th>Operador</th>
 				<th>Tarjeta</th>
 				<th>Empresa</th>
+				<th>Efectivo Pagado</th>
 				<th>Utilidad</th>
 				<th>Usuario</th>
 			</thead>
@@ -83,7 +84,8 @@
 						<td class="text-center"> 
 							<?php if($fila["tarjetas_estatus"] != 'C'){
 								
-								$totales[0]+= $fila["utilidad"];
+								$totales[0]+= $fila["monto"];
+								$totales[1]+= $fila["utilidad"];
 								if(dame_permiso("recaudacion.php", $link) == '3'){ 
 								?>
 								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['recaudacion_autobus_cve']?>'>
@@ -110,6 +112,7 @@
 						<td><?php echo $fila["operadores_nombre"]?></td>
 						<td><?php echo $fila["tarjeta"]?></td>
 						<td><?php echo $fila["empresas_nombre"]?></td>
+						<td>$<?php echo $fila["monto"]?></td>
 						<td>$<?php echo $fila["utilidad"]?></td>
 						<td><?php echo $fila["usuarios_nombre"]?></td>
 							
