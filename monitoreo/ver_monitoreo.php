@@ -419,7 +419,7 @@
 											TAG
 										</td >
 										<td >
-											<input   type="number" id="tag" name="tag" value="<?= $lista_monitoreo["tag"]?>">
+											<input  readonly type="number" id="tag" name="tag" value="<?= $lista_monitoreo["tag"]?>">
 											
 										</td >
 									</tr>
@@ -434,12 +434,11 @@
 									</tr>
 									
 									<tr >
-										<td >
-											Observaciones
+										<td colspan="2">
+											Observaciones <br>
+											<textarea class="form-control" rows="5" cols="40" readonly id="observaciones"  name="observaciones"><?= $lista_monitoreo["observaciones"]?></textarea >
 										</td >
-										<td >
-											<input type="text" id="observaciones"  name="observaciones" size="60" value="<?= $lista_monitoreo["observaciones"]?>">
-										</td >
+										
 									</tr>
 								</table>
 								

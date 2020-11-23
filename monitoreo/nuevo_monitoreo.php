@@ -61,12 +61,12 @@
 					<div class="row">
 						<div class="col-sm-12">
 							
-									<h4>Nuevo Monitoreo </h4>
-								
-								
-									<a href="index.php" class="btn btn-success btn-sm" >
-										<i class="fas fa-arrow-left"></i> Regresar
-									</a>
+							<h4>Nuevo Monitoreo </h4>
+							
+							
+							<a href="index.php" class="btn btn-success btn-sm" >
+								<i class="fas fa-arrow-left"></i> Regresar
+							</a>
 							
 							<table >
 								
@@ -106,7 +106,7 @@
 										<label for="">Vueltas:</label>
 									</td >
 									<td >
-										<input type="number" name="vueltas" form="form_monitoreo" id="vueltas" value="2" min="1" max="3"> 
+										<input type="number" name="vueltas" form="form_monitoreo" id="vueltas" value="2" min="1" max="7"> 
 									</td >
 								</tr>
 							</table>
@@ -218,12 +218,11 @@
 									</tr>
 									
 									<tr >
-										<td >
-											Observaciones
+										<td colspan="2">
+											<label>Observaciones:</label> <br>
+											<textarea rows="5" cols="40" id="observaciones"  name="observaciones"></textarea >
 										</td >
-										<td >
-											<input type="text" id="observaciones"  name="observaciones" size="60">
-										</td >
+										
 									</tr>
 									
 									
@@ -234,30 +233,30 @@
 												
 											</td >
 											<td >
-												<button type="submit" class="btn btn-success">
+												<button type="submit" class="btn btn-success btn-block">
 													<i class="fas fa-save"></i> Guardar
 												</button >
 											</td >
 										</tr>
 										
 									</tfoot>
-							</table>
-							
+								</table>
+								
+							</div>
 						</div>
-					</div>
+						
+					</form>
 					
-				</form>
-				
+				</div>
 			</div>
 		</div>
-	</div>
+		
+		
+		
+		<?php include_once("../scripts.php");?>
+		<script src="monitoreo.js?v=<?= date("Ymdis")?>"></script>
+		
+		
+	</body>
 	
-	
-	
-	<?php include_once("../scripts.php");?>
-	<script src="monitoreo.js?v=<?= date("Ymdis")?>"></script>
-	
-	
-</body>
-
 </html>

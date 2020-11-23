@@ -5,7 +5,16 @@
 	$link = Conectarse();
 	$filas = array();
 	
+	$buscar_monitoreo ="
+	SELECT * FROM monitoreo WHERE tarjeta = 
+	'{$_GET["tarjeta"]}' 
+	AND estatus_monitoreo = 'Activo'";
 	
+	$result_monitoreo = mysqli_query($link,$buscar_monitoreo);
+	
+	if(mysqli_num_rows($result_monitoreo )  >= 1 ){
+		die("<script> alert('La tarjeta ya ha sido aforada');</script>");
+	}
 	
 	$consulta = "		
 	SELECT

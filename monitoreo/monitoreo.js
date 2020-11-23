@@ -69,7 +69,7 @@ function renderVueltas(){
 		TARIFA
 		</td >
 		<td >
-		<select required class="origen" style="width: 90px">
+		<select form="form_monitoreo" required class="origen" style="width: 90px">
 		<option value="">Elige...</option>
 		<option>APAXCO</option>
 		<option>NUEVOS PASEOS</option>
@@ -80,7 +80,7 @@ function renderVueltas(){
 		</select>
 		</td >
 		<td >
-		<select required class="destino" style="width: 90px">
+		<select form="form_monitoreo" required class="destino" style="width: 90px">
 		<option value="">Elige...</option>
 		<option>APAXCO</option>
 		<option>NUEVOS PASEOS</option>
@@ -94,12 +94,8 @@ function renderVueltas(){
 		TOTAL
 		</td >
 		</tr>`;
-		//<?php $tarifas = [5,10,12,15,20,25,30,35,38,40,42,43,44,45,48,50,57];
 		
 		var tarifas = [5,10,12,15,20,25,30,35,38,40,42,43,44,45,48,50,57];
-		
-		
-		
 		
 		
 		
@@ -238,12 +234,12 @@ function guardarMonitoreo(event){
 			"vueltas" :  $("#vueltas").val(),
 			"ingreso_bruto" :  $("#ingreso_bruto").val(),
 			"casetas" :  $("#casetas").val(),
-			"diesel" :  $("#casetas").val(),
-			"despachadores" :  $("#casetas").val(),
+			"diesel" :  $("#diesel").val(),
+			"despachadores" :  $("#despachadores").val(),
 			"comision" :  $("#comision").val(),
-			"incentivo" :  $("#casetas").val(),
-			"mutualidad" :  $("#casetas").val(),
-			"seguridad" :  $("#casetas").val(),
+			"incentivo" :  $("#incentivo").val(),
+			"mutualidad" :  $("#mutualidad").val(),
+			"seguridad" :  $("#seguridad").val(),
 			"fianza" :  $("#fianza").val(),
 			"tag" :  $("#tag").val(),
 			"utilidad" :  $("#utilidad").val(),
@@ -256,7 +252,7 @@ function guardarMonitoreo(event){
 		}).done(function(respuesta){
 		
 		alertify.success("Guardado Correctamente");
-		// window.location.href = "../inicio.php";
+		window.location.href = "index.php";
 		}).always(function(){
 		boton.prop("disabled", false)
 		icono.toggleClass("fa-save fa-spinner fa-spin");
