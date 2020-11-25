@@ -72,7 +72,7 @@
 				<th>Operador</th>
 				<th>Tarjeta</th>
 				<th>Empresa</th>
-				<th>Efectivo Pagado</th>
+				<th>Observaciones</th>
 				<th>Utilidad</th>
 				<th>Usuario</th>
 			</thead>
@@ -112,7 +112,7 @@
 						<td><?php echo $fila["operadores_nombre"]?></td>
 						<td><?php echo $fila["tarjeta"]?></td>
 						<td><?php echo $fila["empresas_nombre"]?></td>
-						<td>$<?php echo $fila["monto"]?></td>
+						<td><?php echo $fila["observaciones"]?></td>
 						<td>$<?php echo $fila["utilidad"]?></td>
 						<td><?php echo $fila["usuarios_nombre"]?></td>
 							

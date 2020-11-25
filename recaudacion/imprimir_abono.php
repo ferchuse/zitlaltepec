@@ -34,7 +34,7 @@
 			
 			$registro = $fila ;
 			
-		}
+			}
 		
 		$texto = "";
 		
@@ -48,16 +48,16 @@
 			$texto.= $registro['fecha']." ".$registro['hora']."\n\n";
 			
 			$texto.= "Tarjeta: ". $registro['tarjeta']."\n\n";
-			$texto.= "Fecha Cuenta: ".$registro['fecha_viaje']."\n\n";
-			$texto.= "Recaudacion:  ". $registro['recaudaciones_nombre']."\n\n";
+			$texto.= "F.C.: ".$registro['fecha_viaje']."\n\n";
+			$texto.= "RD:  ". $registro['recaudaciones_nombre']."\n\n";
 			
-			$texto.=chr(27).'!'.chr(40)."TAQUILLERO: ".$registro['usuarios_nombre']."\n\n";
+			$texto.=chr(27).'!'.chr(40)."Taquillero: ".$registro['usuarios_nombre']."\n\n";
 			
 			$texto.=chr(27).'!'.chr(40)."NUM ECO: ".$registro['no_eco']."\n\n";
 			
 			$texto.=chr(27).'!'.chr(20)."(".$registro['operador'].')'.$registro['operadores_nombre']."\n\n";
 			
-			$texto.=chr(27).'!'.chr(40)."Total Recaudado: $".number_format($registro['monto'],2)."\n\n";
+			$texto.=chr(27).'!'.chr(40)."Utilidad: $".number_format($registro['utilidad'],2)."\n\n";
 			$texto.= "VA"; // Cut
 			
 			

@@ -27,6 +27,18 @@
 			background: url('../img/cargando.gif') no-repeat right center;
 			}
 			
+			/* Chrome, Safari, Edge, Opera */
+			input::-webkit-outer-spin-button,
+			input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+			}
+			
+			/* Firefox */
+			input[type=number] {
+			-moz-appearance: textfield;
+			}
+			
 		</style>
 		
 		
@@ -42,7 +54,7 @@
 			// echo "<pre>";
 			// print var_dump($_SESSION);
 			// echo "<pre>";
-			?>
+		?>
 		
 		
 		<?php include("../navbar.php")?>
@@ -244,12 +256,11 @@
 										</td >
 									</tr>
 									<tr >
-										<td class="text-left">
-											<label for="">Observaciones: </label>
+										<td colspan="3">
+											<label>Observaciones:</label> <br>
+											<textarea rows="5" cols="40" id="observaciones"  name="observaciones"></textarea >
 										</td >
-										<td >
-											<input type="text" name="observaciones" id="observaciones" value="" >
-										</td >
+										
 									</tr>
 									
 									<tfoot>

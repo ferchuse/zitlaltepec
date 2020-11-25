@@ -792,7 +792,16 @@
 					<tr><td><table class="cmenu'.$k.'" style="display:none">';
 					while($ro=mysql_fetch_array($rs)) {
 						
-						IF($ro['link'] == "monitoreo.php"){
+						
+						
+						
+						IF($ro['link'] == "recaudacion.php" ){
+							
+							echo "<tr><td><a href='recaudacion/index.php' >-{$ro['nombre']}</a></td></tr>";
+							
+							
+						}
+						elseIF($ro['link'] == "monitoreo.php"  ){
 							
 							echo "<tr><td><a href='monitoreo/index.php' >-{$ro['nombre']}</a></td></tr>";
 							
@@ -814,20 +823,20 @@
 							{document.forma.cvemenu.value='.$ro['cve'].';atcr(\''.$ro['link'].'\',\''.$ro['target'].'\',\'0\',\'\');}
 							}
 							}
-							">-'.$ro['nombre'].'</a></td></tr>';
-							if($_POST['cvemenu']==$ro['cve'])
-							$mostrar='cmenu'.$k;
+						">-'.$ro['nombre'].'</a></td></tr>';
+						if($_POST['cvemenu']==$ro['cve'])
+						$mostrar='cmenu'.$k;
 						}
 					}
-					echo '</table></td></tr>';
-				}
+				echo '</table></td></tr>';
 			}
 		}
-		
-		echo '</table>';
-		if($mostrar!='') {
-			echo '<script language="javascript">$(\'.'.$mostrar.'\').show();'.substr($mostrar,1).'++;</script>';
-		}
+	}
+	
+	echo '</table>';
+	if($mostrar!='') {
+		echo '<script language="javascript">$(\'.'.$mostrar.'\').show();'.substr($mostrar,1).'++;</script>';
+	}
 	}
 	
 	function menunavegacion() {
