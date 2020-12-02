@@ -159,6 +159,14 @@
 									</tr>
 									<tr >
 										<td class="text-left">
+											<label for="">Importe de B. Tijera: </label>
+										</td >
+										<td >
+											<input type="number" name="boletos_tijera" id="boletos_tijera" value="" >
+										</td >
+									</tr>
+									<tr >
+										<td class="text-left">
 											<label for="">Mutualidad: </label>
 										</td >
 										<td >
@@ -253,6 +261,14 @@
 										</td >
 										<td >
 											<input type="number" name="deuda_operador" id="deuda_operador" value="" >
+										</td >
+									</tr>
+									<tr >
+										<td class="text-left">
+											<label for="">Devolución Excedente: </label>
+										</td >
+										<td >
+											<input type="number" name="devolucion" id="devolucion" value="" >
 										</td >
 									</tr>
 									<tr >

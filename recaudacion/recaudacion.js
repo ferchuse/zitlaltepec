@@ -26,7 +26,8 @@ $(document).ready(function(){
 	$("#btn_seguridad, #btn_mutualidad, #btn_fianza, #btn_tag").click(cobrarCargo);
 	
 	
-	$('#efectivo_pagado').on('keyup', calcularDeuda);
+	$('#efectivo_pagado').on('keyup', calcularExcedente);
+	$('#boletos_tijera').on('keyup', calcularEfectivo);
 	
 	
 	$('#fecha_tarjetas').on('change', buscarFecha);
@@ -378,6 +379,7 @@ function calcularEfectivo(){
 	let vale_dinero = Number($("#vale_dinero").val());
 	let importe_con_guia = Number($("#importe_con_guia").val());
 	let importe_sin_guia = Number($("#importe_sin_guia").val());
+	let boletos_tijera = Number($("#boletos_tijera").val());
 	let fianza = Number($("#fianza").val());
 	let mutualidad = Number($("#mutualidad").val());
 	let seguridad = Number($("#seguridad").val());
@@ -391,7 +393,7 @@ function calcularEfectivo(){
 	// console.log("seguridad" , seguridad);
 	
 	
-	let efectivo_entregar = utilidad + fianza + mutualidad + seguridad + tag - vale_dinero - importe_con_guia - importe_sin_guia ;
+	let efectivo_entregar = utilidad + fianza + mutualidad + seguridad + tag - vale_dinero - importe_con_guia - importe_sin_guia - boletos_tijera;
 	
 	// console.log("utilidad" , utilidad);
 	
@@ -399,8 +401,8 @@ function calcularEfectivo(){
 	
 }
 
-function calcularDeuda(){
-	console.log("calcularDeuda()")
+function calcularExcedente(){
+	console.log("calcularExcedente()")
 	
 	let efectivo_entregar = Number($("#efectivo_entregar").val());
 	let efectivo_pagado = Number($("#efectivo_pagado").val());
@@ -408,10 +410,10 @@ function calcularDeuda(){
 	
 	
 	
-	let deuda_operador = efectivo_entregar - efectivo_pagado ;
+	let devolucion = efectivo_entregar - efectivo_pagado ;
 	
 	
-	$("#deuda_operador").val(deuda_operador.toFixed(2));
+	$("#devolucion").val(devolucion.toFixed(2));
 	// $("#abono").val(abono.toFixed(2));
 	
 }
