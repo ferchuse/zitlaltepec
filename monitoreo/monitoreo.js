@@ -4,6 +4,7 @@ function onLoad(){
 	
 	
 	$("#form_monitoreo").submit(guardarMonitoreo);
+	$("#tipo_unidad").change(calcularUtilidad);
 	
 	$("#diesel, #casetas, #despachadores, #incentivo, #fianza").keyup(calcularUtilidad)
 	$("#row_vueltas").on("keyup", ".cant_origen, .cant_destino", sumarBoletos)
@@ -290,7 +291,15 @@ function calcularUtilidad(){
 	console.log("calcularUtilidad()");
 	let ingreso_bruto = Number($("#ingreso_bruto").val());
 	
-	comision = ingreso_bruto * .13;
+	if($("#tipo_unidad").val() == "AUTOBUS" ){
+		
+		comision = 400;
+	}
+	else{
+		
+		
+		comision = ingreso_bruto * .13;
+	}
 	
 	$("#comision").val(comision.toFixed(0));
 	
@@ -401,7 +410,6 @@ function sumarTotales(tabla){
 	
 	$("#ingreso_bruto").val(ingreso_bruto);
 	
-	// calculaComision();
 	
 	
 	calcularUtilidad();

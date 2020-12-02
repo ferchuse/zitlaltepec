@@ -109,6 +109,19 @@
 										<input type="number" name="vueltas" form="form_monitoreo" id="vueltas" value="2" min="1" max="7"> 
 									</td >
 								</tr>
+								<tr >
+									
+									<td class="text-left">
+										<label for="">Tipo de Unidad:</label>
+									</td >
+									<td >
+										<select id="tipo_unidad" >
+											
+											<option>AUTOBUS</option>
+											<option>CAMIONETA</option>
+										</select>
+									</td >
+								</tr>
 							</table>
 							
 							<hr>
