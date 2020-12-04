@@ -39,6 +39,7 @@
 		vueltas='{$_POST['vueltas']}',
 		monto_boletos='{$_POST['monto_boletos']}',
 		monto_efectivo='{$_POST['efectivo_pagado']}',
+		total_utilidad='{$_POST['utilidad']}',
 		recaudacion='{$_POST['recaudacion']}',
 		diesel='{$_POST['diesel']}',
 		comision='{$_POST['comision']}',

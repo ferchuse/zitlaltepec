@@ -17,7 +17,8 @@
 	tarjetas_unidad.cve AS tarjeta,
 	empresas.nombre as empresas_nombre,
 	usuarios.nombre as usuarios_nombre,
-	tarjetas_unidad.estatus AS tarjetas_estatus
+	tarjetas_unidad.estatus AS tarjetas_estatus,
+	recaudacion_autobus.estatus AS recaudacion_estatus
 	
 	FROM recaudacion_autobus
 	
@@ -82,10 +83,9 @@
 					?>
 					<tr>
 						<td class="text-center"> 
-							<?php if($fila["tarjetas_estatus"] != 'C'){
+							<?php if($fila["recaudacion_estatus"] != 'C'){
 								
-								$totales[0]+= $fila["monto"];
-								$totales[1]+= $fila["utilidad"];
+								$totales[0]+= $fila["utilidad"];
 								if(dame_permiso("recaudacion.php", $link) == '3'){ 
 								?>
 								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['recaudacion_autobus_cve']?>'>
@@ -101,7 +101,7 @@
 							<?php
 							}
 							else{
-								echo "<span class='badge badge-danger'>".$fila["tarjetas_estatus"]."<br>".$fila["datos_cancelacion"]."</span>";
+								echo "<span class='badge badge-danger'>".$fila["recaudacion_estatus"]."<br>".$fila["datos_cancelacion"]."</span>";
 							}
 							?>
 						</td>
@@ -113,7 +113,7 @@
 						<td><?php echo $fila["tarjeta"]?></td>
 						<td><?php echo $fila["empresas_nombre"]?></td>
 						<td><?php echo $fila["observaciones"]?></td>
-						<td>$<?php echo $fila["utilidad"]?></td>
+						<td>$<?php echo $fila["total_utilidad"]?></td>
 						<td><?php echo $fila["usuarios_nombre"]?></td>
 							
 					</tr>
@@ -123,6 +123,7 @@
 			</tbody>
 			<tfoot>
 				<tr>
+					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>

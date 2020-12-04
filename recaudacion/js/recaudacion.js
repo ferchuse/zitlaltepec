@@ -351,6 +351,7 @@ function buscarTarjeta(tarjeta){
 		$('#nombre_operador').val(respuesta.tarjeta.nombre_operador);
 		$('#no_eco').val(respuesta.tarjeta.no_eco);
 		$('#utilidad').val(respuesta.tarjeta.utilidad);
+		$('#utilidad_monitoreo').val(respuesta.tarjeta.utilidad);
 		$('#mutualidad').val(respuesta.tarjeta.mutualidad);
 		$('#seguridad').val(respuesta.tarjeta.seguridad);
 		$('#fianza').val(respuesta.tarjeta.fianza);
@@ -368,12 +369,8 @@ function buscarTarjeta(tarjeta){
 
 
 function calcularEfectivo(){
-	// console.log("calcularUtilidad()");
-	// let ingreso_bruto = Number($("#ingreso_bruto").val());
+	console.log("calcularEfectivo()");
 	
-	// comision = ingreso_bruto * .13;
-	
-	// $("#comision").val(comision.toFixed(2));
 	
 	let utilidad = Number($("#utilidad").val());
 	let vale_dinero = Number($("#vale_dinero").val());
@@ -385,17 +382,9 @@ function calcularEfectivo(){
 	let seguridad = Number($("#seguridad").val());
 	let tag = Number($("#tag").val());
 	
-	// console.log("vale_dinero" , vale_dinero);
-	// console.log("importe_con_guia" , importe_con_guia);
-	// console.log("importe_sin_guia" , vale_dinero);
-	// console.log("fianza" , fianza);
-	// console.log("mutualidad" , mutualidad);
-	// console.log("seguridad" , seguridad);
-	
 	
 	let efectivo_entregar = utilidad + fianza + mutualidad + seguridad + tag - vale_dinero - importe_con_guia - importe_sin_guia - boletos_tijera;
 	
-	// console.log("utilidad" , utilidad);
 	
 	$("#efectivo_entregar").val(efectivo_entregar.toFixed(2));
 	
@@ -406,14 +395,26 @@ function calcularExcedente(){
 	
 	let efectivo_entregar = Number($("#efectivo_entregar").val());
 	let efectivo_pagado = Number($("#efectivo_pagado").val());
+	let deuda_operador = efectivo_entregar - efectivo_pagado;
+	let utilidad_monitoreo =  Number($("#utilidad_monitoreo").val());
 	
 	
 	
+	if(deuda_operador > 0){
+		
+		$("#deuda_operador").val(deuda_operador.toFixed(2));
+		$("#devolucion").val(0);
+		$("#utilidad").val(utilidad_monitoreo);
+	}
+	else{
+		utilidad = utilidad_monitoreo - Math.abs(deuda_operador.toFixed(2));
+		$("#deuda_operador").val(0);
+		$("#devolucion").val(Math.abs(deuda_operador.toFixed(2)));
+		$("#utilidad").val(utilidad.toFixed(2) );
+		
+	}
 	
-	let devolucion = efectivo_entregar - efectivo_pagado ;
 	
-	
-	$("#devolucion").val(devolucion.toFixed(2));
 	// $("#abono").val(abono.toFixed(2));
 	
 }

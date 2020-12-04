@@ -111,6 +111,8 @@
 										</td >
 										<td >
 											<input type="number" name="utilidad" id="utilidad" readonly value="">
+											<input type="hidden" name="utilidad_monitoreo" id="utilidad_monitoreo" readonly value="">
+											
 										</td >
 									</tr>
 									<tr >
@@ -310,7 +312,7 @@
 		<?php include_once("../scripts.php");?>
 		
 		<script src="../plugins/pos_print/websocket-printer.js" > </script>
-		<script src="recaudacion.js?v=<?= date("Ymdis")?>"></script>
+		<script src="js/recaudacion.js?v=<?= date("Ymdis")?>"></script>
 		<script src="js/boletos.js?v=<?= date("Ymdis")?>"></script>
 		
 		

@@ -143,11 +143,11 @@
 			
 			
 			});
-		});
-		
-		var printService = new WebSocketPrinter();
-		
-		function imprimirTicket(folio){
+			});
+			
+			var printService = new WebSocketPrinter();
+			
+			function imprimirTicket(folio){
 			console.log("imprimirAbono()");
 			
 			
@@ -156,38 +156,38 @@
 			// icono.toggleClass("fa-print fa-spinner fa-spin");
 			
 			$.ajax({
-				url: "imprimir_abono.php",
-				data:{
-					folio : folio
-				}
-				}).done(function (respuesta){
-				
-				$.ajax({
-					url: "http://localhost/impresiongenerallogo.php",
-					method: "GET",
-					data:{
-						"textoimp" : atob(respuesta) + atob(respuesta)
-					}
-				});
-				
-				
-				
-				printService.submit({
-					'type': 'LABEL',
-					'raw_content': respuesta
-				});
-				
-				
-				
-				}).always(function(){
-				
-				// boton.prop("disabled", false);
-				// icono.toggleClass("fa-print fa-spinner fa-spin");
-				
+			url: "imprimir_abono.php",
+			data:{
+			folio : folio
+			}
+			}).done(function (respuesta){
+			
+			$.ajax({
+			url: "http://localhost/impresiongenerallogo.php",
+			method: "GET",
+			data:{
+			"textoimp" : atob(respuesta) + atob(respuesta)
+			}
 			});
-		}
-		
-		function listarRegistros(){
+			
+			
+			
+			printService.submit({
+			'type': 'LABEL',
+			'raw_content': respuesta
+			});
+			
+			
+			
+			}).always(function(){
+			
+			// boton.prop("disabled", false);
+			// icono.toggleClass("fa-print fa-spinner fa-spin");
+			
+			});
+			}
+			
+			function listarRegistros(){
 			console.log("listarRegistros()");
 			
 			let form = $("#form_filtro");
@@ -198,29 +198,87 @@
 			icono.toggleClass('fa-search fa-spinner fa-pulse ');
 			
 			return $.ajax({
-				url: 'consultas/lista_recaudacion.php',
-				data: $("#form_filtro").serialize()
-				}).done(function(respuesta){
-				
-				$("#tabla_registros").html(respuesta)
-				
-				$(".imprimir").click(function(){
-				imprimirTicket($(this).data("id_registro"))
-				});
-				
-				// $(".cancelar").click(confirmaCancelacion);
-				
-				// $("#check_all").change(checkAll);
-				
-				// $(".seleccionar").change(contarSeleccionados)
-				
-				}).always(function(){  
-				
-				boton.prop('disabled',false);
-				icono.toggleClass('fa-search fa-spinner fa-pulse fa-fw');
-				
+			url: 'consultas/lista_recaudacion.php',
+			data: $("#form_filtro").serialize()
+			}).done(function(respuesta){
+			
+			$("#tabla_registros").html(respuesta)
+			
+			$(".imprimir").click(function(){
+			imprimirTicket($(this).data("id_registro"))
+			});
+			
+			$(".cancelar").click(confirmaCancelacion);
+			
+			// $("#check_all").change(checkAll);
+			
+			// $(".seleccionar").change(contarSeleccionados)
+			
+			}).always(function(){  
+			
+			boton.prop('disabled',false);
+			icono.toggleClass('fa-search fa-spinner fa-pulse fa-fw');
+			
 			});
 		}
+		
+		
+		function confirmaCancelacion(event){
+			console.log("confirmaCancelacion()");
+			let boton = $(this);
+			let icono = boton.find(".fas");
+			var id_registro = $(this).data("id_registro");
+			
+			
+			alertify.confirm()
+			.setting({
+				'reverseButtons': true,
+				'labels' :{ok:"SI", cancel:'NO'},
+				'title': "Cancelar" ,
+				'onok':cancelarRegistro
+			}).show();
+			
+			
+			
+			
+			function cancelarRegistro(evt, motivo){
+				if(motivo == ''){
+					console.log("Escribe un motivo");
+					alertify.error("Escribe un motivo");
+					return false;
+					
+				}
+				
+				boton.prop("disabled", true);
+				icono.toggleClass("fa-times fa-spinner fa-spin");
+				
+				
+				return $.ajax({
+					url: "control/cancelar_abono.php",
+					dataType:"JSON",
+					data:{
+						id_registro : id_registro,
+						nombre_usuarios : $("#sesion_nombre_usuarios").text(),
+						motivo : motivo
+					}
+					}).done(function (respuesta){
+					if(respuesta.result == "success"){
+						alertify.success("Cancelado");
+						listarRegistros();
+					}
+					else{
+						alertify.error(respuesta.result);
+						
+					}
+					
+					}).always(function(){
+					boton.prop("disabled", false);
+					icono.toggleClass("fa-times fa-spinner fa-spin");
+					
+				});
+			}
+		}
+		
 		
 		
 	</script>

@@ -65,6 +65,7 @@
 				<th>Tarjeta</th>
 				<th>Monto</th>
 				<th>Vueltas</th>
+				<th>Observaciones</th>
 				
 			</thead>
 			<tbody id="tabla_DB">
@@ -106,6 +107,7 @@
 						<td><?php echo $fila["tarjeta"]?></td>
 						<td>$<?php echo number_format($fila["utilidad"])?></td>
 						<td><?php echo $fila["vueltas"]?></td>
+						<td><?php echo $fila["observaciones"]?></td>
 						
 					</tr>
 					<?php
