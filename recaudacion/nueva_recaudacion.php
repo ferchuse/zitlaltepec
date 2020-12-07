@@ -262,7 +262,7 @@
 											<label for="">Deuda Operador: </label>
 										</td >
 										<td >
-											<input type="number" name="deuda_operador" id="deuda_operador" value="" >
+											<input readonly type="number" name="deuda_operador" id="deuda_operador" value="" >
 										</td >
 									</tr>
 									<tr >

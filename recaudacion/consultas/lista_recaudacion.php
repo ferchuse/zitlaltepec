@@ -112,7 +112,7 @@
 						<td><?php echo $fila["operadores_nombre"]?></td>
 						<td><?php echo $fila["tarjeta"]?></td>
 						<td><?php echo $fila["empresas_nombre"]?></td>
-						<td><?php echo $fila["observaciones"]?></td>
+						<td><?php echo $fila["obs"]?></td>
 						<td>$<?php echo $fila["total_utilidad"]?></td>
 						<td><?php echo $fila["usuarios_nombre"]?></td>
 							

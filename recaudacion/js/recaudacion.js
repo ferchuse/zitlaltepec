@@ -27,6 +27,7 @@ $(document).ready(function(){
 	
 	
 	$('#efectivo_pagado').on('keyup', calcularExcedente);
+	$('#devolucion').on('keyup', calcularExcedente);
 	$('#boletos_tijera').on('keyup', calcularEfectivo);
 	
 	
@@ -395,24 +396,32 @@ function calcularExcedente(){
 	
 	let efectivo_entregar = Number($("#efectivo_entregar").val());
 	let efectivo_pagado = Number($("#efectivo_pagado").val());
-	let deuda_operador = efectivo_entregar - efectivo_pagado;
+	let devolucion = Number($("#devolucion").val());
+	let deuda_operador = efectivo_entregar - efectivo_pagado ;
+	
 	let utilidad_monitoreo =  Number($("#utilidad_monitoreo").val());
 	
 	
+	utilidad = utilidad_monitoreo - devolucion;
 	
-	if(deuda_operador > 0){
-		
-		$("#deuda_operador").val(deuda_operador.toFixed(2));
-		$("#devolucion").val(0);
-		$("#utilidad").val(utilidad_monitoreo);
-	}
-	else{
-		utilidad = utilidad_monitoreo - Math.abs(deuda_operador.toFixed(2));
-		$("#deuda_operador").val(0);
-		$("#devolucion").val(Math.abs(deuda_operador.toFixed(2)));
-		$("#utilidad").val(utilidad.toFixed(2) );
-		
-	}
+	$("#utilidad").val(utilidad.toFixed(2) );
+	
+	$("#deuda_operador").val(deuda_operador.toFixed(2));
+	
+	
+	// if(deuda_operador > 0){
+	
+	// $("#deuda_operador").val(deuda_operador.toFixed(2));
+	// $("#devolucion").val(0);
+	// $("#utilidad").val(utilidad_monitoreo);
+	// }
+	// else{
+	
+	// $("#deuda_operador").val(0);
+	// $("#devolucion").val(Math.abs(deuda_operador.toFixed(2)));
+	// $("#utilidad").val(utilidad.toFixed(2) );
+	
+	// }
 	
 	
 	// $("#abono").val(abono.toFixed(2));
