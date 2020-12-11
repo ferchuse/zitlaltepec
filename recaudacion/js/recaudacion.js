@@ -243,7 +243,7 @@ function imprimirAbono(folio){
 			url: "http://localhost/impresiongenerallogo.php",
 			method: "GET",
 			data:{
-				"textoimp" : atob(respuesta) + atob(respuesta)
+				"textoimp" : atob(respuesta) 
 			}
 		});
 		
