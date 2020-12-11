@@ -19,8 +19,7 @@
 	
 	
 	$result = mysqli_query($link,$consulta);
-	if($result){
-		
+	if($result){	
 		if( mysqli_num_rows($result) == 0){
 			
 			die("<div class='alert alert-danger'>Registro no encontrado</div>");
@@ -34,25 +33,34 @@
 			
 		}
 		
+		$copias = ["original" , "copia"];
+		$texto = "";
 		
+		foreach($copias as $copia){
+			
+			
+			
+			$texto.="@";
+			$texto.=chr(27).'!'.chr(40)."  ".$_GET['tabla']."\n\n";
+			
+			$texto.=chr(27).'!'.chr(40)."FOLIO: ".$registro['folio']."\n\n";
+			
+			$texto.= $registro['fecha']." ".$registro['hora']."\n\n";
+			
+			$texto.=chr(27).'!'.chr(40)."TAQUILLERO: ".$registro['usuarios_nombre']."\n\n";
+			
+			$texto.=chr(27).'!'.chr(40)."NUM ECO: ".$registro['no_eco']."\n\n";
+			
+			$texto.=chr(27).'!'.chr(20)."(".$registro['operador'].')'.$registro['operadores_nombre']."\n\n";
+			
+			$texto.=chr(27).'!'.chr(40)."MONTO: ".number_format($registro['monto'],2)."\n\n";
+			
+			if($copia == "original"){
+				$texto.= "VA"; // Cut
+				
+			}
+		}
 		
-		$texto ="@";
-		$texto.=chr(27).'!'.chr(40)."  ".$_GET['tabla']."\n\n";
-	
-		$texto.=chr(27).'!'.chr(40)."FOLIO: ".$registro['folio']."\n\n";
-	
-		$texto.= $registro['fecha']." ".$registro['hora']."\n\n";
-		
-		$texto.=chr(27).'!'.chr(40)."TAQUILLERO: ".$registro['usuarios_nombre']."\n\n";
-		
-		$texto.=chr(27).'!'.chr(40)."NUM ECO: ".$registro['no_eco']."\n\n";
-	
-		$texto.=chr(27).'!'.chr(20)."(".$registro['operador'].')'.$registro['operadores_nombre']."\n\n";
-		
-		$texto.=chr(27).'!'.chr(40)."MONTO: ".number_format($registro['monto'],2)."\n\n";
-		$texto.= "VA"; // Cut
-		
-	
 		
 		echo base64_encode ( $texto );
 		exit(0);
