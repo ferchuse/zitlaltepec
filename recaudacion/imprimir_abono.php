@@ -57,8 +57,9 @@
 			
 			$texto.=chr(27).'!'.chr(20)."(".$registro['operador'].')'.$registro['operadores_nombre']."\n\n";
 			
-			$texto.=chr(27).'!'.chr(40)."Utilidad: $".number_format($registro['total_utilidad'],2)."\n\n";
+			$texto.=chr(27).'!'.chr(40)."Utilidad: $".number_format($registro['total_utilidad'],2);
 			if($i == 1){ // Cortar Primer Ticket
+				$texto.="\n\n";
 				$texto.= "VA"; // Cut
 				
 			}
