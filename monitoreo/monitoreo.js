@@ -77,6 +77,7 @@ function renderVueltas(){
 		<option>SAUCES</option>
 		<option>GUARDIA</option>
 		<option>SAN BARTOLO</option>
+		<option>PASEOS INTERIOR</option>
 		<option>I.V.</option>
 		</select>
 		</td >
@@ -88,6 +89,7 @@ function renderVueltas(){
 		<option>SAUCES</option>
 		<option>GUARDIA</option>
 		<option>SAN BARTOLO</option>
+		<option>PASEOS INTERIOR</option>
 		<option>I.V.</option>
 		</select>
 		</td >
