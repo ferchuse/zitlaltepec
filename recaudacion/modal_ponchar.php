@@ -18,25 +18,27 @@
 					<input type="number" class="form-control" id="boleto" name="boleto"  required>
 				</div>
 				
-				
-				<table  id="tablaboletossencillos" class="table-bordered table-condensed">
-					<thead>
-						
-						<tr bgcolor="#E9F2F8">
+				<form id="form_boletos">
+					<table  id="tablaboletossencillos" class="table-bordered table-condensed">
+						<thead>
 							
-							<th></th>
-							<th>Taquilla</th>
-							<th>Folio</th>
-							<th>Fecha</th>
-							<th>Hora</th>
-							<th>Boleto</th>
-							<th>Costo</th>
-						</tr>
-					</thead>
-					
-					
-				</table>
-				
+							<tr bgcolor="#E9F2F8">
+								
+								<th></th>
+								<th>Taquilla</th>
+								<th>Folio</th>
+								<th>Fecha</th>
+								<th>Hora</th>
+								<th>Boleto</th>
+								<th>Costo</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+						
+						
+					</table>
+				</form>
 				
 			</div>
 			<!-- Modal footer -->
@@ -48,3 +50,4 @@
 		</div>
 	</div>
 </div>
+

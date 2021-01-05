@@ -73,9 +73,9 @@
 		$result = mysqli_query($link,$consulta);
 		if($result){
 			
+			$folio_recaudacion = mysqli_insert_id($link);
 			
-			
-			$respuesta["folio"] = mysqli_insert_id($link);
+			$respuesta["folio"] = $folio_recaudacion;
 			$respuesta["estatus"] = "success";
 			$respuesta["mensaje"] = "Guardado";
 			
@@ -110,33 +110,105 @@
 		$respuesta["mensaje_update"] = "Error en ".$update.mysqli_Error($link);
 	}
 	
+	
+	
 	//Actualiza Guias
+	$update_guia = 
+	"UPDATE guia
+	SET folio_recaudacion='$folio_recaudacion',
+	fecha_recaudacion = CURDATE()
+	WHERE taquilla > 0 
+	AND unidad='{$fila['unidad']}' AND folio_recaudacion=0";
+	
+	$respuesta["guia_update"] = $update_guia;
+	
+	$result_guia = mysqli_query($link,$update_guia);
+	if($result_update){
+		$respuesta["guia_estatus"] = "success";
+		$respuesta["guia_mensaje"] = "Guia Actualizada";	
+	}
+	else {
+		$respuesta["guia_estatus"] = "error";
+		$respuesta["guia_mensaje"] = mysqli_Error($link);
+	}
 	
 	
-	//Actualisa Vales de Dinero
+	//Actualiza Vales de Dinero
+	$update_vales = 
+	"UPDATE vale_dinero
+	SET
+	recaudacion='$folio_recaudacion',
+	fecha_recaudacion=CURDATE() 
+	WHERE estatus!='C' AND recaudacion=0 AND unidad='{$fila['unidad']}' ";
 	
+	$respuesta["vales_update"] = "success";
 	
-	//Actualisa Boletos Sencillos
+	$result_vales = mysqli_query($link,$update_vales);
 	
+	if($result_vales){
+		$respuesta["vales_estatus"] = "success";
+		$respuesta["vales_mensaje"] = "Vales Actualizados";	
+	}
+	else {
+		$respuesta["vales_estatus"] = "error";
+		$respuesta["vales_mensaje"] = mysqli_Error($link);
+	}
+	
+	//Actualiza Boletos Sencillos
+	
+	foreach($_POST["folio_boleto"] as $i => $folio_boleto){
+		
+		$update_boletos_sencillos = 
+		"UPDATE boletos_sencillos
+		SET
+		folio_recaudacion='$folio_recaudacion',
+		fecha_recaudacion=CURDATE() ,
+		tipo_recaudacion = 1
+		WHERE 
+		taquilla ='{$_POST["taquilla"][$i]}' 
+		AND folio ='{$folio_boleto}' 
+		
+		";
+		
+		$respuesta["boletos_sencillos_update"][] = $update_boletos_sencillos;
+		
+		$result_boletos_sencillos = mysqli_query($link,$update_boletos_sencillos);
+		
+		if($result_boletos_sencillos){
+			$respuesta["boletos_sencillos_estatus"] = "success";
+			$respuesta["boletos_sencillos_mensaje"] = "boletos_sencillos Actualizados";	
+		}
+		else {
+			$respuesta["boletos_sencillos_estatus"] = "error";
+			$respuesta["boletos_sencillos_mensaje"] = mysqli_Error($link);
+		}
+		
+		
+	}
 	/*
-	
-	foreach($_POST['guias'] as $guia){
-			$datos = explode("_",$guia);
-			mysql_query("UPDATE guia SET folio_recaudacion='".$cverecaudacion."',fecha_recaudacion='".$_POST['fecha']."' WHERE taquilla='".$datos[0]."' AND folio='".$datos[1]."'");
-			mysql_query("UPDATE boletos SET folio_recaudacion='".$cverecaudacion."',fecha_recaudacion='".$_POST['fecha']."' WHERE taquilla='".$datos[0]."' AND guia='".$datos[1]."'");
+		
+		foreach($_POST['guias'] as $guia){
+		$datos = explode("_",$guia);
+		mysql_query("UPDATE guia SET folio_recaudacion='".$cverecaudacion."',fecha_recaudacion='".$_POST['fecha']."' WHERE taquilla='".$datos[0]."' AND folio='".$datos[1]."'");
+		mysql_query("UPDATE boletos SET folio_recaudacion='".$cverecaudacion."',fecha_recaudacion='".$_POST['fecha']."' WHERE taquilla='".$datos[0]."' AND guia='".$datos[1]."'");
 		}
 		if($_POST['cant_taqmovil'] > 0){
-			mysql_query("UPDATE boletos_taquillamovil SET folio_recaudacion='".$cverecaudacion."',fecha_recaudacion='".fechaLocal()."' WHERE unidad='".$_POST['unidad']."' AND folio_recaudacion='0' AND estatus!='C' ORDER BY cve LIMIT ".intval($_POST['cant_taqmovil']));
+		mysql_query("UPDATE boletos_taquillamovil SET folio_recaudacion='".$cverecaudacion."',fecha_recaudacion='".fechaLocal()."' WHERE unidad='".$_POST['unidad']."' AND folio_recaudacion='0' AND estatus!='C' ORDER BY cve LIMIT ".intval($_POST['cant_taqmovil']));
 		}
 		if($_POST['cant_abonomovil'] > 0){
-			mysql_query("UPDATE abono_unidad_taquillamovil SET folio_recaudacion='".$cverecaudacion."',fecha_recaudacion='".fechaLocal()."' WHERE unidad='".$_POST['unidad']."' AND folio_recaudacion='0' AND estatus!='C' ORDER BY cve LIMIT ".intval($_POST['cant_abonomovil']));
+		mysql_query("UPDATE abono_unidad_taquillamovil SET folio_recaudacion='".$cverecaudacion."',fecha_recaudacion='".fechaLocal()."' WHERE unidad='".$_POST['unidad']."' AND folio_recaudacion='0' AND estatus!='C' ORDER BY cve LIMIT ".intval($_POST['cant_abonomovil']));
 		}
-		$boletos = json_decode($_POST['boletossencillos'], true);
+		$boletos = json_decode($_POST['boletossencillos'], true)
+		
+		
+		;
 		foreach($boletos as $boleto){
-			mysql_query("UPDATE boletos_sencillos SET folio_recaudacion='$cverecaudacion', fecha_recaudacion='".fechaLocal()."', tipo_recaudacion=1 WHERE taquilla = '".$boleto['taquilla']."' AND folio='".$boleto['folio']."'");
+		mysql_query("UPDATE boletos_sencillos SET folio_recaudacion='$cverecaudacion', fecha_recaudacion='".fechaLocal()."', tipo_recaudacion=1 WHERE taquilla = '".$boleto['taquilla']."' AND folio='".$boleto['folio']."'");
 		}
+		
+		
 		foreach($_POST['vales_dinero'] as $vale){
-			mysql_query("UPDATE vale_dinero SET recaudacion='".$cverecaudacion."',fecha_recaudacion='".$_POST['fecha']."' WHERE cve='".$vale."'");
+		mysql_query("UPDATE vale_dinero SET recaudacion='".$cverecaudacion."',fecha_recaudacion='".$_POST['fecha']."' WHERE cve='".$vale."'");
 		}
 	*/
 	

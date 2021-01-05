@@ -194,6 +194,7 @@ function guardarRecaudacion(event){
 	var boton = form.find(":submit");
 	var icono = boton.find('.fas');
 	var datos = form.serialize();
+	datos += "&"+ $("#form_boletos").serialize()
 	
 	boton.prop('disabled',true);
 	icono.toggleClass('fa-save fa-spinner fa-pulse ');
@@ -348,6 +349,9 @@ function buscarTarjeta(tarjeta){
 			return false;
 		}
 		
+		$('#guias').html(respuesta.tabla_guias);
+		$('#importe_con_guia').val(respuesta.importe_con_guia);
+		$('#vale_dinero').val(respuesta.vale_dinero);
 		$('#fecha_viaje').val(respuesta.tarjeta.fecha_viaje);
 		$('#nombre_operador').val(respuesta.tarjeta.nombre_operador);
 		$('#no_eco').val(respuesta.tarjeta.no_eco);

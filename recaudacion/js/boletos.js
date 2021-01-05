@@ -2,6 +2,21 @@
 $(document).ready( onLoad);
 
 
+//boletos
+
+/*
+	
+	1038609010
+	
+	
+	90100100058963
+	90100100058964
+	90100100058965
+	90100100058966
+	90100100058967
+*/
+
+
 
 
 function onLoad(){
@@ -12,30 +27,22 @@ function onLoad(){
 			agregarBoletoSencillo();
 		}
 	})
+	
+	$("#tablaboletossencillos").on("click", ".btn_borrar", borrarBoleto);
+	$("#form_boletos").on("submit", function(event){
+		event.preventDefault();
+	});
 }
 
 
 
-// $("#dialogboletossencillos").dialog({ 
-// bgiframe: true,
-// autoOpen: false,
-// modal: true,
-// width: 600,
-// height: 400,
-// autoResize: true,
-// position: "center",
-// beforeClose: function( event, ui ) {
-// calcular();
-// },
-// buttons: {
-// "Cerrar": function(){ 
-// $(this).dialog("close"); 
-// }
-// },
-// }); 
-
 function poncharsencillos(){
 	$("#dialogboletossencillos").dialog("open");
+}
+
+function borrarBoleto(){
+	$(this).closest("tr").remove();
+	sumarBoletos();
 }
 
 
@@ -55,15 +62,12 @@ function agregarBoletoSencillo(){
 			alert(data.mensaje);
 		}
 		else{
+			
 			$("#tablaboletossencillos").append(data.html);
 		}
+		$("#boleto").val("")
 		
-		
-		// document.getElementById(\'capturadosencillo\').value = 0;
-		// document.getElementById(\'boletosencillo\').value = "";
-		// document.getElementById(\'boletosencillo\').focus();
-		// calcularboletosencillo();
-		
+		sumarBoletos();
 	});
 	
 	
@@ -71,8 +75,16 @@ function agregarBoletoSencillo(){
 
 
 function sumarBoletos(){
+	var total_boletos  = 0 ;
+	var cant_boletos = 0 ;
+	$("#tablaboletossencillos tbody tr").each(function(index, item){
+		total_boletos += Number($(this).find(".monto").text());
+		cant_boletos ++ ;
+		
+	});
 	
-	$("#tablaboletossencillos bo")
+	$("#importe_sin_guia").val(total_boletos);
+	$("#cant_boletos").val(cant_boletos);
 	
 }
 

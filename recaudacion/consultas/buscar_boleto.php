@@ -33,6 +33,8 @@
 		AND folio='$folio'";
 	
 	
+	$resultado['buscar_boleto'] = $buscar_boleto;
+	
 	$res = mysqli_query($link, $buscar_boleto);
 	if($row = mysqli_fetch_array($res)){
 		if($row['folio_recaudacion'] > 0){
@@ -50,7 +52,9 @@
 		else{
 			// $resultado['html'] .= rowb(false);
 			$resultado['html'] .= '<tr><td align="center">';
-			$resultado['html'] .= '<button class="btn btn-danger btn-sm aboletos  data-taquilla="'.$row['taquilla'].'" data-folio="'.$row['folio'].'" data-monto="'.$row['monto'].'" title="Quitar">
+			$resultado['html'] .= "<input type='hidden'  name='taquilla[]' value='{$row['taquilla']}'>";
+			$resultado['html'] .= "<input type='hidden' name='folio_boleto[]' value='{$row['folio']}'>";
+			$resultado['html'] .= '<button class="btn btn-danger btn-sm btn_borrar   data-taquilla="'.$row['taquilla'].'" data-folio="'.$row['folio'].'" data-monto="'.$row['monto'].'" title="Quitar">
 			<i class="fas fa-trash"></i> 
 			</button>';
 			$resultado['html'] .= '</td>';
@@ -59,7 +63,7 @@
 			$resultado['html'] .= '<td align="center">'.$row['fecha'].'</td>';
 			$resultado['html'] .= '<td align="center">'.$row['hora'].'</td>';
 			$resultado['html'] .= '<td align="center">'.utf8_encode($array_costo[$row['costo']]).'</td>';
-			$resultado['html'] .= '<td align="right">'.number_format($row['monto'],2).'</td>';
+			$resultado['html'] .= '<td align="right" class="monto">'.number_format($row['monto'],2).'</td>';
 			$resultado['html'] .= '</tr>';
 		}
 	}

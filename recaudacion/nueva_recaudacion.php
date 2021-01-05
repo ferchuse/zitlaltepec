@@ -137,6 +137,8 @@
 											<label for="">Importe Boletos con Guia: </label>
 										</td >
 										<td >
+											<div id="guias">
+											</div>
 											<input type="number" name="importe_con_guia" id="importe_con_guia" value="" readonly>
 										</td >
 									</tr>
