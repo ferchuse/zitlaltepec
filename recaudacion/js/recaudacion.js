@@ -357,8 +357,8 @@ function buscarTarjeta(tarjeta){
 		$('#no_eco').val(respuesta.tarjeta.no_eco);
 		$('#utilidad').val(respuesta.tarjeta.utilidad);
 		$('#utilidad_monitoreo').val(respuesta.tarjeta.utilidad);
-		$('#mutualidad').val(respuesta.tarjeta.mutualidad);
-		$('#seguridad').val(respuesta.tarjeta.seguridad);
+		// $('#mutualidad').val(respuesta.tarjeta.mutualidad);
+		// $('#seguridad').val(respuesta.tarjeta.seguridad);
 		$('#fianza').val(respuesta.tarjeta.fianza);
 		$('#tag').val(respuesta.tarjeta.tag);
 		
