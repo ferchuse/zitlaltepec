@@ -189,7 +189,7 @@
 											Mutualidad
 										</td >
 										<td >
-											<input  type="number" id="mutualidad" name="mutualidad" value="20">
+											<input  type="number" id="mutualidad" name="mutualidad" value="">
 											
 										</td >
 									</tr>
@@ -199,7 +199,7 @@
 											Seguridad
 										</td >
 										<td >
-											<input   type="number" id="seguridad" name="seguridad" value="20">
+											<input   type="number" id="seguridad" name="seguridad" value="">
 											
 										</td >
 									</tr>
