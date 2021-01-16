@@ -6,7 +6,7 @@ function onLoad(){
 	$("#form_monitoreo").submit(guardarMonitoreo);
 	$("#tipo_unidad").change(calcularUtilidad);
 	
-	$("#diesel, #casetas, #despachadores, #incentivo, #fianza").keyup(calcularUtilidad)
+	$("#diesel, #casetas, #despachadores, #incentivo, #fianza, #mutualidad, #fianza, #seguridad").keyup(calcularUtilidad)
 	$("#row_vueltas").on("keyup", ".cant_origen, .cant_destino", sumarBoletos)
 	$("#row_vueltas").on("change", ".cant_origen, .cant_destino", sumarBoletos)
 	$("#row_vueltas").on("keydown", "input", cursorPress)

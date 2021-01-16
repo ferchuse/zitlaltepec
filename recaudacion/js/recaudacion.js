@@ -406,9 +406,9 @@ function calcularExcedente(){
 	let utilidad_monitoreo =  Number($("#utilidad_monitoreo").val());
 	
 	
-	utilidad = utilidad_monitoreo - devolucion;
+	// utilidad = utilidad_monitoreo - devolucion;
 	
-	$("#utilidad").val(utilidad.toFixed(2) );
+	// $("#utilidad").val(utilidad.toFixed(2) );
 	
 	$("#deuda_operador").val(deuda_operador.toFixed(2));
 	
