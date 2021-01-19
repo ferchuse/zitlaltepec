@@ -391,7 +391,16 @@ function calcularEfectivo(){
 	let efectivo_entregar = utilidad + fianza + mutualidad + seguridad + tag - vale_dinero - importe_con_guia - importe_sin_guia - boletos_tijera;
 	
 	
-	$("#efectivo_entregar").val(efectivo_entregar.toFixed(2));
+	if(efectivo_entregar < 0 ){
+		$("#devolucion").val(Math.abs(efectivo_entregar))
+		$("#efectivo_entregar").val(0)
+	}
+	else{
+		$("#efectivo_entregar").val(efectivo_entregar.toFixed(2));
+	}
+	
+	
+	
 	
 }
 
