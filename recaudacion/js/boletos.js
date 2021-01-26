@@ -8,7 +8,7 @@ $(document).ready( onLoad);
 	
 	1038609010
 	
-	
+	90100100058967
 	90100100058963
 	90100100058964
 	90100100058965
@@ -68,6 +68,8 @@ function agregarBoletoSencillo(){
 		$("#boleto").val("")
 		
 		sumarBoletos();
+		
+		calcularEfectivo();
 	});
 	
 	

@@ -349,6 +349,9 @@ function buscarTarjeta(tarjeta){
 			return false;
 		}
 		
+		$("#form_abono")[0].reset();
+		$("#tarjeta").val(tarjeta)
+		
 		$('#guias').html(respuesta.tabla_guias);
 		$('#importe_con_guia').val(respuesta.importe_con_guia);
 		$('#vale_dinero').val(respuesta.vale_dinero);
