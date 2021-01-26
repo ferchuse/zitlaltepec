@@ -396,6 +396,7 @@ function calcularEfectivo(){
 		$("#efectivo_entregar").val(0)
 	}
 	else{
+		$("#devolucion").val(0)
 		$("#efectivo_entregar").val(efectivo_entregar.toFixed(2));
 	}
 	
