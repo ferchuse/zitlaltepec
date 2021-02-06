@@ -272,7 +272,7 @@
 											<label for="">Devolución Excedente: </label>
 										</td >
 										<td >
-											<input type="number" name="devolucion" id="devolucion" value="" >
+											<input readonly type="number" name="devolucion" id="devolucion" value="" >
 										</td >
 									</tr>
 									<tr >

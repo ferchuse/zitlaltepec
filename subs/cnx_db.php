@@ -84,7 +84,7 @@
 			
 			// mysqli_query($link, "SET SESSION sql_mode = ''") or die("Error Cambiando charset").mysqli_error($link);
 			
-			mysql_query("SET CHARACTER SET utf8") or die("Error en charset UTF8".mysql_error());
+			// mysql_query("SET CHARACTER SET utf8") or die("Error en charset UTF8".mysql_error());
 		// }
 		
 	
