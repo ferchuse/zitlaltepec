@@ -15,7 +15,7 @@
 		if(mysqli_num_rows($result) > 0){
 			while($fila = mysqli_fetch_assoc($result)){
 				
-				$respuesta= $fila["permiso"];
+				$respuesta= $fila["acceso"];
 			}
 			
 			if($respuesta == "0" || $respuesta == "" ){

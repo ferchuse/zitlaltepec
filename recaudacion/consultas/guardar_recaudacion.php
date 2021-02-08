@@ -34,7 +34,7 @@
 		empresa='{$fila['empresa']}',	
 		estatus='A',
 		obs='{$_POST['observaciones']}',
-		monto='{$_POST['efectivo_pagado']}',
+		monto='{$_POST['efectivo_recaudado']}',
 		monto_derrotero='{$_POST['monto_derrotero']}',
 		cant_boletos='{$_POST['cant_boletos']}',
 		vueltas='{$_POST['vueltas']}',

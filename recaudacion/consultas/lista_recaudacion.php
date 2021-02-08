@@ -18,7 +18,10 @@
 	empresas.nombre as empresas_nombre,
 	usuarios.nombre as usuarios_nombre,
 	tarjetas_unidad.estatus AS tarjetas_estatus,
-	recaudacion_autobus.estatus AS recaudacion_estatus
+	recaudacion_autobus.monto AS efectivo_recaudado,
+	recaudacion_autobus.estatus AS recaudacion_estatus,
+	recaudacion_autobus.fechacan AS recaudacion_fechacan
+	
 	
 	FROM recaudacion_autobus
 	
@@ -29,6 +32,7 @@
 	LEFT JOIN unidades ON unidades.cve = tarjetas_unidad.unidad
 	LEFT JOIN operadores ON operadores.cve = tarjetas_unidad.operador
 	LEFT JOIN usuarios ON usuarios.cve = recaudacion_autobus.usuario
+	
 	WHERE 1
 	";
 	
@@ -60,7 +64,9 @@
 			$filas[] = $fila ;
 		}
 	?>
-	
+	<pre hidden>
+		<?php echo $consulta ?>
+	</pre>
 	
 	<table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
 		<thead>
@@ -74,7 +80,7 @@
 				<th>Tarjeta</th>
 				<th>Empresa</th>
 				<th>Observaciones</th>
-				<th>Utilidad</th>
+				<th>Efectivo Recaudado</th>
 				<th>Usuario</th>
 			</thead>
 			<tbody id="tabla_DB">
@@ -85,8 +91,9 @@
 						<td class="text-center"> 
 							<?php if($fila["recaudacion_estatus"] != 'C'){
 								
-								$totales[0]+= $fila["utilidad"];
-								if(dame_permiso("recaudacion.php", $link) == '3'){ 
+								$totales[0]+= $fila["efectivo_recaudado"];
+								if(dame_permiso("recaudacion.php", $link) == '3'){ //Permiso Supervisor
+								// echo dame_permiso("recaudacion.php", $link);
 								?>
 								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['recaudacion_autobus_cve']?>'>
 									<i class="fas fa-times"></i>
@@ -101,7 +108,7 @@
 							<?php
 							}
 							else{
-								echo "<span class='badge badge-danger'>".$fila["recaudacion_estatus"]."<br>".$fila["datos_cancelacion"]."</span>";
+								echo "<span class='badge badge-danger'>CANCELADO<br>".$fila["recaudacion_fechacan"]."<br>".$fila["usuario_cancela"]."</span>";
 							}
 							?>
 						</td>
@@ -113,7 +120,7 @@
 						<td><?php echo $fila["tarjeta"]?></td>
 						<td><?php echo $fila["empresas_nombre"]?></td>
 						<td><?php echo $fila["obs"]?></td>
-						<td>$<?php echo $fila["total_utilidad"]?></td>
+						<td>$<?php echo $fila["efectivo_recaudado"]?></td>
 						<td><?php echo $fila["usuarios_nombre"]?></td>
 							
 					</tr>

@@ -220,14 +220,14 @@
 			icono.toggleClass('fa-search fa-spinner fa-pulse fa-fw');
 			
 			});
-		}
-		
-		
-		function confirmaCancelacion(event){
+			}
+			
+			
+			function confirmaCancelacion(event){
 			console.log("confirmaCancelacion()");
 			let boton = $(this);
 			let icono = boton.find(".fas");
-			var id_registro = $(this).data("id_registro");
+			var folio = $(this).data("id_registro");
 			
 			
 			alertify.confirm()
@@ -235,6 +235,7 @@
 				'reverseButtons': true,
 				'labels' :{ok:"SI", cancel:'NO'},
 				'title': "Cancelar" ,
+				'message': "¿Esta seguro que desea cancelar?" ,
 				'onok':cancelarRegistro
 			}).show();
 			
@@ -254,20 +255,20 @@
 				
 				
 				return $.ajax({
-					url: "control/cancelar_abono.php",
+					url: "consultas/cancelar_recaudacion.php",
+					method:"POST",
 					dataType:"JSON",
 					data:{
-						id_registro : id_registro,
-						nombre_usuarios : $("#sesion_nombre_usuarios").text(),
-						motivo : motivo
+						folio : folio,
+						id_usuarios : $("#sesion_id_usuarios").val()
 					}
 					}).done(function (respuesta){
-					if(respuesta.result == "success"){
+					if(respuesta.cancelar == true){
 						alertify.success("Cancelado");
 						listarRegistros();
 					}
 					else{
-						alertify.error(respuesta.result);
+						alertify.error("Ocurrio un Error ");
 						
 					}
 					

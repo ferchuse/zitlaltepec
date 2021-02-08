@@ -276,6 +276,14 @@
 										</td >
 									</tr>
 									<tr >
+										<td class="text-left">
+											<label for="">Efectivo Recaudado: </label>
+										</td >
+										<td >
+											<input readonly type="number" name="efectivo_recaudado" id="efectivo_recaudado" value="" >
+										</td >
+									</tr>
+									<tr >
 										<td colspan="3">
 											<label>Observaciones:</label> <br>
 											<textarea rows="5" cols="40" id="observaciones"  name="observaciones"></textarea >
