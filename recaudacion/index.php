@@ -263,7 +263,7 @@
 						id_usuarios : $("#sesion_id_usuarios").val()
 					}
 					}).done(function (respuesta){
-					if(respuesta.cancelar == true){
+					if(respuesta.result_cancelar == true){
 						alertify.success("Cancelado");
 						listarRegistros();
 					}

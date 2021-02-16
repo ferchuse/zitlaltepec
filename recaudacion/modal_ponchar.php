@@ -15,7 +15,7 @@
 				
 				<div class="form-group">
 					<label for="boleto">Boleto</label>
-					<input type="number" class="form-control" id="boleto" name="boleto"  required>
+					<input type="number" class="form-control" id="boleto" name="boleto"  required autofocus>
 				</div>
 				
 				<form id="form_boletos">

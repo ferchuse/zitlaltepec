@@ -18,6 +18,14 @@ $(document).ready(function(){
 		}
 	});
 	
+	$("#modal_ponchar")
+	
+	$("#modal_ponchar").on('shown.bs.modal', function(){
+		$("#boleto").focus();
+		// alert('The modal is fully shown.');
+	});
+	
+	
 	$('#btn_ponchar').click(function(event){
 		
 		$("#modal_ponchar").modal("show");
@@ -35,10 +43,10 @@ $(document).ready(function(){
 	
 	$('#btn_generar_tarjeta').on('click', function(){
 		
-		$("#form_edicion")[0].reset();
-		$('#modal_edicion').modal({ backdrop: 'static'}).modal('show').on('shown.bs.modal', function () {
-			$('#form_edicion input:eq(0)').trigger("focus");
-		});
+	$("#form_edicion")[0].reset();
+	$('#modal_edicion').modal({ backdrop: 'static'}).modal('show').on('shown.bs.modal', function () {
+		$('#form_edicion input:eq(0)').trigger("focus");
+	});
 	});
 	
 	
