@@ -16,7 +16,7 @@
 	recaudaciones.nombre AS recaudacion_nombre,
 	tarjetas_unidad.cve AS tarjeta,
 	empresas.nombre as empresas_nombre,
-	usuarios.nombre as usuarios_nombre,
+	usuarios.usuario as usuarios_nombre,
 	tarjetas_unidad.estatus AS tarjetas_estatus,
 	recaudacion_autobus.monto AS efectivo_recaudado,
 	recaudacion_autobus.estatus AS recaudacion_estatus,
