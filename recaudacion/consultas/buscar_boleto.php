@@ -12,7 +12,9 @@
 	while($row=mysqli_fetch_array($res)){
 		$array_costo[$row['cve']]=$row['nombre'];
 	}
-	
+	// 0 1 2  3 4 5 6   7 8 9 10111213 
+	// 9 0 1  0 0 1 0   0 0 5 8 9 6 6
+	// 90100100129205
 	
 	
 	$taq = intval(substr($_POST['boleto'],1,2));

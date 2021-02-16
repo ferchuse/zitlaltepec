@@ -20,7 +20,8 @@
 	tarjetas_unidad.estatus AS tarjetas_estatus,
 	recaudacion_autobus.monto AS efectivo_recaudado,
 	recaudacion_autobus.estatus AS recaudacion_estatus,
-	recaudacion_autobus.fechacan AS recaudacion_fechacan
+	recaudacion_autobus.fechacan AS recaudacion_fechacan,
+	usuarios_cancela.usuario AS usuario_cancela
 	
 	
 	FROM recaudacion_autobus
@@ -32,6 +33,7 @@
 	LEFT JOIN unidades ON unidades.cve = tarjetas_unidad.unidad
 	LEFT JOIN operadores ON operadores.cve = tarjetas_unidad.operador
 	LEFT JOIN usuarios ON usuarios.cve = recaudacion_autobus.usuario
+	LEFT JOIN usuarios AS usuarios_cancela ON usuarios_cancela.cve = recaudacion_autobus.usucan
 	
 	WHERE 1
 	";
