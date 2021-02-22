@@ -118,7 +118,7 @@
 										<select id="tipo_unidad" >
 											
 											<option>AUTOBUS</option>
-											<option>CAMIONETA</option>
+											<option selected>CAMIONETA</option>
 										</select>
 									</td >
 								</tr>

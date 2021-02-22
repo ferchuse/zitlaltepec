@@ -71,16 +71,15 @@
 			<tbody id="tabla_DB">
 				<?php 
 					foreach($filas as $index=>$fila){
-						$total+= $fila["utilidad"];
+						
 					?>
 					<tr>
 						<td class="text-center"> 
-							<?php if($fila["monitoreo_estatus"] != 'C'){
-								
-								
+							<?php if($fila["estatus_monitoreo"] != 'Cancelado'){
+								$total+= $fila["utilidad"];
 								if(dame_permiso("monitoreo.php", $link) == '3'){ 
 								?>
-								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['recaudacion_operador_cve']?>'>
+								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_monitoreo']?>'>
 									<i class="fas fa-times"></i>
 								</button>
 								
@@ -93,10 +92,10 @@
 							<?php
 							}
 							else{
-								echo "<span class='badge badge-danger'>".$fila["tarjetas_estatus"]."<br>".$fila["datos_cancelacion"]."</span>";
+								echo "<span class='badge badge-danger'>".$fila["estatus_monitoreo"]."<br>".$fila["datos_cancelacion"]."</span>";
 							}
 							?>
-							<a href="ver_monitoreo.php?id_monitoreo=<?php echo $fila['id_monitoreo']?>" class="btn btn-default cancelar" title="Cancelar" data-id_registro='<?php echo $fila['id_monitoreo']?>'>
+							<a href="ver_monitoreo.php?id_monitoreo=<?php echo $fila['id_monitoreo']?>" class="btn btn-default " title="Cancelar" data-id_registro='<?php echo $fila['id_monitoreo']?>'>
 								<i class="fas fa-search"></i>
 							</a>
 						</td>

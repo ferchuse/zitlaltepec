@@ -69,7 +69,11 @@
 						<div class="col-sm-12">
 							<h4>Recaudación </h4>
 						</div>
+						
 						<div class="col-sm-10">
+							<a href="index.php" class="btn btn-success btn-sm" >
+								<i class="fas fa-arrow-left"></i> Regresar
+							</a>
 							<form id="form_abono" >
 								
 								<table >

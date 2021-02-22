@@ -17,6 +17,17 @@
 	// 90100100129205
 	
 	
+	/*
+	90100100058967
+	
+	90100100058963
+	90100100058964
+	90100100058965
+	90100100058966
+	90100100058967
+	*/
+	
+	
 	$taq = intval(substr($_POST['boleto'],1,2));
 	$costo = intval(substr($_POST['boleto'],3,4));
 	$folio = intval(substr($_POST['boleto'],7,7));
@@ -47,11 +58,17 @@
 			$resultado['error'] = 1;
 			$resultado['mensaje'] = 'El boleto esta cancelado';
 		}
+		elseif($row['estatus']==2){
+			$resultado['error'] = 1;
+			$resultado['mensaje'] = 'El boleto ya esta recaudado';
+		}
 		elseif($row['dias']>5){
 			$resultado['error'] = 1;
 			$resultado['mensaje'] = 'El boleto esta caducado';
 		}
 		else{
+			//El boleto si existe
+			
 			// $resultado['html'] .= rowb(false);
 			$resultado['html'] .= '<tr><td align="center">';
 			$resultado['html'] .= "<input type='hidden'  name='taquilla[]' value='{$row['taquilla']}'>";
@@ -67,6 +84,16 @@
 			$resultado['html'] .= '<td align="center">'.utf8_encode($array_costo[$row['costo']]).'</td>';
 			$resultado['html'] .= '<td align="right" class="monto">'.number_format($row['monto'],2).'</td>';
 			$resultado['html'] .= '</tr>';
+			
+			//Cambiar a recaudado
+			
+			$update_boleto =  "UPDATE boletos_sencillos SET estatus = 2 WHERE folio = '$folio'";
+			
+			$result_update_boleto = mysqli_query($link, $update_boleto);
+			
+			$resultado['update_boleto'] = $result_update_boleto ;
+			
+			
 		}
 	}
 	else{

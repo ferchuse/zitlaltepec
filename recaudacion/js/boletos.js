@@ -41,6 +41,7 @@ function poncharsencillos(){
 }
 
 function borrarBoleto(){
+	console.log("borrarBoleto()")
 	$(this).closest("tr").remove();
 	sumarBoletos();
 }

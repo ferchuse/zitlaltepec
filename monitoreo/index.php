@@ -166,7 +166,7 @@
 			// imprimirTicket($(this).data("id_registro"))
 			// });
 			
-			// $(".cancelar").click(confirmaCancelacion);
+			$(".cancelar").click(confirmaCancelacion);
 			
 			// $("#check_all").change(checkAll);
 			
@@ -177,10 +177,66 @@
 			boton.prop('disabled',false);
 			icono.toggleClass('fa-search fa-spinner fa-pulse fa-fw');
 			
+			});
+			}
+			
+			
+			function confirmaCancelacion(event){
+			console.log("confirmaCancelacion()");
+			let boton = $(this);
+			let icono = boton.find(".fas");
+			var folio = $(this).data("id_registro");
+			
+			
+			alertify.confirm()
+			.setting({
+			'reverseButtons': true,
+			'labels' :{ok:"SI", cancel:'NO'},
+			'title': "Cancelar" ,
+			'message': "¿Esta seguro que desea cancelar?" ,
+			'onok':cancelarRegistro
+			}).show();
+			
+			function cancelarRegistro(evt, motivo){
+			if(motivo == ''){
+			console.log("Escribe un motivo");
+			alertify.error("Escribe un motivo");
+			return false;
+			
+		}
+		
+		boton.prop("disabled", true);
+		icono.toggleClass("fa-times fa-spinner fa-spin");
+		
+		
+		return $.ajax({
+			url: "consultas/cancelar_monitoreo.php",
+			method:"POST",
+			dataType:"JSON",
+			data:{
+				folio : folio,
+				nombre_usuarios : $("#sesion_nombre_usuarios").text()
+			}
+			}).done(function (respuesta){
+			if(respuesta.result_cancelar == true){
+				alertify.success("Cancelado");
+				listarRegistros();
+			}
+			else{
+				alertify.error("Ocurrio un Error ");
+				
+			}
+			
+			}).always(function(){
+			boton.prop("disabled", false);
+			icono.toggleClass("fa-times fa-spinner fa-spin");
+			
 		});
 	}
-	
-	
+}
+
+
+
 </script>
 
 
