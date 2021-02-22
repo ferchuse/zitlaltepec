@@ -62,7 +62,11 @@
 				<input hidden value="<?php echo $_COOKIE["id_administrador"]?>" id="sesion_id_administrador">
 				<input hidden id="permiso" value="<?php //echo dame_permiso(basename($_SERVER['PHP_SELF']), $link);?>">
 				<a class="dropdown-item" href="#">
-					<?php echo "<b>Usuario</b>: <span id='sesion_nombre_usuarios'>". $_COOKIE["nombre_usuarios"]."</span>"?>
+					<?php 
+						echo "<b>Usuario</b>: <span id='sesion_nombre_usuarios'>". $_SESSION["NickUsuario"]."</span>";
+						
+						// print_r($_SESSION);
+						?>
 				</a>	
 				<a class="dropdown-item" href="#">
 					<?php //echo "<b>Permiso</b>: ". dame_permiso(basename($_SERVER['PHP_SELF']), $link);?>
