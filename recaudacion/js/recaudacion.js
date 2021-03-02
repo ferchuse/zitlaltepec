@@ -399,7 +399,7 @@ function calcularEfectivo(){
 	let tag = Number($("#tag").val());
 	
 	
-	let efectivo_entregar = utilidad + fianza + mutualidad + seguridad + tag - vale_dinero - importe_con_guia - importe_sin_guia - boletos_tijera;
+	let efectivo_entregar = utilidad  - vale_dinero - importe_con_guia - importe_sin_guia - boletos_tijera;
 	
 	// let efectivo_recaudado = utilidad + fianza + mutualidad + seguridad + tag - vale_dinero - importe_con_guia - importe_sin_guia - boletos_tijera;
 	
