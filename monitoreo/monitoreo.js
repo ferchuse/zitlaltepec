@@ -313,11 +313,11 @@ function calcularUtilidad(){
 	let seguridad = Number($("#seguridad").val());
 	let tag = Number($("#tag").val());
 	
-	
+	// let total_gasto = 
 	
 	let utilidad = ingreso_bruto -  casetas - diesel - despachadores - comision - incentivo - mutualidad - seguridad;
 	
-	console.log("utilidad" , utilidad);
+	// console.log("utilidad" , utilidad);
 	
 	$("#utilidad").val(utilidad.toFixed(0));
 	

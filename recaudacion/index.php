@@ -110,7 +110,7 @@
 					
 					<div class="row">
 						
-						<div class="col-sm-12" id="tabla_registros">
+						<div class="col-sm-12 table-responsive" id="tabla_registros">
 							
 						</div>
 						

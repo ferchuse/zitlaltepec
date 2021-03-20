@@ -42,6 +42,7 @@ $res=mysql_query("SELECT recaudacion FROM usuario_recaudacion WHERE usuario='".$
 $row=mysql_fetch_array($res);
 $recaudacion_usuario=$_SESSION['RecUsuario'];
 if($_POST['ajax']==1){
+	//Listar Registros
 	$nivelUsuario = nivelUsuario();
 	$x=0;
 	$filtroruta="";
@@ -767,8 +768,21 @@ if($_POST['cmd']==1){
 					var total = 0;
 					total = (document.forma.monto_boletos_tijera.value/1)+(document.forma.monto_boletos.value/1)+(document.forma.monto_boletos_abordo.value/1)+(document.forma.monto_vale_dinero.value/1)+(document.forma.monto_taqmovil.value/1)+(document.forma.monto_abonomovil.value/1)+(document.forma.diesel_manual.value/1)+(document.forma.monto_sencillos.value/1);
 					document.forma.total_boletos.value=total.toFixed(2);
-					total = (document.forma.diesel.value/1)+(document.forma.comision.value/1)+(document.forma.lavada.value/1)+(document.forma.vale_comida.value/1)+(document.forma.bono_productividad.value/1)+(document.forma.casetas.value/1)+(document.forma.despachadores.value/1)+(document.forma.excedente.value/1) + (document.forma.monto_vale_diesel.value/1);
+					
+					//Total Gasto
+					total = (document.forma.diesel.value/1)
+					+(document.forma.comision.value/1)
+					+(document.forma.lavada.value/1)
+					+(document.forma.vale_comida.value/1)
+					+(document.forma.bono_productividad.value/1)
+					+(document.forma.casetas.value/1)
+					+(document.forma.despachadores.value/1)
+					+(document.forma.excedente.value/1) 
+					+ (document.forma.monto_vale_diesel.value/1);
+					
 					document.forma.total_gasto.value=total.toFixed(2);
+					
+					
 					total = (document.forma.total_boletos.value/1)+(document.forma.monto_efectivo.value/1)-(document.forma.total_gasto.value/1);
 					document.forma.monto.value=total.toFixed(2);
 				}

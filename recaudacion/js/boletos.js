@@ -175,7 +175,7 @@ function sumarBoletos(){
 // if (objeto1.readyState != 0) {
 // alert("Error: El Navegador no soporta AJAX");
 // } else {
-// objeto1.open("POST","recaudacion_autobus.php",true);
+// objeto1.open("POST","recaudacion_monitoreo.php",true);
 // objeto1.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
 // objeto1.send("ajax=2&plaza="+document.forma.plaza.value+"&tarjeta="+document.forma.folio.value);
 // objeto1.onreadystatechange = function(){

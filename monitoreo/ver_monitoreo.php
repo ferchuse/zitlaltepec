@@ -8,6 +8,7 @@
 	
 	
 	$consulta_monitoreo = "SELECT *, 
+	monitoreo.tag AS monitoreo_tag,
 	usuarios.nombre as usuarios_nombre,
 	operadores.nombre as operadores_nombre
 	FROM monitoreo
@@ -419,7 +420,7 @@
 											TAG
 										</td >
 										<td >
-											<input  readonly type="number" id="tag" name="tag" value="<?= $lista_monitoreo["tag"]?>">
+											<input  readonly type="number" id="tag" name="tag" value="<?= $lista_monitoreo["monitoreo_tag"]?>">
 											
 										</td >
 									</tr>

@@ -20,7 +20,7 @@
 		
 		
 		$consulta = 
-		"INSERT INTO recaudacion_autobus					 
+		"INSERT INTO recaudacion_monitoreo					 
 		SET 
 		tarjeta='{$_POST['tarjeta']}',		
 		fecha= CURDATE(),
@@ -34,7 +34,9 @@
 		empresa='{$fila['empresa']}',	
 		estatus='A',
 		obs='{$_POST['observaciones']}',
-		monto='{$_POST['efectivo_recaudado']}',
+		monto='{$_POST['utilidad']}',
+		efectivo_recaudado='{$_POST['efectivo_recaudado']}',
+		efectivo_entregar='{$_POST['efectivo_entregar']}',
 		monto_derrotero='{$_POST['monto_derrotero']}',
 		cant_boletos='{$_POST['cant_boletos']}',
 		vueltas='{$_POST['vueltas']}',
@@ -53,13 +55,13 @@
 		total_gasto='{$_POST['total_gasto']}',
 		concepto='{$_POST['concepto']}',
 		cant_boletos_tijera='{$_POST['cant_boletos_tijera']}',
-		monto_boletos_tijera='{$_POST['monto_boletos_tijera']}',
+		monto_boletos_tijera='{$_POST['boletos_tijera']}',
 		cant_boletos_abordo='{$_POST['cant_boletos_abordo']}',
 		monto_boletos_abordo='{$_POST['monto_boletos_abordo']}',
 		total_boletos='{$_POST['total_boletos']}',
 		deuda_operador='{$_POST['deuda_operador']}',
 		motivo_deuda='{$_POST['motivo_deuda']}', 
-		monto_vale_dinero='{$_POST['monto_vale_dinero']}',
+		monto_vale_dinero='{$_POST['vale_dinero']}',
 		cant_taqmovil='{$_POST['cant_taqmovil']}',
 		monto_taqmovil='{$_POST['monto_taqmovil']}',
 		cant_abonomovil='{$_POST['cant_abonomovil']}',
@@ -68,7 +70,7 @@
 		monto_vale_diesel='{$_POST['monto_vale_diesel']}',
 		diesel_manual='{$_POST['diesel_manual']}', 
 		cant_sencillos='{$_POST['cant_sencillos']}',
-		monto_sencillos='{$_POST['monto_sencillos']}'";
+		monto_sencillos='{$_POST['importe_sin_guia']}'";
 		
 		$result = mysqli_query($link,$consulta);
 		if($result){

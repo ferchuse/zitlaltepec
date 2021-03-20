@@ -12,34 +12,34 @@
 	
 	$consulta = "SELECT *,
 	operadores.nombre AS operadores_nombre ,
-	recaudacion_autobus.cve AS recaudacion_autobus_cve,
+	recaudacion_monitoreo.cve AS recaudacion_monitoreo_cve,
 	recaudaciones.nombre AS recaudacion_nombre,
 	tarjetas_unidad.cve AS tarjeta,
 	empresas.nombre as empresas_nombre,
 	usuarios.usuario as usuarios_nombre,
 	tarjetas_unidad.estatus AS tarjetas_estatus,
-	recaudacion_autobus.monto AS efectivo_recaudado,
-	recaudacion_autobus.estatus AS recaudacion_estatus,
-	recaudacion_autobus.fechacan AS recaudacion_fechacan,
+	recaudacion_monitoreo.efectivo_recaudado AS efectivo_recaudado,
+	recaudacion_monitoreo.estatus AS recaudacion_estatus,
+	recaudacion_monitoreo.fechacan AS recaudacion_fechacan,
 	usuarios_cancela.usuario AS usuario_cancela
 	
 	
-	FROM recaudacion_autobus
+	FROM recaudacion_monitoreo
 	
-	LEFT JOIN monitoreo ON monitoreo.tarjeta = recaudacion_autobus.tarjeta
-	LEFT JOIN tarjetas_unidad ON tarjetas_unidad.cve = recaudacion_autobus.tarjeta
-	LEFT JOIN recaudaciones ON recaudaciones.cve = recaudacion_autobus.recaudacion
+	LEFT JOIN monitoreo ON monitoreo.tarjeta = recaudacion_monitoreo.tarjeta
+	LEFT JOIN tarjetas_unidad ON tarjetas_unidad.cve = recaudacion_monitoreo.tarjeta
+	LEFT JOIN recaudaciones ON recaudaciones.cve = recaudacion_monitoreo.recaudacion
 	LEFT JOIN empresas ON empresas.cve = tarjetas_unidad.empresa
 	LEFT JOIN unidades ON unidades.cve = tarjetas_unidad.unidad
 	LEFT JOIN operadores ON operadores.cve = tarjetas_unidad.operador
-	LEFT JOIN usuarios ON usuarios.cve = recaudacion_autobus.usuario
-	LEFT JOIN usuarios AS usuarios_cancela ON usuarios_cancela.cve = recaudacion_autobus.usucan
+	LEFT JOIN usuarios ON usuarios.cve = recaudacion_monitoreo.usuario
+	LEFT JOIN usuarios AS usuarios_cancela ON usuarios_cancela.cve = recaudacion_monitoreo.usucan
 	
 	WHERE 1
 	";
 	
 	$consulta.=  " 
-	AND  DATE(fecha_creacion)
+	AND  DATE(recaudacion_monitoreo.fecha)
 	BETWEEN '{$_GET['fecha_inicial']}' 
 	AND '{$_GET['fecha_final']}'"; 
 	
@@ -49,7 +49,7 @@
 		$consulta.=  " AND usuarios.cve = '{$_GET["usuarios_cve"]}'"; 
 	}
 	
-	$consulta.=  " ORDER BY recaudacion_autobus.cve"; 
+	$consulta.=  " ORDER BY recaudacion_monitoreo.cve"; 
 	
 	
 	
@@ -83,6 +83,7 @@
 				<th>Empresa</th>
 				<th>Observaciones</th>
 				<th>Efectivo Recaudado</th>
+				<th>Efectivo a Entregar</th>
 				<th>Usuario</th>
 			</thead>
 			<tbody id="tabla_DB">
@@ -94,17 +95,18 @@
 							<?php if($fila["recaudacion_estatus"] != 'C'){
 								
 								$totales[0]+= $fila["efectivo_recaudado"];
+								$totales[1]+= $fila["efectivo_entregar"];
 								if(dame_permiso("recaudacion.php", $link) == '3'){ //Permiso Supervisor
 								// echo dame_permiso("recaudacion.php", $link);
 								?>
-								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['recaudacion_autobus_cve']?>'>
+								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['recaudacion_monitoreo_cve']?>'>
 									<i class="fas fa-times"></i>
 								</button>
 								
 								<?php
 								}
 							?>
-							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['recaudacion_autobus_cve']?>'>
+							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['recaudacion_monitoreo_cve']?>'>
 								<i class="fas fa-print"></i>
 							</button>
 							<?php
@@ -114,8 +116,8 @@
 							}
 							?>
 						</td>
-						<td><?php echo $fila["recaudacion_autobus_cve"]?></td>
-						<td><?php echo $fila["fecha_creacion"]?></td>
+						<td><?php echo $fila["recaudacion_monitoreo_cve"]?></td>
+						<td><?php echo $fila["fecha"]?></td>
 						<td><?php echo $fila["recaudacion_nombre"]?></td>
 						<td><?php echo $fila["no_eco"]?></td>
 						<td><?php echo $fila["operadores_nombre"]?></td>
@@ -123,6 +125,7 @@
 						<td><?php echo $fila["empresas_nombre"]?></td>
 						<td><?php echo $fila["obs"]?></td>
 						<td>$<?php echo $fila["efectivo_recaudado"]?></td>
+						<td>$<?php echo $fila["efectivo_entregar"]?></td>
 						<td><?php echo $fila["usuarios_nombre"]?></td>
 							
 					</tr>
