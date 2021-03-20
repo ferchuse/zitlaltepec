@@ -97,18 +97,18 @@
 								$totales[0]+= $fila["efectivo_recaudado"];
 								$totales[1]+= $fila["efectivo_entregar"];
 								if(dame_permiso("recaudacion.php", $link) == '3'){ //Permiso Supervisor
-								// echo dame_permiso("recaudacion.php", $link);
+									// echo dame_permiso("recaudacion.php", $link);
 								?>
 								<button class="btn btn-danger cancelar" title="Cancelar" data-id_registro='<?php echo $fila['recaudacion_monitoreo_cve']?>'>
 									<i class="fas fa-times"></i>
 								</button>
-								
+								<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['recaudacion_monitoreo_cve']?>'>
+									<i class="fas fa-print"></i>
+								</button>
 								<?php
 								}
 							?>
-							<button class="btn btn-outline-info imprimir" data-id_registro='<?php echo $fila['recaudacion_monitoreo_cve']?>'>
-								<i class="fas fa-print"></i>
-							</button>
+							
 							<?php
 							}
 							else{
@@ -127,7 +127,7 @@
 						<td>$<?php echo $fila["efectivo_recaudado"]?></td>
 						<td>$<?php echo $fila["efectivo_entregar"]?></td>
 						<td><?php echo $fila["usuarios_nombre"]?></td>
-							
+						
 					</tr>
 					<?php
 					}
