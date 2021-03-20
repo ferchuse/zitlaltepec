@@ -48,7 +48,7 @@
 	WHERE folio_recaudacion='{$_POST['folio']}' AND tipo_recaudacion=1");
 	
 	
-	//Regresar recaudacion operador, por cargos de mutulidad, fianza, seguridad y tag 
+	//Cancela recaudacion operador, por cargos de mutulidad, fianza, seguridad y tag 
 	
 	
 	echo json_encode($respuesta);

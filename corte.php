@@ -667,7 +667,27 @@
 			
 			echo '<td align="right">'.number_format($row['venta_vales_dinero'],2).'</td>';
 			echo '<td align="right">'.number_format($row['venta_boleto_singuia'],2).'</td>';
-			$row['efectivo_entregar'] = $row['monto']+$row['general']+$row['cargo_servicios']+$row['fianza']+$row['mutualidad']+$row['seguridad']+$row['tarjeta_reposicion']+$row['pago_curso']+$row['tag']+$row['boletos_abordo']-$row['total_gastos']+$row['venta_vales_dinero']+$row['venta_boleto_singuia']+$row['recibos_entradas'] + $row['efectivo_recaudado'];
+			
+			
+			$row['efectivo_entregar'] = 
+			
+			$row['monto']
+			+$row['general'] 
+			+$row['cargo_servicios']
+			+$row['fianza']
+			+$row['mutualidad']
+			+$row['seguridad']
+			+$row['tarjeta_reposicion']
+			+$row['pago_curso'] 
+			+$row['tag']
+			+$row['recibos_entradas']  
+			+$row['vales_dinero']  
+			+$row['boletos_abordo']
+			+$row['boleto_singuia'] 
+			-$row['total_gastos']
+			+$row['efectivo_recaudado']
+			+$row['venta_vales_dinero']
+			+$row['venta_boleto_singuia'];
 			
 			
 			echo '<td align="right">'.number_format($row['efectivo_entregar'],2).'</td>';
