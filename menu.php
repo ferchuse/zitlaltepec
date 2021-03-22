@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	$array_modulos=array(1=>"Catalogos", 2=>"Parque Vehicular",3=>"Operadores",4=>'Recaudacion Unidades',
-	6=>'Recaudacion Operadores',9=>'Recaudacion Pachuca',5=>'Movimientos',7=>'Accidentes',8=>'Taquilla',10=>'Taquilla sin Guia', 13=>"Gps",12=>"Servicios",16=>"Monitoreo",99=>"Administracion");
+	6=>'Recaudacion Operadores',9=>'Recaudacion Pachuca',5=>'Movimientos',7=>'Accidentes',8=>'Taquilla',10=>'Taquilla sin Guia', 13=>"Gps",12=>"Servicios",16=>"Monitoreo",17=>"Bases",99=>"Administracion");
 	
 	include_once("../conexi.php");
 	if(!isset($link)){

@@ -98,7 +98,7 @@
 	$array_meses=array("","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 	$array_dias=array("Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado");
 	$array_modulos=array(1=>"Catalogos", 2=>"Parque Vehicular",3=>"Operadores",4=>'Recaudacion Unidades',
-	6=>'Recaudacion Operadores',9=>'Recaudacion Pachuca',5=>'Movimientos',7=>'Accidentes',8=>'Taquilla',10=>'Taquilla sin Guia', 13=>"Gps",12=>"Servicios",16=>"Monitoreo",99=>"Administracion");
+	6=>'Recaudacion Operadores',9=>'Recaudacion Pachuca',5=>'Movimientos',7=>'Accidentes',8=>'Taquilla',10=>'Taquilla sin Guia', 13=>"Gps",12=>"Servicios",16=>"Monitoreo",17=>"Bases",99=>"Administracion");
 	//
 	$empresanomina = 999999;
 	$array_nosi=array('NO','SI');
@@ -804,6 +804,12 @@
 						elseIF($ro['link'] == "monitoreo.php"  ){
 							
 							echo "<tr><td><a href='monitoreo/index.php' >-{$ro['nombre']}</a></td></tr>";
+							
+							
+						}
+						elseIF($k == 17  ){
+							
+							echo "<tr><td><a href='bases/{$ro['link']}' >-{$ro['nombre']}</a></td></tr>";
 							
 							
 						}
