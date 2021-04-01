@@ -186,7 +186,7 @@ if($_POST['cmd']==2){
 		mysql_query("INSERT condonacion_tarjetas_unidad SET tarjeta='".$_POST['tarjeta']."',fecha_viaje='".$_POST['fecha_viaje']."',
 			fecha='".fechaLocal()."',operador='".$_POST['operador']."',hora='".horaLocal()."',unidad='".$_POST['unidad']."',
 			derrotero='".$_POST['derrotero']."',usuario='".$_POST['cveusuario']."',empresa='".$_POST['empresa']."',estatus='A',
-			monto='".$_POST['monto']."',motivo='".$_POST['motivo']."'") or die(mysql_error());
+			monto='".$_POST['monto']."',motivo='".$_POST['motivo']."', obs = '{$_POST['obs']}' ") or die(mysql_error());
 		$cvealteracion=mysql_insert_id();
 		foreach($_POST['montos'] as $k=>$v){
 			if($v>0){
