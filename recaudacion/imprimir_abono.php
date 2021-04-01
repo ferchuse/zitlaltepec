@@ -5,19 +5,19 @@
 	
 	$consulta = "SELECT 
 	*,
-	recaudacion_monitoreo.monto as monto,
-	recaudacion_monitoreo.cve  AS folio,
+	recaudacion_autobus.monto as monto,
+	recaudacion_autobus.cve  AS folio,
 	operadores.nombre  AS operadores_nombre,
 	recaudaciones.nombre  AS recaudaciones_nombre,
 	usuarios.usuario  AS usuarios_nombre
-	FROM recaudacion_monitoreo
-	LEFT JOIN recaudaciones  ON recaudacion_monitoreo.recaudacion = recaudaciones.cve
-	LEFT JOIN tarjetas_unidad  ON recaudacion_monitoreo.tarjeta = tarjetas_unidad.cve
-	LEFT JOIN usuarios  ON recaudacion_monitoreo.usuario = usuarios.cve
-	LEFT JOIN operadores  ON recaudacion_monitoreo.operador = operadores.cve
-	LEFT JOIN unidades  ON recaudacion_monitoreo.unidad = unidades.cve
+	FROM recaudacion_autobus
+	LEFT JOIN recaudaciones  ON recaudacion_autobus.recaudacion = recaudaciones.cve
+	LEFT JOIN tarjetas_unidad  ON recaudacion_autobus.tarjeta = tarjetas_unidad.cve
+	LEFT JOIN usuarios  ON recaudacion_autobus.usuario = usuarios.cve
+	LEFT JOIN operadores  ON recaudacion_autobus.operador = operadores.cve
+	LEFT JOIN unidades  ON recaudacion_autobus.unidad = unidades.cve
 	
-	WHERE recaudacion_monitoreo.cve = '{$_GET['folio']}'";
+	WHERE recaudacion_autobus.cve = '{$_GET['folio']}'";
 	
 	
 	$result = mysqli_query($link,$consulta);

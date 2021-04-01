@@ -5,7 +5,7 @@
 	$link = Conectarse();
 	$filas = array();
 	
-	$cancelar = "UPDATE recaudacion_monitoreo 
+	$cancelar = "UPDATE recaudacion_autobus 
 	SET estatus='C',
 	fechacan= NOW(),
 	usucan = '{$_POST['id_usuarios']}' 
@@ -17,13 +17,13 @@
 	$respuesta["cancelar"] = $cancelar;
 	
 	
-	$result_tarjeta = mysqli_query($link, "SELECT tarjeta FROM recaudacion_monitoreo WHERE cve='{$_POST['folio']}'");
+	$result_tarjeta = mysqli_query($link, "SELECT tarjeta FROM recaudacion_autobus WHERE cve='{$_POST['folio']}'");
 	
 	$tarjeta = mysqli_fetch_assoc($result_tarjeta);
 	
 	$respuesta["tarjeta"] = $tarjeta;
 	
-	$res1 = mysqli_query($link, "SELECT COUNT(cve) FROM recaudacion_monitoreo WHERE tarjeta = '{$tarjeta}' AND estatus!='C'");
+	$res1 = mysqli_query($link, "SELECT COUNT(cve) FROM recaudacion_autobus WHERE tarjeta = '{$tarjeta}' AND estatus!='C'");
 	
 	$row1 = mysql_fetch_array($res1);
 	

@@ -43,10 +43,10 @@ $(document).ready(function(){
 	
 	$('#btn_generar_tarjeta').on('click', function(){
 		
-	$("#form_edicion")[0].reset();
-	$('#modal_edicion').modal({ backdrop: 'static'}).modal('show').on('shown.bs.modal', function () {
-		$('#form_edicion input:eq(0)').trigger("focus");
-	});
+		$("#form_edicion")[0].reset();
+		$('#modal_edicion').modal({ backdrop: 'static'}).modal('show').on('shown.bs.modal', function () {
+			$('#form_edicion input:eq(0)').trigger("focus");
+		});
 	});
 	
 	
@@ -261,12 +261,16 @@ function imprimirAbono(folio){
 			window.location.href = "../inicio.php";
 		}, 1000)
 		
-		printService.submit({
-			'type': 'LABEL',
-			'raw_content': respuesta
-		});
-		
-		
+		if(printService){
+			
+			printService.submit({
+				'type': 'LABEL',
+				'raw_content': respuesta
+			});
+			
+			
+			
+		}		
 		
 		}).always(function(){
 		

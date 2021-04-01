@@ -20,7 +20,7 @@
 		
 		
 		$consulta = 
-		"INSERT INTO recaudacion_monitoreo					 
+		"INSERT INTO recaudacion_autobus					 
 		SET 
 		tarjeta='{$_POST['tarjeta']}',		
 		fecha= CURDATE(),
@@ -34,9 +34,7 @@
 		empresa='{$fila['empresa']}',	
 		estatus='A',
 		obs='{$_POST['observaciones']}',
-		monto='{$_POST['utilidad']}',
-		efectivo_recaudado='{$_POST['efectivo_recaudado']}',
-		efectivo_entregar='{$_POST['efectivo_entregar']}',
+		monto='{$_POST['efectivo_recaudado']}',
 		monto_derrotero='{$_POST['monto_derrotero']}',
 		cant_boletos='{$_POST['cant_boletos']}',
 		vueltas='{$_POST['vueltas']}',
@@ -57,7 +55,7 @@
 		cant_boletos_tijera='{$_POST['cant_boletos_tijera']}',
 		monto_boletos_tijera='{$_POST['boletos_tijera']}',
 		cant_boletos_abordo='{$_POST['cant_boletos_abordo']}',
-		monto_boletos_abordo='{$_POST['monto_boletos_abordo']}',
+		monto_boletos_abordo='{$_POST['efectivo_recaudado']}',
 		total_boletos='{$_POST['total_boletos']}',
 		deuda_operador='{$_POST['deuda_operador']}',
 		motivo_deuda='{$_POST['motivo_deuda']}', 

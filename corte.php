@@ -536,14 +536,14 @@
 		echo '<table width="100%" border="0" cellpadding="4" cellspacing="1" class="">';
 		echo '<tr bgcolor="#E9F2F8">';
 		echo '<th rowspan="2">Usuario</th><th rowspan="2">Abono Unidades</th><th rowspan="2">Abono General</th><th rowspan="2">Cargo por Servicios</th><th rowspan="2">Fianza</th><th rowspan="2">Mutualidad</th><th rowspan="2">Seguridad</th><th rowspan="2">Tarjeta Reposicion</th><th rowspan="2">Pago Curso</th><th rowspan="2">TAG</th><th rowspan="2">Recibos Entradas</th>
-		<th colspan="6">Recaudacion por Monitoreo</th>
+		<th colspan="5">Recaudacion por Monitoreo</th>
 		
 		<th colspan="2">Ventas</th>
 		<th rowspan="2">Efectivo a Entregar</th>
 		</tr>
 		<tr bgcolor="#E9F2F8"><th>Vale Dinero</th><th>Boletos a Bordo</th><th>Boletos sin guia</th><th>Total Gastos</th>
 		<th>Utilidad</th>
-		<th>MRecaucación</th>
+		
 		<th>Vales de dinero</th><th>Boletos sin guia</th></tr>'; 
 		$array_total = array(0,0,0,0,0);
 		$total_gastos=0;
@@ -641,8 +641,16 @@
 		
 		
 		
+		
+		
 		while($row = mysql_fetch_array($res)){
 			rowb();
+			
+			if($row['monto'] > 0){
+				$row['boletos_abordo'] = $row['monto'];
+				
+				}
+			
 			echo '<td>'.utf8_encode($row['nomusuario']).'';echo'</td>';
 			echo '<td align="right">'.number_format($row['monto'],2).'</td>';
 			echo '<td align="right">'.number_format($row['general'],2).'</td>';
@@ -662,7 +670,6 @@
 			$row['utilidad']=$row['vales_dinero']+$row['boletos_abordo']+$row['boleto_singuia']-$row['total_gastos'];
 			
 			echo '<td align="right">'.number_format($row['utilidad'],2).'</td>';
-			echo '<td align="right">'.number_format($row['efectivo_recaudado'],2).'</td>';
 			
 			
 			echo '<td align="right">'.number_format($row['venta_vales_dinero'],2).'</td>';
@@ -683,7 +690,6 @@
 			+$row['recibos_entradas']  
 			+$row['vales_dinero']  
 			+$row['boletos_abordo']
-			+$row['boleto_singuia'] 
 			-$row['total_gastos']
 			+$row['efectivo_recaudado']
 			+$row['venta_vales_dinero']
@@ -708,7 +714,6 @@
 			$array_total[$c]+=round($row['boleto_singuia'],2);$c++;
 			$array_total[$c]+=round($row['total_gastos'],2);$c++;
 			$array_total[$c]+=round($row['utilidad'],2);$c++;
-			$array_total[$c]+=round($row['efectivo_recaudado'],2);$c++;
 			
 			
 			$array_total[$c]+=round($row['venta_vales_dinero'],2);$c++;
