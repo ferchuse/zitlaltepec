@@ -18,6 +18,9 @@
 	
 	
 	/*
+	
+				
+	
 	90100100148739
 	
 	90100100058963
@@ -73,7 +76,7 @@
 			$resultado['html'] .= '<tr><td align="center">';
 			$resultado['html'] .= "<input type='hidden'  name='taquilla[]' value='{$row['taquilla']}'>";
 			$resultado['html'] .= "<input type='hidden' name='folio_boleto[]' value='{$row['folio']}'>";
-			$resultado['html'] .= '<button class="btn btn-danger btn-sm btn_borrar   data-taquilla="'.$row['taquilla'].'" data-folio="'.$row['folio'].'" data-monto="'.$row['monto'].'" title="Quitar">
+			$resultado['html'] .= '<button class="btn btn-danger btn-sm btn_borrar"   data-taquilla="'.$row['taquilla'].'" data-folio="'.$row['folio'].'" data-monto="'.$row['monto'].'" title="Quitar">
 			<i class="fas fa-trash"></i> 
 			</button>';
 			$resultado['html'] .= '</td>';
@@ -87,7 +90,7 @@
 			
 			//Cambiar a recaudado
 			
-			$update_boleto =  "UPDATE boletos_sencillos SET estatus = 2 WHERE folio = '$folio'";
+			$update_boleto =  "UPDATE boletos_sencillos SET estatus = 2 WHERE folio = '$folio' AND taquilla = '$taq'";
 			
 			$result_update_boleto = mysqli_query($link, $update_boleto);
 			

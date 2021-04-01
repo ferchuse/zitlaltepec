@@ -210,7 +210,7 @@
 											TAG
 										</td >
 										<td >
-											<input  readonly type="number" id="tag" name="tag" value="">
+											<input  readonly type="number" id="tag" name="tag" value="0">
 											<button
 											data-id_cargo="6"
 											data-nombre_cargo="TAG" 
@@ -232,6 +232,23 @@
 											data-id_cargo="5"
 											data-nombre_cargo="Fianza" 
 											data-monto="50" 
+											
+											
+											id="btn_fianza" class="btn btn-secondary btn-sm" type="button">
+												Cobrar
+											</button >
+										</td >
+									</tr>
+									<tr >
+										<td >
+											Recaudación Bases
+										</td >
+										<td >
+											<input  readonly type="number" id="fianza" name="fianza" value="0">
+											<button
+											data-id_cargo="11"
+											data-nombre_cargo="Recaudacion Bases" 
+											data-monto="0" 
 											
 											
 											id="btn_fianza" class="btn btn-secondary btn-sm" type="button">

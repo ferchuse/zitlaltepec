@@ -8,6 +8,9 @@ $(document).ready( onLoad);
 	
 	1038609010
 	
+	90100100151994
+	
+	
 	90100100058967
 	90100100058963
 	90100100058964
@@ -42,8 +45,32 @@ function poncharsencillos(){
 
 function borrarBoleto(){
 	console.log("borrarBoleto()")
-	$(this).closest("tr").remove();
-	sumarBoletos();
+	boton = $(this)
+	boton.prop("disabled", true)
+	
+	folio = $(this).data("folio")
+	taquilla = $(this).data("taquilla")
+	
+	$.ajax({
+		url: "consultas/reactivar_boleto.php",
+		type: "GET",
+		// async: false,
+		dataType: "json",
+		data: {
+			"folio": folio,
+			"taquilla": taquilla
+		}
+	})
+	.done(function(data) {
+		
+		boton.closest("tr").remove();
+		
+		sumarBoletos();
+		
+		calcularEfectivo();
+	});
+	
+	// sumarBoletos();
 }
 
 
