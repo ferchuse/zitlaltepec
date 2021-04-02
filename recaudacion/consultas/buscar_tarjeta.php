@@ -24,6 +24,7 @@
 	monitoreo.seguridad,
 	utilidad,
 	monitoreo.tag,
+	monitoreo.bases,
 	fianza
 	FROM
 	tarjetas_unidad

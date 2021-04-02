@@ -535,7 +535,7 @@
 	if($_POST['ajax']==1){
 		echo '<table width="100%" border="0" cellpadding="4" cellspacing="1" class="">';
 		echo '<tr bgcolor="#E9F2F8">';
-		echo '<th rowspan="2">Usuario</th><th rowspan="2">Abono Unidades</th><th rowspan="2">Abono General</th><th rowspan="2">Cargo por Servicios</th><th rowspan="2">Fianza</th><th rowspan="2">Mutualidad</th><th rowspan="2">Seguridad</th><th rowspan="2">Tarjeta Reposicion</th><th rowspan="2">Pago Curso</th><th rowspan="2">TAG</th><th rowspan="2">Recibos Entradas</th>
+		echo '<th rowspan="2">Usuario</th><th rowspan="2">Abono Unidades</th><th rowspan="2">Abono General</th><th rowspan="2">Cargo por Servicios</th><th rowspan="2">Fianza</th><th rowspan="2">Mutualidad</th><th rowspan="2">Seguridad</th><th rowspan="2">Bases</th><th rowspan="2">Tarjeta Reposicion</th><th rowspan="2">Pago Curso</th><th rowspan="2">TAG</th><th rowspan="2">Recibos Entradas</th>
 		<th colspan="5">Recaudacion por Monitoreo</th>
 		
 		<th colspan="2">Ventas</th>
@@ -550,14 +550,17 @@
 		if ($_POST['recaudacion']!="") { $fil_rec=" AND a.recaudacion = ".$_POST['recaudacion']."";$fil_rec1=" AND b.recaudacion = ".$_POST['recaudacion'].""; }
 		
 		$res = mysql_query("
-		SELECT SUM(a.efectivo_recaudado) as efectivo_recaudado, a.usuario, SUM(a.monto) as monto, 
+		SELECT SUM(a.bases) as bases, SUM(a.efectivo_recaudado) as efectivo_recaudado, SUM(a.efectivo_recaudado) as efectivo_recaudado, a.usuario, SUM(a.monto) as monto, 
 		SUM(a.general) as general,
 		SUM(a.pago_curso) as pago_curso,SUM(a.tarjeta_reposicion) as tarjeta_reposicion,SUM(a.cargo_servicios) as cargo_servicios,
 		SUM(a.mutualidad) as mutualidad,SUM(a.seguridad) as seguridad, 
-		SUM(a.boleto_singuia) as boleto_singuia, SUM(a.boletos_abordo) as boletos_abordo, SUM(a.vales_dinero) as vales_dinero, SUM(a.fianza) as fianza, 
+		SUM(a.boleto_singuia) as boleto_singuia, SUM(a.boletos_abordo) as boletos_abordo, SUM(a.vales_dinero) as vales_dinero, 
+		
+		SUM(a.fianza) as fianza, 
+		
 		a.nomusuario,SUM(a.total_gast) as total_gastos, SUM(a.tag) as tag, SUM(a.venta_vales_dinero) as venta_vales_dinero, SUM(a.venta_boleto_singuia) as venta_boleto_singuia, SUM(a.recibos_entradas) as recibos_entradas
 		FROM (
-		(SELECT 0 AS efectivo_recaudado,a.usuario, SUM(a.monto) as monto, 
+		(SELECT 0 AS bases, 0 AS efectivo_recaudado,a.usuario, SUM(a.monto) as monto, 
 		0 as general,
 		0 as pago_curso,0 as tarjeta_reposicion,0 as cargo_servicios,
 		0 as mutualidad,0 as seguridad, 0 as boleto_singuia, 0 as boletos_abordo, 0 as vales_dinero, 0 as fianza,
@@ -567,17 +570,17 @@
 		a.usuario IN (".$_POST['usuarios'].")
 		GROUP BY a.usuario ORDER BY b.usuario)
 		UNION ALL 
-		(SELECT 0 AS efectivo_recaudado,a.usuario, 0 as monto, 0 as general,
+		(SELECT  SUM(IF(a.cargo=11, a.monto, 0)) as bases, 0 AS efectivo_recaudado,a.usuario, 0 as monto, 0 as general,
 		SUM(IF(a.cargo=-1,a.monto,0)) as pago_curso,SUM(IF(a.cargo=2,a.monto,0)) as tarjeta_reposicion,SUM(IF(a.cargo=3,a.monto,0)) as cargo_servicios,
 		SUM(IF(a.cargo=1,a.monto,0)) as mutualidad,SUM(IF(a.cargo=4,a.monto,0)) as seguridad, 0 as boleto_singuia, 
 		0 as boletos_abordo, 0 as vales_dinero, SUM(IF(a.cargo=5,a.monto,0)) as fianza, 
-		b.usuario as nomusuario, 0 as total_gast, SUM(IF(a.cargo=6, a.monto, 0)) as tag, 0 as venta_vales_dinero, 0 as venta_boleto_singuia, 0 as recibos_entradas
+		b.usuario as nomusuario, 0 as total_gast, SUM(IF(a.cargo=6, a.monto, 0)) as tag,  0 as venta_vales_dinero, 0 as venta_boleto_singuia, 0 as recibos_entradas
 		FROM recaudacion_operador a INNER JOIN usuarios b ON b.cve = a.usuario
 		WHERE a.estatus != 'C'".$fil_rec." AND a.fecha BETWEEN '".$_POST['fecha_ini']."' AND '".$_POST['fecha_fin']."' AND 
 		a.usuario IN (".$_POST['usuarios'].")
 		GROUP BY a.usuario ORDER BY b.usuario)
 		UNION ALL 
-		(SELECT 0 AS efectivo_recaudado, a.usuario, 0 as monto, SUM(a.monto) as general,
+		(SELECT 0 AS bases, 0 AS efectivo_recaudado, a.usuario, 0 as monto, SUM(a.monto) as general,
 		0 as pago_curso,0 as tarjeta_reposicion,0 as cargo_servicios,
 		0 as mutualidad,0 as seguridad, 0 as boleto_singuia, 0 as boletos_abordo, 0 as vales_dinero, 0 as fianza, 
 		b.usuario as nomusuario, 0 as total_gast, 0 as tag, 0 as venta_vales_dinero, 0 as venta_boleto_singuia, 0 as recibos_entradas
@@ -586,7 +589,7 @@
 		a.usuario IN (".$_POST['usuarios'].") 
 		GROUP BY a.usuario ORDER BY b.usuario)
 		UNION ALL 
-		(SELECT 0 AS efectivo_recaudado, a.usuario, 0 as monto, 0 as general,
+		(SELECT 0 AS bases, 0 AS efectivo_recaudado, a.usuario, 0 as monto, 0 as general,
 		0 as pago_curso,0 as tarjeta_reposicion,0 as cargo_servicios,
 		0 as mutualidad,0 as seguridad, SUM(a.monto_sencillos) as boleto_singuia, 
 		SUM(a.monto_boletos_abordo) as boletos_abordo, SUM(a.monto_vale_dinero) as vales_dinero, 0 as fianza, 
@@ -597,7 +600,7 @@
 		a.usuario IN (".$_POST['usuarios'].") 
 		GROUP BY a.usuario ORDER BY b.usuario)
 		UNION ALL 
-		(SELECT SUM(efectivo_recaudado) AS efectivo_recaudado, a.usuario, 0 as monto, 0 as general,
+		(SELECT 0 AS bases, SUM(efectivo_recaudado) AS efectivo_recaudado, a.usuario, 0 as monto, 0 as general,
 		0 as pago_curso,0 as tarjeta_reposicion,0 as cargo_servicios,
 		0 as mutualidad,0 as seguridad, 0 as boleto_singuia, 
 		0 as boletos_abordo, 0 as vales_dinero, 0 as fianza, 
@@ -608,7 +611,7 @@
 		a.usuario IN (".$_POST['usuarios'].") 
 		GROUP BY a.usuario ORDER BY b.usuario)
 		UNION ALL 
-		(SELECT 0 AS efectivo_recaudado,a.usuario, 0 as monto, 0 as general,
+		(SELECT 0 AS bases, 0 AS efectivo_recaudado,a.usuario, 0 as monto, 0 as general,
 		0 as pago_curso,0 as tarjeta_reposicion,0 as cargo_servicios,
 		0 as mutualidad,0 as seguridad, 0 as boleto_singuia, 
 		0 as boletos_abordo, 0 as vales_dinero, 0 as fianza, 
@@ -618,7 +621,7 @@
 		a.usuario IN (".$_POST['usuarios'].") 
 		GROUP BY a.usuario ORDER BY b.usuario)
 		UNION ALL 
-		(SELECT 0 AS efectivo_recaudado,a.usuario, 0 as monto, 0 as general,
+		(SELECT 0 AS bases, 0 AS efectivo_recaudado,a.usuario, 0 as monto, 0 as general,
 		0 as pago_curso,0 as tarjeta_reposicion,0 as cargo_servicios,
 		0 as mutualidad,0 as seguridad, 0 as boleto_singuia, 
 		0 as boletos_abordo, 0 as vales_dinero, 0 as fianza, 
@@ -628,7 +631,7 @@
 		a.usuario IN (".$_POST['usuarios'].") 
 		GROUP BY a.usuario ORDER BY b.usuario)
 		UNION ALL 
-		(SELECT 0 AS efectivo_recaudado,a.usuario, 0 as monto, 0 as general,
+		(SELECT 0 AS bases, 0 AS efectivo_recaudado,a.usuario, 0 as monto, 0 as general,
 		0 as pago_curso,0 as tarjeta_reposicion,0 as cargo_servicios,
 		0 as mutualidad,0 as seguridad, 0 as boleto_singuia, 
 		0 as boletos_abordo, 0 as vales_dinero, 0 as fianza, 
@@ -658,6 +661,7 @@
 			echo '<td align="right">'.number_format($row['fianza'],2).'</td>';
 			echo '<td align="right">'.number_format($row['mutualidad'],2).'</td>';
 			echo '<td align="right">'.number_format($row['seguridad'],2).'</td>';
+			echo '<td align="right">'.number_format($row['bases'],2).'</td>';
 			echo '<td align="right">'.number_format($row['tarjeta_reposicion'],2).'</td>';
 			echo '<td align="right">'.number_format($row['pago_curso'],2).'</td>';
 			echo '<td align="right">'.number_format($row['tag'],2).'</td>';
@@ -684,6 +688,7 @@
 			+$row['fianza']
 			+$row['mutualidad']
 			+$row['seguridad']
+			+$row['bases']
 			+$row['tarjeta_reposicion']
 			+$row['pago_curso'] 
 			+$row['tag']
@@ -705,6 +710,7 @@
 			$array_total[$c]+=round($row['fianza'],2);$c++;
 			$array_total[$c]+=round($row['mutualidad'],2);$c++;
 			$array_total[$c]+=round($row['seguridad'],2);$c++;
+			$array_total[$c]+=round($row['bases'],2);$c++;
 			$array_total[$c]+=round($row['tarjeta_reposicion'],2);$c++;
 			$array_total[$c]+=round($row['pago_curso'],2);$c++;
 			$array_total[$c]+=round($row['tag'],2);$c++;

@@ -241,17 +241,17 @@
 									</tr>
 									<tr >
 										<td >
-											Recaudación Bases
+											Bases
 										</td >
 										<td >
-											<input  readonly type="number" id="fianza" name="fianza" value="0">
+											<input  readonly type="number" id="bases" name="bases" value="0">
 											<button
 											data-id_cargo="11"
-											data-nombre_cargo="Recaudacion Bases" 
+											data-nombre_cargo="Bases" 
 											data-monto="0" 
 											
 											
-											id="btn_fianza" class="btn btn-secondary btn-sm" type="button">
+											id="btn_bases" class="btn btn-secondary btn-sm" type="button">
 												Cobrar
 											</button >
 										</td >

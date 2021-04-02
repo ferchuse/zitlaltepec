@@ -19,6 +19,7 @@
 	mutualidad='{$_POST["mutualidad"]}',
 	seguridad='{$_POST["seguridad"]}',
 	tag='{$_POST["tag"]}',
+	bases='{$_POST["bases"]}',
 	fianza='{$_POST["fianza"]}',
 	utilidad='{$_POST["utilidad"]}',
 	vueltas='{$_POST["vueltas"]}',

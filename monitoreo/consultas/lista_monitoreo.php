@@ -48,12 +48,7 @@
 		}
 	?>
 	
-	<pre hidden>
-		Id_empresas <?php echo $_SESSION["id_empresas"]?>
-		Session Id <?php echo session_id()?>
-		Sesiion Estatus <?php echo session_status()?>
-		Consulta <?php echo $consulta?>
-	</pre>
+	
 	<table class="table table-bordered table-condensed" id="dataTable" width="100%" cellspacing="0">
 		<thead>
 			<tr>

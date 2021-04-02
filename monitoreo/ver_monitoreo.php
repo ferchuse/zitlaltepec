@@ -417,6 +417,14 @@
 									</tr>
 									<tr >
 										<td >
+											Bases
+										</td >
+										<td >
+											<input readonly type="number" id="bases" name="bases"   value="<?= $lista_monitoreo["bases"]?>">
+										</td >
+									</tr>
+									<tr >
+										<td >
 											TAG
 										</td >
 										<td >

@@ -213,14 +213,20 @@
 									</tr>
 									<tr >
 										<td >
+											Bases
+										</td >
+										<td >
+											<input   type="number" id="bases" name="bases" value="">
+										</td >
+									</tr>
+									<tr >
+										<td >
 											TAG
 										</td >
 										<td >
 											<input   type="number" id="tag" name="tag" value="">
-											
 										</td >
 									</tr>
-									
 									<tr >
 										<td >
 											Utilidad

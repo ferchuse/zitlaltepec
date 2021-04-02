@@ -31,7 +31,7 @@ $(document).ready(function(){
 		$("#modal_ponchar").modal("show");
 	});
 	
-	$("#btn_seguridad, #btn_mutualidad, #btn_fianza, #btn_tag").click(cobrarCargo);
+	$("#btn_seguridad, #btn_mutualidad, #btn_fianza, #btn_tag, #btn_bases").click(cobrarCargo);
 	
 	
 	$('#efectivo_pagado').on('keyup', calcularExcedente);
@@ -374,6 +374,7 @@ function buscarTarjeta(tarjeta){
 		$('#utilidad_monitoreo').val(respuesta.tarjeta.utilidad);
 		// $('#mutualidad').val(respuesta.tarjeta.mutualidad);
 		// $('#seguridad').val(respuesta.tarjeta.seguridad);
+		$('#bases').val(respuesta.tarjeta.bases);
 		$('#fianza').val(respuesta.tarjeta.fianza);
 		$('#tag').val(respuesta.tarjeta.tag);
 		
