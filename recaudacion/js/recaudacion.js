@@ -402,10 +402,11 @@ function calcularEfectivo(){
 	let mutualidad = Number($("#mutualidad").val());
 	let seguridad = Number($("#seguridad").val());
 	let tag = Number($("#tag").val());
+	let bases = Number($("#bases").val());
 	
 	
 	
-	let efectivo_entregar = utilidad + fianza + mutualidad + seguridad + tag - vale_dinero - importe_con_guia - importe_sin_guia - boletos_tijera;
+	let efectivo_entregar = utilidad + fianza + mutualidad + seguridad + tag + bases - vale_dinero - importe_con_guia - importe_sin_guia - boletos_tijera;
 	
 	let efectivo_recaudado = utilidad  - vale_dinero - importe_con_guia - importe_sin_guia - boletos_tijera;
 	
