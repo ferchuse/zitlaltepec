@@ -87,7 +87,7 @@
 				<th>Tarjeta</th>
 				<th>Empresa</th>
 				<th>Observaciones</th>
-				<th>Efectivo Recaudado</th>
+				
 				<th>Utilidad</th>
 				<th>Usuario</th>
 			</thead>
@@ -129,7 +129,6 @@
 						<td><?php echo $fila["tarjeta"]?></td>
 						<td><?php echo $fila["empresas_nombre"]?></td>
 						<td><?php echo $fila["obs"]?></td>
-						<td>$<?php echo number_format($fila["efectivo_recaudado"])?></td>
 						<td>$<?php echo number_format($fila["total_utilidad"])?></td>
 						<td><?php echo $fila["usuarios_nombre"]?></td>
 						
