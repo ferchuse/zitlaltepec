@@ -1,5 +1,9 @@
 <?php 
 	session_start();
+	if(!isset($_SESSION["CveUsuario"])){
+		header("location: ../index.php");
+	}
+	// print_r($_SESSION);
 	include('../../conexi.php');
 	include('../../funciones/generar_select.php');
 	include('../../funciones/dame_permiso.php');
@@ -47,7 +51,7 @@
 	
 	
 	if($_GET["usuarios_cve"] != ""){
-		$consulta.=  " AND usuarios.cve = '{$_GET["usuarios_cve"]}'"; 
+		$consulta.=  " AND usuarios.cve = '{$_SESSION["usuarios_cve"]}'"; 
 	}
 	
 	$consulta.=  " ORDER BY recaudacion_autobus.cve"; 
@@ -84,6 +88,7 @@
 				<th>Empresa</th>
 				<th>Observaciones</th>
 				<th>Efectivo Recaudado</th>
+				<th>Utilidad</th>
 				<th>Usuario</th>
 			</thead>
 			<tbody id="tabla_DB">
@@ -125,6 +130,7 @@
 						<td><?php echo $fila["empresas_nombre"]?></td>
 						<td><?php echo $fila["obs"]?></td>
 						<td>$<?php echo number_format($fila["efectivo_recaudado"])?></td>
+						<td>$<?php echo number_format($fila["total_utilidad"])?></td>
 						<td><?php echo $fila["usuarios_nombre"]?></td>
 						
 					</tr>
