@@ -99,7 +99,7 @@
 						<td class="text-center"> 
 							<?php if($fila["recaudacion_estatus"] != 'C'){
 								
-								$totales[0]+= $fila["efectivo_recaudado"];
+								$totales[0]+= $fila["total_utilidad"];
 								// $totales[1]+= $fila["efectivo_entregar"];
 								if(dame_permiso("recaudacion.php", $link) == '3'){ //Permiso Supervisor
 									// echo dame_permiso("recaudacion.php", $link);
