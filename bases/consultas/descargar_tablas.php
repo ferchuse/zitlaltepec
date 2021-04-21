@@ -2,12 +2,7 @@
 	// session_start();
 	include('../../conexi.php');
 	$link = Conectarse();
-	
-	$folio_tarjeta = substr ($_GET["barcode"], 6,6);
-	
-	$respuesta["folio_tarjeta"] = $folio_tarjeta;
-	
-	
+		
 	$consulta_checadores = "		
 	SELECT 
 	*
