@@ -12,7 +12,7 @@
 	SELECT 
 	fecha_viaje,
 	tarjetas_unidad.cve as folio_tarjeta,
-	unidades.num_eco as num_eco,
+	unidades.no_eco as num_eco,
 	tarjetas_unidad.estatus as estatus_tarjeta
 	
 	FROM tarjetas_unidad 
@@ -39,6 +39,7 @@
 		SET 
 		tarjeta = '{$tarjeta["folio_tarjeta"]}',		
 		id_checadores= '{$_GET["id_checadores"]}',	
+		num_eco= '{$tarjeta["num_eco"]}',		
 		id_base= '{$_GET["id_base"]}',	
 		fecha_registro= NOW()
 		";
