@@ -3,18 +3,20 @@
 	include('../../conexi.php');
 	$link = Conectarse();
 	
-	$tarjeta = substr ($_GET["barcode"], 6,6);
+	$folio_tarjeta = substr ($_GET["barcode"], 6,6);
 	
-	$respuesta["tarjeta"] = $tarjeta;
+	$respuesta["folio_tarjeta"] = $folio_tarjeta;
 	
 	
 	$consulta_tarjeta = "		
 	SELECT * FROM tarjetas_unidad 
 	LEFT JOIN unidades ON tarjetas_unidad.unidad = unidades.cve
-	WHERE tarjetas_unidad.cve = '{$tarjeta}'
+	WHERE tarjetas_unidad.cve = '{$folio_tarjeta}'
 	";
 	
 	$result_tarjeta = mysqli_query($link,$consulta_tarjeta);
+	
+	
 	
 	
 	if($result_tarjeta){
@@ -23,6 +25,8 @@
 			
 			$tarjeta = $row;
 		}
+		
+		$respuesta["tarjeta"] = $tarjeta;
 		
 		$insert_registro = 
 		"INSERT INTO  bases_registros					 
