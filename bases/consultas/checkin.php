@@ -25,12 +25,12 @@
 		}
 		
 		$insert_registro = 
-		"INSERT INTO bases_registros					 
+		"INSERT INTO  bases_registros					 
 		SET 
 		tarjeta = '{$tarjeta["cve"]}',		
 		id_checadores= '{$_GET["id_checadores"]}',	
 		id_base= '{$_GET["id_base"]}',	
-		fecha_registro= NOW(),
+		fecha_registro= NOW()
 		";
 		
 		$result = mysqli_query($link,$insert_registro);
