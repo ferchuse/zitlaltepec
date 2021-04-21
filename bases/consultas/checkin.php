@@ -54,7 +54,10 @@
 			$respuesta["mensaje"] = "Error en ".$insert_registro.mysqli_Error($link);
 		}
 	}
-	
+	else {
+			$respuesta["estatus"] = "error";
+			$respuesta["mensaje"] = "Error en ".$consulta_tarjeta.mysqli_Error($link);
+		}
 	
 	
 	echo json_encode($respuesta);
