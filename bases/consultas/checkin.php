@@ -11,7 +11,7 @@
 	$consulta_tarjeta = "		
 	SELECT 
 	fecha_viaje,
-	tarjetas_unidad.cva as folio_tarjeta,
+	tarjetas_unidad.cve as folio_tarjeta,
 	unidades.num_eco as num_eco,
 	tarjetas_unidad.estatus as estatus_tarjeta
 	
