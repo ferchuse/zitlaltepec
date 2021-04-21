@@ -5,11 +5,13 @@
 	
 	$tarjeta = substr ($_GET["barcode"], 6,6);
 	
+	$respuesta["tarjeta"] = $tarjeta;
+	
 	
 	$consulta_tarjeta = "		
 	SELECT * FROM tarjetas_unidad 
 	LEFT JOIN unidades ON tarjetas_unidad.unidad = unidades.cve
-	WHERE tarjetas_unidad.cve = '{$_POST["tarjeta"]}'
+	WHERE tarjetas_unidad.cve = '{$tarjeta}'
 	";
 	
 	$result_tarjeta = mysqli_query($link,$consulta_tarjeta);
@@ -43,7 +45,7 @@
 		}
 	}
 	
-
+	
 	
 	echo json_encode($respuesta);
 	
