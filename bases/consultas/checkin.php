@@ -9,7 +9,13 @@
 	
 	
 	$consulta_tarjeta = "		
-	SELECT * FROM tarjetas_unidad 
+	SELECT 
+	fecha_viaje,
+	tarjetas_unidad.cva as folio_tarjeta,
+	unidades.num_eco as num_eco,
+	tarjetas_unidad.estatus as estatus_tarjeta
+	
+	FROM tarjetas_unidad 
 	LEFT JOIN unidades ON tarjetas_unidad.unidad = unidades.cve
 	WHERE tarjetas_unidad.cve = '{$folio_tarjeta}'
 	";
@@ -31,7 +37,7 @@
 		$insert_registro = 
 		"INSERT INTO  bases_registros					 
 		SET 
-		tarjeta = '{$tarjeta["cve"]}',		
+		tarjeta = '{$tarjeta["folio_tarjeta"]}',		
 		id_checadores= '{$_GET["id_checadores"]}',	
 		id_base= '{$_GET["id_base"]}',	
 		fecha_registro= NOW()
