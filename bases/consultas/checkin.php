@@ -3,7 +3,7 @@
 	include('../../conexi.php');
 	$link = Conectarse();
 	
-	$folio_tarjeta = substr ($_GET["barcode"], 6,6);
+	$folio_tarjeta = substr ($_POST["barcode"], 6,6);
 	
 	$respuesta["folio_tarjeta"] = $folio_tarjeta;
 	
@@ -39,8 +39,8 @@
 		"INSERT INTO  bases_registros					 
 		SET 
 		tarjeta = '{$tarjeta["folio_tarjeta"]}',		
-		id_checadores= '{$_GET["id_checadores"]}',	
-		id_base= '{$_GET["id_base"]}',	
+		id_checadores= '{$_POST["id_checadores"]}',	
+		id_base= '{$_POST["id_base"]}',	
 		id_unidades=  '{$tarjeta["id_unidades"]}',	
 		num_eco= '{$tarjeta["num_eco"]}',		
 		fecha_registro= NOW()
