@@ -25,8 +25,16 @@
 	
 	
 	
-	if($_GET["usuarios_cve"] != ""){
-		$consulta.=  " AND usuarios.cve = '{$_GET["usuarios_cve"]}'"; 
+	if($_GET["id_checadores"] != ""){
+		$consulta.=  " AND id_checadores = '{$_GET["id_checadores"]}'"; 
+	}
+	
+	if($_GET["num_eco"] != ""){
+		$consulta.=  " AND num_eco = '{$_GET["num_eco"]}'"; 
+	}
+	
+	if($_GET["id_base"] != ""){
+		$consulta.=  " AND bases_registros.id_base = '{$_GET["id_base"]}'"; 
 	}
 	
 	// $consulta.=  " ORDER BY recaudacion_monitoreo.cve"; 
