@@ -27,6 +27,16 @@
 			background: url('../img/cargando.gif') no-repeat right center;
 			}
 			
+			
+			#dataTable{
+			display: block;
+			overflow: auto;
+			overflow-x: auto;
+			height: 350px;
+			width: 100%;
+			font-size: 12px;			
+			}	
+			
 		</style>
 		
 		
@@ -126,120 +136,139 @@
 		<?php include_once("modal_ponchar.php");?>
 		<?php include_once("../scripts.php");?>
 		
+		<script src="../lib/jquery.doubleScroll.js" > </script>
 		<script src="../plugins/pos_print/websocket-printer.js" > </script>
 		<script >
 			
-			$(document).ready(function(){
-			
-			listarRegistros();
-			
-			$('#cve').select2();
-			
-			$('#form_filtro').on('submit', function filtrar(event){
-			event.preventDefault();
-			
-			listarRegistros();
-			
-			
-			
+			$(function () {
+				$('.wrapper1').on('scroll', function (e) {
+					$('.wrapper2').scrollLeft($('.wrapper1').scrollLeft());
+				}); 
+				$('.wrapper2').on('scroll', function (e) {
+					$('.wrapper1').scrollLeft($('.wrapper2').scrollLeft());
+				});
 			});
+			$(window).on('load', function (e) {
+				$('.div1').width($('table').width());
+				$('.div2').width($('table').width());
+			});
+			
+			
+			$(document).ready(function(){
+				
+				
+				listarRegistros();
+				
+				$('#cve').select2();
+				
+				$('#form_filtro').on('submit', function filtrar(event){
+					event.preventDefault();
+					
+					listarRegistros();
+					
+					
+					
+				});
 			});
 			
 			function listarRegistros(){
-			console.log("listarRegistros()");
-			
-			let form = $("#form_filtro");
-			let boton = form.find(":submit");
-			let icono = boton.find('.fas');
-			
-			boton.prop('disabled',true);
-			icono.toggleClass('fa-search fa-spinner fa-pulse ');
-			
-			return $.ajax({
-			url: 'consultas/lista_monitoreo.php',
-			data: $("#form_filtro").serialize()
-			}).done(function(respuesta){
-			
-			$("#tabla_registros").html(respuesta)
-			
-			// $(".imprimir").click(function(){
-			// imprimirTicket($(this).data("id_registro"))
-			// });
-			
-			$(".cancelar").click(confirmaCancelacion);
-			
-			// $("#check_all").change(checkAll);
-			
-			// $(".seleccionar").change(contarSeleccionados)
-			
-			}).always(function(){  
-			
-			boton.prop('disabled',false);
-			icono.toggleClass('fa-search fa-spinner fa-pulse fa-fw');
-			
-			});
+				console.log("listarRegistros()");
+				
+				let form = $("#form_filtro");
+				let boton = form.find(":submit");
+				let icono = boton.find('.fas');
+				
+				boton.prop('disabled',true);
+				icono.toggleClass('fa-search fa-spinner fa-pulse ');
+				
+				return $.ajax({
+					url: 'consultas/lista_monitoreo.php',
+					data: $("#form_filtro").serialize()
+					}).done(function(respuesta){
+					
+					$("#tabla_registros").html(respuesta)
+					
+					
+					$('.table-responsive').doubleScroll();
+				
+					// $(".imprimir").click(function(){
+					// imprimirTicket($(this).data("id_registro"))
+					// });
+					
+					$(".cancelar").click(confirmaCancelacion);
+					
+					// $("#check_all").change(checkAll);
+					
+					// $(".seleccionar").change(contarSeleccionados)
+					
+					}).always(function(){  
+					
+					boton.prop('disabled',false);
+					icono.toggleClass('fa-search fa-spinner fa-pulse fa-fw');
+					
+				});
 			}
 			
 			
 			function confirmaCancelacion(event){
-			console.log("confirmaCancelacion()");
-			let boton = $(this);
-			let icono = boton.find(".fas");
-			var folio = $(this).data("id_registro");
-			
-			
-			alertify.confirm()
-			.setting({
-			'reverseButtons': true,
-			'labels' :{ok:"SI", cancel:'NO'},
-			'title': "Cancelar" ,
-			'message': "¿Esta seguro que desea cancelar?" ,
-			'onok':cancelarRegistro
-			}).show();
-			
-			function cancelarRegistro(evt, motivo){
-			if(motivo == ''){
-			console.log("Escribe un motivo");
-			alertify.error("Escribe un motivo");
-			return false;
-			
-		}
-		
-		boton.prop("disabled", true);
-		icono.toggleClass("fa-times fa-spinner fa-spin");
-		
-		
-		return $.ajax({
-			url: "consultas/cancelar_monitoreo.php",
-			method:"POST",
-			dataType:"JSON",
-			data:{
-				folio : folio,
-				nombre_usuarios : $("#sesion_nombre_usuarios").text()
-			}
-			}).done(function (respuesta){
-			if(respuesta.result_cancelar == true){
-				alertify.success("Cancelado");
-				listarRegistros();
-			}
-			else{
-				alertify.error("Ocurrio un Error ");
+				console.log("confirmaCancelacion()");
+				let boton = $(this);
+				let icono = boton.find(".fas");
+				var folio = $(this).data("id_registro");
 				
+				
+				alertify.confirm()
+				.setting({
+					'reverseButtons': true,
+					'labels' :{ok:"SI", cancel:'NO'},
+					'title': "Cancelar" ,
+					'message': "¿Esta seguro que desea cancelar?" ,
+					'onok':cancelarRegistro
+				}).show();
+				
+				function cancelarRegistro(evt, motivo){
+					if(motivo == ''){
+						console.log("Escribe un motivo");
+						alertify.error("Escribe un motivo");
+						return false;
+						
+					}
+					
+					boton.prop("disabled", true);
+					icono.toggleClass("fa-times fa-spinner fa-spin");
+					
+					
+					return $.ajax({
+						url: "consultas/cancelar_monitoreo.php",
+						method:"POST",
+						dataType:"JSON",
+						data:{
+							folio : folio,
+							nombre_usuarios : $("#sesion_nombre_usuarios").text()
+						}
+						}).done(function (respuesta){
+						if(respuesta.result_cancelar == true){
+							alertify.success("Cancelado");
+							listarRegistros();
+						}
+						else{
+							alertify.error("Ocurrio un Error ");
+							
+						}
+						
+						}).always(function(){
+						boton.prop("disabled", false);
+						icono.toggleClass("fa-times fa-spinner fa-spin");
+						
+					});
+				}
 			}
 			
-			}).always(function(){
-			boton.prop("disabled", false);
-			icono.toggleClass("fa-times fa-spinner fa-spin");
 			
-		});
-	}
-}
-
-
-
-</script>
-
-
-</body>
-
+			
+		</script>
+		
+		
+	</body>
+	
 </html>
